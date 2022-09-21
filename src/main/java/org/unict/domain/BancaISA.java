@@ -205,8 +205,8 @@ public class BancaISA {
                     if(pz200 > max200 /*prendere il valore della quantità dei pezzi da 200*/)
                     {
                         //anzichè usare il tmp usare direttamente il valore massimo
-                        tmp200=//max200
-                        pz100=(max200*200-prelievo)/100 //pz100=5
+                        tmp200=//max200;
+                        pz100=(max200*200-prelievo)/100 //pz100=5;
                         prelievo = prelievo - max200*200;
                     }
 
