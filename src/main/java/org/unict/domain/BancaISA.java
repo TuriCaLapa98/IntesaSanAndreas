@@ -199,10 +199,10 @@ public class BancaISA {
 
                 int prelievo = Integer.parseInt(tastiera.readLine());
                 int pz200 = 0, pz100 = 0, pz50 = 0, pz20 = 0, pz10 = 0, pz5 = 0;
-                if (listaCc.get(iban).getSaldo() >= prelievo) {
+                /**if (listaCc.get(iban).getSaldo() >= prelievo) {
                     //inziamo dal taglio più grande/ tmp quantita di banconote
                     pz200 = prelievo/200; //dim200=20pz , pz200=25
-                    if(pz200 > max200 /*prendere il valore della quantità dei pezzi da 200*/)
+                    if(pz200 > max200 //prendere il valore della quantità dei pezzi da 200)
                     {
                         //anzichè usare il tmp usare direttamente il valore massimo
                         tmp200=//max200;
@@ -213,7 +213,7 @@ public class BancaISA {
                     pz100 = prelievo/100;
                 //implementare taglio banconote: lista con valore
                 System.out.println("\nPrelevare il denaro richiesto\n");
-                }
+                }*/
             }
 
         }
