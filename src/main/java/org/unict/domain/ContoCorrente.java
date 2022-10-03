@@ -28,7 +28,7 @@ public class ContoCorrente
         this.pin = generaPin();
     }
 
-    public ContoCorrente(String iban, String cf, float saldo, String numeroCarta, String dataScadenza, int pin) {
+    public ContoCorrente(String iban, String cf, float saldo, String numeroCarta, String dataScadenza, String pin) {
         this.cf = cf;
         this.iban = iban;
         this.saldo = saldo;
@@ -121,8 +121,9 @@ public class ContoCorrente
         return builder.toString();
     }
 
+
     public void inserisciImporto(float importo, String nomeM, String cognomeM) {
-       this.listaOperazioniBancarie.
+       //this.listaOperazioniBancarie
     }
 
     /*public void dettagliContoCorrente() throws IOException

@@ -22,8 +22,7 @@ public class Main
         do
         {
             try{
-                System.out.println("\n\nInserisci la tua scelta:\n1) Login" +
-                        " \n0) Chiudi applicazione");
+                System.out.println("\n\nInserisci la tua scelta:\n1) Login" + " \n0) Chiudi applicazione");
                 scelta = Integer.parseInt(tastiera.readLine());
 
             }catch (Exception e){e.printStackTrace();}
@@ -44,11 +43,5 @@ public class Main
         }while(scelta !=0);
 
         System.out.println("Grazie per aver scelto BancaISA!");
-
-
-
-
-        
-
     }
 }

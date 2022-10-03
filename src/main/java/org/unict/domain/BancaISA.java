@@ -6,22 +6,141 @@ import java.util.*;
 public class BancaISA {
     private static BancaISA bancaIsa;
     private Cliente clienteCorrente;
+    private ContoCorrente ccCorrente;
     private Map<String, Cliente> listaClienti;
     public Map<String, ContoCorrente> listaCc;
     private final BufferedReader tastiera;
+    private Bancomat bancomat;
+    public List<Bancomat> listaBancomat;
 
 
     private String iban;
 
-    /* ------- BancaISA ------- */
+    /** ----------------------- BancaISA -------------------------- */
     private BancaISA() {
         this.listaClienti = new HashMap<>();
         this.listaCc = new HashMap<>();
+        this.listaBancomat = new List<Bancomat>() {
+            @Override
+            public int size() {
+                return 0;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return false;
+            }
+
+            @Override
+            public boolean contains(Object o) {
+                return false;
+            }
+
+            @Override
+            public Iterator<Bancomat> iterator() {
+                return null;
+            }
+
+            @Override
+            public Object[] toArray() {
+                return new Object[0];
+            }
+
+            @Override
+            public <T> T[] toArray(T[] a) {
+                return null;
+            }
+
+            @Override
+            public boolean add(Bancomat bancomat) {
+                return false;
+            }
+
+            @Override
+            public boolean remove(Object o) {
+                return false;
+            }
+
+            @Override
+            public boolean containsAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(Collection<? extends Bancomat> c) {
+                return false;
+            }
+
+            @Override
+            public boolean addAll(int index, Collection<? extends Bancomat> c) {
+                return false;
+            }
+
+            @Override
+            public boolean removeAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public boolean retainAll(Collection<?> c) {
+                return false;
+            }
+
+            @Override
+            public void clear() {
+
+            }
+
+            @Override
+            public Bancomat get(int index) {
+                return null;
+            }
+
+            @Override
+            public Bancomat set(int index, Bancomat element) {
+                return null;
+            }
+
+            @Override
+            public void add(int index, Bancomat element) {
+
+            }
+
+            @Override
+            public Bancomat remove(int index) {
+                return null;
+            }
+
+            @Override
+            public int indexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public int lastIndexOf(Object o) {
+                return 0;
+            }
+
+            @Override
+            public ListIterator<Bancomat> listIterator() {
+                return null;
+            }
+
+            @Override
+            public ListIterator<Bancomat> listIterator(int index) {
+                return null;
+            }
+
+            @Override
+            public List<Bancomat> subList(int fromIndex, int toIndex) {
+                return null;
+            }
+        };
         this.tastiera = new BufferedReader(new InputStreamReader(System.in));
         caricaClienti();
     }
 
-    /* ------- getInstance ------- */
+    /** ------------------- getInstance ------------------------ */
     public static BancaISA getInstance() {
         if (bancaIsa == null)
             bancaIsa = new BancaISA();
@@ -29,13 +148,14 @@ public class BancaISA {
         return bancaIsa;
     }
 
-    /* ------- caricaClienti ------- */
+    /** ----------------- caricaClienti ---------------------- */
     public void caricaClienti() {
         try {
             String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoClienti.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
-            for (String cf = fp.readLine(); cf != null; cf = fp.readLine()) {
+            for (String cf = fp.readLine(); cf != null; cf = fp.readLine())
+            {
                 String nome = fp.readLine();
                 String cognome = fp.readLine();
                 String dataNascita = fp.readLine();
@@ -53,7 +173,7 @@ public class BancaISA {
     }
 
 
-    /* ------- verificaCredenziali ------- */
+    /** ------------------- verificaCredenziali ------------------------- */
     public boolean verificaCredenziali(String cf) throws Exception {
         if (listaClienti.containsKey(cf)) {
             try {
@@ -66,7 +186,7 @@ public class BancaISA {
                 return false;
             }
         } else {
-            /* ------- UC12 CreaCliente ------- */
+            /** ------------------- UC12 CreaCliente ------------------- */
             //Chiedere da console se si vuole creare il nuovo cliente
 
             System.out.println("Cliente non esistente, creazione conto corrente in corso...\n");
@@ -76,7 +196,7 @@ public class BancaISA {
 
     }
 
-    /* ------- inserisciCredenziali ------- */
+    /** ---------------- inserisciCredenziali --------------------- */
     public void inserisciCredenziali(String cf) throws Exception {
         System.out.println("inserisci nome:\n");
         String nome = this.tastiera.readLine();
@@ -108,12 +228,14 @@ public class BancaISA {
         clienteCorrente.creaContoCorrente();
     }
 
+    /** --------------------- Menu Dipendente Normale ----------------------- */
     public void menuDipendenteN() throws Exception {
         System.out.println("sono nel menu N");
 
         int scelta = -1;
         do {
-            try {
+            try
+            {
                 System.out.println("****MENU DIPENDENTE NORMALE****\n" +
                         "\nInserisci la tua scelta:" +
                         "\n1) Crea conto corrente" +
@@ -124,8 +246,8 @@ public class BancaISA {
                     System.out.println("Scelta non valida");
                     throw new Exception("Scelta non valida");
                 }
-            } catch (Exception ignored) {
-            }
+            } catch(Exception e){e.printStackTrace();}
+
             switch (scelta) {
                 case 1:
                     /* ------- UC1 CreaContoCorrente ------- */
@@ -161,7 +283,8 @@ public class BancaISA {
 
 
         if (listaClienti.get(listaCc.get(iban).getCf()).getNome().equals(nomeBeneficiario) &&
-                listaClienti.get(listaCc.get(iban).getCf()).getCognome().equals(cognomeBeneficiario)) {
+                listaClienti.get(listaCc.get(iban).getCf()).getCognome().equals(cognomeBeneficiario))
+        {
             System.out.println("Inserisci Importo");
             float importo = Float.parseFloat(tastiera.readLine());
             System.out.println("Inserisci Nome Mittente");
@@ -174,62 +297,60 @@ public class BancaISA {
 
     }
 
-
+    /** --------------- Menu Dipendente Tecnico ----------------------- */
     public void menuDipendenteT() {
         System.out.println("sono nel menu T");
 
     }
 
+    /** --------------- Menu Bancomat ----------------------- */
     public void menuCliente() {
-        System.out.println("sono nel menu cliente");
+        int idBancomat = 1;
+        caricaListaBancomat();
+        System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat);
+        bancomat.caricaListaBanconote();
 
+        try
+        {
+            /** ------------- UC4 Prelievo Bancomat ------------- */
 
-        try {
             System.out.println("****INSERIMENTO CREDENZIALI****\n");
             System.out.println("Inserisci iban\n");
             String iban = tastiera.readLine();
             System.out.println("Inserisci pin\n");
             String pin = tastiera.readLine();
 
-            if (listaCc.containsKey(iban) && Objects.equals(listaCc.get(iban).getPin(), pin)) {
-
-                System.out.println("Inserisci importo\n");
-
-                //Il prelievo deve essere divisibile per 5. IMPLEMENTARE CONTROLLO DOPO ACQUISIZIONE PRELIEVO DA TASTIERA, dare la possibilità di uscire dal loop
-
-                int prelievo = Integer.parseInt(tastiera.readLine());
-                int pz200 = 0, pz100 = 0, pz50 = 0, pz20 = 0, pz10 = 0, pz5 = 0;
-                /**if (listaCc.get(iban).getSaldo() >= prelievo) {
-                    //inziamo dal taglio più grande/ tmp quantita di banconote
-                    pz200 = prelievo/200; //dim200=20pz , pz200=25
-                    if(pz200 > max200 //prendere il valore della quantità dei pezzi da 200)
-                    {
-                        //anzichè usare il tmp usare direttamente il valore massimo
-                        tmp200=//max200;
-                        pz100=(max200*200-prelievo)/100 //pz100=5;
-                        prelievo = prelievo - max200*200;
-                    }
-
-                    pz100 = prelievo/100;
-                //implementare taglio banconote: lista con valore
-                System.out.println("\nPrelevare il denaro richiesto\n");
-                }*/
+            if (listaCc.containsKey(iban) && Objects.equals(listaCc.get(iban).getPin(), pin))
+            {
+                System.out.println("Saldo disponibile: " + listaCc.get(iban).getSaldo());
+                //System.out.println("Inserisci importo\n");
+                //int prelievo = Integer.parseInt(tastiera.readLine());
+                //bancomat.calcolaPrelievo(prelievo);
             }
 
         }
-        catch(
-                Exception ignored)
-
-        {
-
-
-        }
+        catch(Exception e){e.printStackTrace();}
 
     }
 
+    public void caricaListaBancomat() {
+        try {
+            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBancomat.txt";
+            BufferedReader fp = new BufferedReader(new FileReader(file));
 
+            int codiceBancomat = 0;
+            for (String s = fp.readLine(); s != null; s = fp.readLine())
+            {
+                codiceBancomat = Integer.parseInt(s);
+                String posizione = fp.readLine();
 
+                Bancomat b = new Bancomat(codiceBancomat, posizione);
+                this.listaBancomat.add(b);
 
-
+                if (this.listaBancomat == null)
+                    throw new Exception("Errore caricamento Bancomat");
+            }
+        } catch (Exception e) {e.printStackTrace();}
+    }
 
 }

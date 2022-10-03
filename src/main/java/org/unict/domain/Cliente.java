@@ -158,7 +158,7 @@ public class Cliente
                 float saldo = Float.parseFloat(fp.readLine());
                 String numeroCarta = fp.readLine();
                 String dataScadenza = fp.readLine();
-                int pin = Integer.parseInt(fp.readLine());
+                String pin = fp.readLine();
 
                 ContoCorrente contoCorrente = new ContoCorrente(iban, cf, saldo, numeroCarta, dataScadenza, pin);
                 this.listaContiCorrente.put(iban, contoCorrente);
