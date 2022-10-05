@@ -6,9 +6,14 @@ import java.util.*;
 public class Bancomat {
     private int codice;
     private String posizione;
-    private Map<Integer, Banconota> listaBanconote;
+    public Map<Integer, Banconota> listaBanconote;
 
-    public Bancomat(int codiceBancomat, String posizione) {
+
+    public Bancomat(int codiceBancomat, String posizione)
+    {
+        this.codice = codiceBancomat;
+        this.posizione = posizione;
+        this.listaBanconote = new HashMap<>();
     }
 
     public int getCodice() {
@@ -27,24 +32,29 @@ public class Bancomat {
         this.posizione = posizione;
     }
 
-    public void caricaListaBanconote() {
+    public void caricaListaBanconote(int codiceBancomat) {
         try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBanconote.txt";
+            String file = "file://D:/OneDrive - Università degli Studi di Catania/Magistrale/Primo Anno/Ingegneria del Software/Esame/Progetto/IntesaSanAndreas/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             System.out.println("STO STAMPANDO LE BANCONOTE CHE CI SONO NEL BANCOMAT\n");
 
-            for (int codiceBancomat = Integer.parseInt(fp.readLine()); codiceBancomat != 0; codiceBancomat = Integer.parseInt(fp.readLine()))
+            for (String s = fp.readLine(); s != null; s = fp.readLine())
             {
+
                 int codiceBanconota = Integer.parseInt(fp.readLine());
                 int numeroPezzi = Integer.parseInt(fp.readLine());
 
-                System.out.println("Codice Bancomat: " + codiceBancomat + " Codice Banconota: " + codiceBanconota + " Numero Pezzi: " + numeroPezzi);
+                if(Integer.parseInt(s) == codiceBancomat)
+                {
+                    System.out.println("Codice Bancomat: " + codiceBancomat + " Codice Banconota: " + codiceBanconota + " Numero Pezzi: " + numeroPezzi);
 
-                Banconota b = new Banconota(codiceBanconota, numeroPezzi);
-                this.listaBanconote.put(codiceBancomat, b);
-                if (this.listaBanconote == null)
-                    throw new Exception("Errore caricamento Banconote");
+                    Banconota b = new Banconota(codiceBanconota, numeroPezzi);
+
+                    listaBanconote.put(codiceBancomat, b);
+                    if (this.listaBanconote == null)
+                        throw new Exception("Errore caricamento Banconote");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

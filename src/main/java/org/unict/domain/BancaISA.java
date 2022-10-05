@@ -11,7 +11,7 @@ public class BancaISA {
     public Map<String, ContoCorrente> listaCc;
     private final BufferedReader tastiera;
     private Bancomat bancomat;
-    public List<Bancomat> listaBancomat;
+    public LinkedList<Bancomat> listaBancomat;
 
 
     private String iban;
@@ -20,122 +20,7 @@ public class BancaISA {
     private BancaISA() {
         this.listaClienti = new HashMap<>();
         this.listaCc = new HashMap<>();
-        this.listaBancomat = new List<Bancomat>() {
-            @Override
-            public int size() {
-                return 0;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return false;
-            }
-
-            @Override
-            public boolean contains(Object o) {
-                return false;
-            }
-
-            @Override
-            public Iterator<Bancomat> iterator() {
-                return null;
-            }
-
-            @Override
-            public Object[] toArray() {
-                return new Object[0];
-            }
-
-            @Override
-            public <T> T[] toArray(T[] a) {
-                return null;
-            }
-
-            @Override
-            public boolean add(Bancomat bancomat) {
-                return false;
-            }
-
-            @Override
-            public boolean remove(Object o) {
-                return false;
-            }
-
-            @Override
-            public boolean containsAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(Collection<? extends Bancomat> c) {
-                return false;
-            }
-
-            @Override
-            public boolean addAll(int index, Collection<? extends Bancomat> c) {
-                return false;
-            }
-
-            @Override
-            public boolean removeAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public boolean retainAll(Collection<?> c) {
-                return false;
-            }
-
-            @Override
-            public void clear() {
-
-            }
-
-            @Override
-            public Bancomat get(int index) {
-                return null;
-            }
-
-            @Override
-            public Bancomat set(int index, Bancomat element) {
-                return null;
-            }
-
-            @Override
-            public void add(int index, Bancomat element) {
-
-            }
-
-            @Override
-            public Bancomat remove(int index) {
-                return null;
-            }
-
-            @Override
-            public int indexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public int lastIndexOf(Object o) {
-                return 0;
-            }
-
-            @Override
-            public ListIterator<Bancomat> listIterator() {
-                return null;
-            }
-
-            @Override
-            public ListIterator<Bancomat> listIterator(int index) {
-                return null;
-            }
-
-            @Override
-            public List<Bancomat> subList(int fromIndex, int toIndex) {
-                return null;
-            }
-        };
+        this.listaBancomat = new LinkedList<>();
         this.tastiera = new BufferedReader(new InputStreamReader(System.in));
         caricaClienti();
     }
@@ -307,8 +192,9 @@ public class BancaISA {
     public void menuCliente() {
         int idBancomat = 1;
         caricaListaBancomat();
-        System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat);
-        bancomat.caricaListaBanconote();
+        System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat + "\n");
+        bancomat = listaBancomat.get(idBancomat);
+        bancomat.caricaListaBanconote(idBancomat);
 
         try
         {

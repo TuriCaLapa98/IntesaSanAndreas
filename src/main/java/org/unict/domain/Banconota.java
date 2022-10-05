@@ -7,6 +7,8 @@ public class Banconota {
     private int numPezzi;
 
     public Banconota(int codiceBanconota, int numeroPezzi) {
+        this.codice = codiceBanconota;
+        this.numPezzi = numeroPezzi;
     }
 
     public int getCodice() {
