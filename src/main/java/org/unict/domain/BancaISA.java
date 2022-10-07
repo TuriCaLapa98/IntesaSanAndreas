@@ -183,9 +183,9 @@ public class BancaISA {
     }
 
     /** --------------- Menu Dipendente Tecnico ----------------------- */
-    public void menuDipendenteT() {
+    public void menuDipendenteT(String notifica) {
         System.out.println("sono nel menu T");
-
+        System.out.println(notifica);
     }
 
     /** --------------- Menu Bancomat ----------------------- */

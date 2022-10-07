@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="3st Commit: Creazione di: caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat) (da verificare).&#10;Modifica di menuCliente">
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="4th Commit: Correzione di caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat), e vari errori di inizializzazione su Banconota.java.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/LoginDipendenti.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/LoginDipendenti.java" afterDir="false" />
     </list>
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,10 +35,28 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
       <ranges>
-        <range start1="13" end1="14" start2="13" end2="14" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="22" end1="138" start2="22" end2="23" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="309" end1="311" start2="194" end2="197" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="325" end1="328" start2="211" end2="214" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="4" end1="4" start2="4" end2="6" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="5" end1="6" start2="7" end2="9" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="185" end1="186" start2="188" end2="189" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="187" end1="188" start2="190" end2="191" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="201" end1="202" start2="204" end2="204" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="211" end1="214" start2="213" end2="223" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="221" end1="221" start2="230" end2="250" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="241" end1="241" start2="270" end2="295" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java">
+      <ranges>
+        <range start1="1" end1="1" start2="1" end2="2" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="4" end1="4" start2="5" end2="6" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="5" end1="6" start2="7" end2="9" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="9" end1="9" start2="12" end2="13" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="18" end1="18" start2="22" end2="24" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="36" end1="37" start2="42" end2="43" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="89" end1="90" start2="95" end2="96" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="92" end1="93" start2="98" end2="99" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="94" end1="109" start2="100" end2="153" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="111" end1="111" start2="155" end2="173" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
       </ranges>
     </file>
   </component>
@@ -102,7 +123,8 @@
       <workItem from="1664437076761" duration="2932000" />
       <workItem from="1664639097915" duration="2464000" />
       <workItem from="1664810034605" duration="6514000" />
-      <workItem from="1664987782611" duration="3720000" />
+      <workItem from="1664987782611" duration="3951000" />
+      <workItem from="1665155204417" duration="6773000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -132,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664816474874</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="4th Commit: Correzione di caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat), e vari errori di inizializzazione su Banconota.java.">
+      <created>1664991691168</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664991691168</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,7 +184,8 @@
     <MESSAGE value="1st Commit" />
     <MESSAGE value="2st Commit: Creazione di: Bancomat, Banconota, elencoBanconote, funz. caricaPezzi(Bancomat), funz. StampaListaBanconote(Bancomat)" />
     <MESSAGE value="3st Commit: Creazione di: caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat) (da verificare).&#10;Modifica di menuCliente" />
-    <option name="LAST_COMMIT_MESSAGE" value="3st Commit: Creazione di: caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat) (da verificare).&#10;Modifica di menuCliente" />
+    <MESSAGE value="4th Commit: Correzione di caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat), e vari errori di inizializzazione su Banconota.java." />
+    <option name="LAST_COMMIT_MESSAGE" value="4th Commit: Correzione di caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat), e vari errori di inizializzazione su Banconota.java." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

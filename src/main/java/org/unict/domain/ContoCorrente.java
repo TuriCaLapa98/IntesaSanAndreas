@@ -22,7 +22,7 @@ public class ContoCorrente
     {
         this.cf=cf;
         this.iban = iban;
-        this.saldo = 0;
+        this.saldo = 1000;
         this.numeroCarta =generaNumeroCarta();
         this.dataScadenza = LocalDate.now().plusYears(10);
         this.pin = generaPin();

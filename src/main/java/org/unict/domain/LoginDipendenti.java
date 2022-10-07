@@ -1,7 +1,5 @@
 package org.unict.domain;
 
-import java.util.Map;
-
 public class LoginDipendenti implements InterfacciaLogin{
     InterfacciaLogin login;
 
@@ -15,10 +13,11 @@ public class LoginDipendenti implements InterfacciaLogin{
         if(identificatore.contains("D")) {
             try {
                 BancaISA bancaISA = BancaISA.getInstance();
+                String notifica = null;
                 if(identificatore.equals("DN"))
                     bancaISA.menuDipendenteN();
                 else if(identificatore.equals("DT"))
-                    bancaISA.menuDipendenteT();
+                    bancaISA.menuDipendenteT(notifica);
             } catch (Exception ignored) {
             }
         }else login.login(identificatore);
