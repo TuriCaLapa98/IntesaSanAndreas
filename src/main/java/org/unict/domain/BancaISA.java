@@ -2,8 +2,11 @@ package org.unict.domain;
 
 import java.io.*;
 import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class BancaISA {
+//Observer Patter
+public class BancaISA implements Observer{
     private static BancaISA bancaIsa;
     private Cliente clienteCorrente;
     private ContoCorrente ccCorrente;
@@ -25,16 +28,17 @@ public class BancaISA {
         caricaClienti();
     }
 
+
     /** ------------------- getInstance ------------------------ */
     public static BancaISA getInstance() {
         if (bancaIsa == null)
             bancaIsa = new BancaISA();
-
         return bancaIsa;
     }
 
     /** ----------------- caricaClienti ---------------------- */
-    public void caricaClienti() {
+    public void caricaClienti()
+    {
         try {
             String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoClienti.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
@@ -49,6 +53,8 @@ public class BancaISA {
 
                 Cliente c = new Cliente(cf, nome, cognome, dataNascita, email, telefono);
                 this.listaClienti.put(cf, c);
+                listaCc.putAll(c.getListaCc());
+
                 if (this.listaClienti == null)
                     throw new Exception("Errore caricamento clienti");
             }
@@ -199,7 +205,6 @@ public class BancaISA {
         try
         {
             /** ------------- UC4 Prelievo Bancomat ------------- */
-
             System.out.println("****INSERIMENTO CREDENZIALI****\n");
             System.out.println("Inserisci iban\n");
             String iban = tastiera.readLine();
@@ -209,14 +214,42 @@ public class BancaISA {
             if (listaCc.containsKey(iban) && Objects.equals(listaCc.get(iban).getPin(), pin))
             {
                 System.out.println("Saldo disponibile: " + listaCc.get(iban).getSaldo());
-                //System.out.println("Inserisci importo\n");
-                //int prelievo = Integer.parseInt(tastiera.readLine());
-                //bancomat.calcolaPrelievo(prelievo);
+
+                int prelievo = calcolaImportoInserito();
+
+                //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
+                if(listaCc.get(iban).getSaldo() >=prelievo)
+                {
+                    bancomat.calcolaPrelievo(prelievo);
+                } else {
+                    System.out.println("Non hai abbastanza soldi nel conto da prelevare\n");
+                    bancaIsa.menuCliente();
+                }
             }
+            else System.out.println("IBAN NON TROVATO\n");
 
         }
         catch(Exception e){e.printStackTrace();}
+    }
 
+    public int calcolaImportoInserito()throws IOException
+    {
+        System.out.println("Selezione importo:\n" +
+                            "1) €100 \n" +
+                            "2) €200 \n" +
+                            "3) €300 \n" +
+                            "5) €500 \n" +
+                            "7) €700 \n" +
+                            "10) €1000 \n");
+        int scelta = Integer.parseInt(tastiera.readLine());
+        if(scelta==1 || scelta==2 || scelta==3 || scelta==5 || scelta==7 || scelta==10)
+        {
+            return scelta*100;
+        }else {
+            System.out.println("valore inserito non valido\n");
+            bancaIsa.calcolaImportoInserito();
+        }
+        return 0; //In caso di errori stranni controllare qui
     }
 
     public void caricaListaBancomat() {
@@ -239,4 +272,29 @@ public class BancaISA {
         } catch (Exception e) {e.printStackTrace();}
     }
 
+    //Observer Pattern
+    @Override
+    public void update(Observable obs, Object arg)
+    {
+        if(((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
+            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi(), 5);
+        else if(((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
+            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi(), 10);
+        else if(((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
+            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi(), 20);
+        else if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 20)
+            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi(), 50);
+        else if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 10)
+            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi(), 100);
+        else if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 5)
+            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi(), 200);
+    }
+
+    private void notificaBanconote(int codice, int numPezzi, int taglio)
+    {
+        String notifica = "*** Banconota in esaurimento *** \n " +
+                          "Rifornire bancomat " + codice + " per taglio " + taglio + "€\n" +
+                          "(Pezzi Rimanenti = " + numPezzi + ")\n" ;
+        menuDipendenteT(notifica);
+    }
 }

@@ -1,12 +1,16 @@
 package org.unict.domain;
 
+
 import java.io.*;
 import java.util.*;
+import java.util.Observable;
 
-public class Bancomat {
+//Observer Pattern
+public class Bancomat extends Observable {
     private int codice;
     private String posizione;
     public Map<Integer, Banconota> listaBanconote;
+
 
 
     public Bancomat(int codiceBancomat, String posizione)
@@ -15,6 +19,8 @@ public class Bancomat {
         this.posizione = posizione;
         this.listaBanconote = new HashMap<>();
     }
+
+    public HashMap<Integer, Banconota> getListaBanconote(){return (HashMap<Integer, Banconota>) this.listaBanconote;}
 
     public int getCodice() {
         return codice;
@@ -87,26 +93,82 @@ public class Bancomat {
 
     }*/
 
-    public void calcolaPrelievo(int Prelievo)
+    public void calcolaPrelievo(int prelievo)
     {
-        //Il prelievo deve essere divisibile per 5. IMPLEMENTARE CONTROLLO DOPO ACQUISIZIONE PRELIEVO DA TASTIERA, dare la possibilità di uscire dal loop
-
+        boolean operazione = false;
         int pz200 = 0, pz100 = 0, pz50 = 0, pz20 = 0, pz10 = 0, pz5 = 0;
-        /**if (listaCc.get(iban).getSaldo() >= prelievo) {
-         //inziamo dal taglio più grande/ tmp quantita di banconote
-         pz200 = prelievo/200; //dim200=20pz , pz200=25
-         if(pz200 > max200 //prendere il valore della quantità dei pezzi da 200)
-         {
-         //anzichè usare il tmp usare direttamente il valore massimo
-         tmp200=//max200;
-         pz100=(max200*200-prelievo)/100 //pz100=5;
-         prelievo = prelievo - max200*200;
-         }
 
-         pz100 = prelievo/100;
-         //implementare taglio banconote: lista con valore
-         System.out.println("\nPrelevare il denaro richiesto\n");
-         }*/
+        //Pz taglio 200
+        int tmpPz1 = prelievo/200;
+        int tmpPz2;
+
+        if(tmpPz1<=listaBanconote.get(200).getNumPezzi())
+        {
+            pz200=tmpPz1;
+        } else {
+            pz200 = listaBanconote.get(200).getNumPezzi();
+            tmpPz2 = tmpPz1 - listaBanconote.get(200).getNumPezzi();
+
+            //Pz taglio 100
+            if (tmpPz2 <= listaBanconote.get(100).getNumPezzi()) {
+                pz100 = tmpPz2;
+            } else {
+                pz100 = listaBanconote.get(100).getNumPezzi();
+                tmpPz1 = tmpPz2 - listaBanconote.get(100).getNumPezzi();
+
+                //Pz taglio 50
+                if (tmpPz1 <= listaBanconote.get(50).getNumPezzi()) {
+                    pz50 = tmpPz1;
+                } else {
+                    pz50 = listaBanconote.get(50).getNumPezzi();
+                    tmpPz2 = tmpPz1 - listaBanconote.get(50).getNumPezzi();
+
+                    //Pz taglio 20
+                    if (tmpPz2 <= listaBanconote.get(20).getNumPezzi()) {
+                        pz20 = tmpPz2;
+                    } else {
+                        pz20 = listaBanconote.get(20).getNumPezzi();
+                        tmpPz1 = tmpPz2 - listaBanconote.get(20).getNumPezzi();
+
+                        //Pz taglio 10
+                        if (tmpPz1 <= listaBanconote.get(10).getNumPezzi()) {
+                            pz10 = tmpPz1;
+                        } else {
+                            pz10 = listaBanconote.get(10).getNumPezzi();
+                            tmpPz2 = tmpPz1 - listaBanconote.get(10).getNumPezzi();
+
+                            //Pz taglio 5
+                            if (tmpPz2 <= listaBanconote.get(5).getNumPezzi()) {
+                                pz5 = tmpPz2;
+                            } else {
+                                pz5 = listaBanconote.get(5).getNumPezzi();
+                                tmpPz1 = tmpPz2 - listaBanconote.get(5).getNumPezzi();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        riduciPezzi(pz5,pz10,pz20,pz50,pz100,pz200);
     }
 
+    private void riduciPezzi(int pz5, int pz10, int pz20, int pz50, int pz100, int pz200)
+    {
+        Banconota b5 = new Banconota(5,listaBanconote.get(5).getNumPezzi() - pz5);
+        listaBanconote.replace(5, listaBanconote.get(5), b5);
+        Banconota b10 = new Banconota(5,listaBanconote.get(10).getNumPezzi() - pz10);
+        listaBanconote.replace(10, listaBanconote.get(10), b10);
+        Banconota b20 = new Banconota(20,listaBanconote.get(20).getNumPezzi() - pz20);
+        listaBanconote.replace(20, listaBanconote.get(20), b20);
+        Banconota b50 = new Banconota(50,listaBanconote.get(50).getNumPezzi() - pz50);
+        listaBanconote.replace(50, listaBanconote.get(50), b50);
+        Banconota b100 = new Banconota(100,listaBanconote.get(100).getNumPezzi() - pz100);
+        listaBanconote.replace(100, listaBanconote.get(100), b100);
+        Banconota b200 = new Banconota(200,listaBanconote.get(200).getNumPezzi() - pz200);
+        listaBanconote.replace(200, listaBanconote.get(200), b200);
+
+        //Observer Pattern
+        this.setChanged();
+        this.notifyObservers();
+    }
 }
