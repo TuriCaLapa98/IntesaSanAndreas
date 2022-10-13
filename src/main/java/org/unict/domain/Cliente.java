@@ -104,12 +104,10 @@ public class Cliente
         this.valorePrelievo = valorePrelievo;
     }
 
-    public void createListaCcCliente()
-    {
-        this.listaContiCorrente = new HashMap<>();
-    }
+    public HashMap<String,ContoCorrente> getListaCc(){ return (HashMap<String, ContoCorrente>) this.listaContiCorrente;}
 
-    public void creaContoCorrente() throws IOException {
+    public void creaContoCorrente() throws IOException
+    {
         String IBAN = generaIban();
         ContoCorrente contoCorrente =new ContoCorrente(IBAN,this.cf);
         BancaISA bancaISA = BancaISA.getInstance();
@@ -129,8 +127,6 @@ public class Cliente
 
         printout.flush();
         printout.close();
-
-        //contoCorrente.dettagliContoCorrente();
     }
 
     public String generaIban()
@@ -152,18 +148,22 @@ public class Cliente
             String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
-            for (String cf = fp.readLine(); Objects.equals(cf, this.cf); cf = fp.readLine())
+            for (String cf = fp.readLine(); cf != null; cf = fp.readLine())
             {
-                String iban = fp.readLine();
-                float saldo = Float.parseFloat(fp.readLine());
-                String numeroCarta = fp.readLine();
-                String dataScadenza = fp.readLine();
-                String pin = fp.readLine();
+                if(Objects.equals(this.cf, cf))
+                {
+                    String iban = fp.readLine();
+                    float saldo = Float.parseFloat(fp.readLine());
+                    String numeroCarta = fp.readLine();
+                    String dataScadenza = fp.readLine();
+                    String pin = fp.readLine();
 
-                ContoCorrente contoCorrente = new ContoCorrente(iban, cf, saldo, numeroCarta, dataScadenza, pin);
-                this.listaContiCorrente.put(iban, contoCorrente);
-                if(this.listaContiCorrente == null)
-                    throw new Exception("Errore caricamento clienti");
+                    ContoCorrente contoCorrente = new ContoCorrente(iban, cf, saldo, numeroCarta, dataScadenza, pin);
+                    this.listaContiCorrente.put(iban, contoCorrente);
+
+                    if (this.listaContiCorrente == null)
+                        throw new Exception("Errore caricamento clienti");
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -16,13 +16,14 @@ public class BancaISA implements Observer{
     private Bancomat bancomat;
     public LinkedList<Bancomat> listaBancomat;
 
-
     private String iban;
+    public Map<Integer, Banconota> listaBanconote;
 
     /** ----------------------- BancaISA -------------------------- */
     private BancaISA() {
         this.listaClienti = new HashMap<>();
         this.listaCc = new HashMap<>();
+        this.listaBanconote = new HashMap<>();
         this.listaBancomat = new LinkedList<>();
         this.tastiera = new BufferedReader(new InputStreamReader(System.in));
         caricaClienti();
@@ -53,7 +54,7 @@ public class BancaISA implements Observer{
 
                 Cliente c = new Cliente(cf, nome, cognome, dataNascita, email, telefono);
                 this.listaClienti.put(cf, c);
-                listaCc.putAll(c.getListaCc());
+                this.listaCc.putAll(c.getListaCc());
 
                 if (this.listaClienti == null)
                     throw new Exception("Errore caricamento clienti");
@@ -196,31 +197,34 @@ public class BancaISA implements Observer{
 
     /** --------------- Menu Bancomat ----------------------- */
     public void menuCliente() {
-        int idBancomat = 1;
+        int idBancomat = 0;
         caricaListaBancomat();
         System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat + "\n");
         bancomat = listaBancomat.get(idBancomat);
-        bancomat.caricaListaBanconote(idBancomat);
+        bancomat.caricaListaBanconote();
 
         try
         {
             /** ------------- UC4 Prelievo Bancomat ------------- */
             System.out.println("****INSERIMENTO CREDENZIALI****\n");
             System.out.println("Inserisci iban\n");
-            String iban = tastiera.readLine();
+            //String iban = tastiera.readLine();
+            String iban = "IT88A7174727847774516670157";
             System.out.println("Inserisci pin\n");
-            String pin = tastiera.readLine();
+            //String pin = tastiera.readLine();
+            String pin = "3424";
 
             if (listaCc.containsKey(iban) && Objects.equals(listaCc.get(iban).getPin(), pin))
             {
                 System.out.println("Saldo disponibile: " + listaCc.get(iban).getSaldo());
 
-                int prelievo = calcolaImportoInserito();
+                int prelievo = inserisciImporto();
 
                 //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
                 if(listaCc.get(iban).getSaldo() >=prelievo)
                 {
                     bancomat.calcolaPrelievo(prelievo);
+                    aggiornaFileBanconote();
                 } else {
                     System.out.println("Non hai abbastanza soldi nel conto da prelevare\n");
                     bancaIsa.menuCliente();
@@ -232,7 +236,25 @@ public class BancaISA implements Observer{
         catch(Exception e){e.printStackTrace();}
     }
 
-    public int calcolaImportoInserito()throws IOException
+    private void aggiornaFileBanconote() throws IOException {
+
+        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBanconote.txt");
+        BufferedWriter filebuf = new BufferedWriter(file);
+        PrintWriter printout = new PrintWriter(filebuf);
+
+        for(int i=0; i< this.listaBancomat.size();i++ )
+            this.listaBancomat.get(i).listaBanconote.forEach((key,value) -> this.listaBanconote.put((value.getCodiceBancomat()+value.getCodice()),value));
+
+        this.listaBanconote.forEach((key, value) -> printout.println
+                (value.getCodiceBancomat()
+                        + "\n" + value.getCodice()
+                        + "\n" + value.getNumPezzi()
+                ));
+        printout.flush();
+        printout.close();
+    }
+
+    public int inserisciImporto()throws IOException
     {
         System.out.println("Selezione importo:\n" +
                             "1) €100 \n" +
@@ -247,9 +269,9 @@ public class BancaISA implements Observer{
             return scelta*100;
         }else {
             System.out.println("valore inserito non valido\n");
-            bancaIsa.calcolaImportoInserito();
+            bancaIsa.inserisciImporto();
         }
-        return 0; //In caso di errori stranni controllare qui
+        return 0;
     }
 
     public void caricaListaBancomat() {
