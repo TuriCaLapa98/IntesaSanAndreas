@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.Observable;
 import java.util.Observer;
 
-//Observer Patter
+//Observer Pattern
 public class BancaISA implements Observer{
     private static BancaISA bancaIsa;
     private Cliente clienteCorrente;
@@ -144,7 +144,7 @@ public class BancaISA implements Observer{
                 case 1:
                     /* ------- UC1 CreaContoCorrente ------- */
                     System.out.println("Inserisci codice fiscale");
-                    verificaCredenziali(tastiera.readLine());
+                    verificaCredenziali(tastiera.readLine()); //verifichiamo le credenziali del cliente
                     break;
 
                 case 2:
