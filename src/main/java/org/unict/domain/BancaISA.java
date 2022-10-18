@@ -67,9 +67,9 @@ public class BancaISA implements Observer{
 
     /** ------------------- verificaCredenziali ------------------------- */
     public boolean verificaCredenziali(String cf) throws Exception {
-        if (listaClienti.containsKey(cf)) {
+        if (this.listaClienti.containsKey(cf)) {
             try {
-                clienteCorrente = listaClienti.get(cf);
+                clienteCorrente = this.listaClienti.get(cf);
                 System.out.println("Cliente esistente, creazione conto corrente in corso...\n");
                 // throw new Exception("Cliente esistente, creazione conto corrente in corso...\n");
                 clienteCorrente.creaContoCorrente();
@@ -102,11 +102,11 @@ public class BancaISA implements Observer{
         String telefono = this.tastiera.readLine();
 
         clienteCorrente = new Cliente(cf, nome, cognome, dataNascita, email, telefono);
-        listaClienti.put(cf, clienteCorrente);
+        this.listaClienti.put(cf, clienteCorrente);
         FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoClienti.txt");
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
-        listaClienti.forEach((key, value) -> printout.println
+        this.listaClienti.forEach((key, value) -> printout.println
                 (key
                         + "\n" + value.getNome()
                         + "\n" + value.getCognome()
@@ -165,7 +165,7 @@ public class BancaISA implements Observer{
     }
 
     private void verificaEsistenzaCc(String iban, String nomeBeneficiario, String cognomeBeneficiario) throws Exception {
-        if (listaCc.get(iban) != null) {
+        if (this.listaCc.get(iban) != null) {
             verificaBeneficiario(iban, nomeBeneficiario, cognomeBeneficiario);
         } else
             System.out.println("IBAN NON ESISTENTE");
@@ -174,8 +174,8 @@ public class BancaISA implements Observer{
     private void verificaBeneficiario(String iban, String nomeBeneficiario, String cognomeBeneficiario) throws Exception {
 
 
-        if (listaClienti.get(listaCc.get(iban).getCf()).getNome().equals(nomeBeneficiario) &&
-                listaClienti.get(listaCc.get(iban).getCf()).getCognome().equals(cognomeBeneficiario))
+        if (this.listaClienti.get(this.listaCc.get(iban).getCf()).getNome().equals(nomeBeneficiario) &&
+                this.listaClienti.get(this.listaCc.get(iban).getCf()).getCognome().equals(cognomeBeneficiario))
         {
             System.out.println("Inserisci Importo");
             float importo = Float.parseFloat(tastiera.readLine());
@@ -184,7 +184,7 @@ public class BancaISA implements Observer{
             System.out.println("Inserisci Cognome Mittente");
             String cognomeM = tastiera.readLine();
 
-            listaCc.get(iban).inserisciImporto(importo, nomeM, cognomeM);
+            this.listaCc.get(iban).inserisciImporto(importo, nomeM, cognomeM);
         }
 
     }
@@ -200,7 +200,7 @@ public class BancaISA implements Observer{
         int idBancomat = 0;
         caricaListaBancomat();
         System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat + "\n");
-        bancomat = listaBancomat.get(idBancomat);
+        bancomat = this.listaBancomat.get(idBancomat);
         bancomat.caricaListaBanconote();
 
         try
@@ -209,31 +209,53 @@ public class BancaISA implements Observer{
             System.out.println("****INSERIMENTO CREDENZIALI****\n");
             System.out.println("Inserisci iban\n");
             //String iban = tastiera.readLine();
-            String iban = "IT88A7174727847774516670157";
+            String iban = "IT88A5315876888350827758213";
             System.out.println("Inserisci pin\n");
             //String pin = tastiera.readLine();
-            String pin = "3424";
+            String pin = "4532";
 
-            if (listaCc.containsKey(iban) && Objects.equals(listaCc.get(iban).getPin(), pin))
+            if (this.listaCc.containsKey(iban) && Objects.equals(this.listaCc.get(iban).getPin(), pin))
             {
-                System.out.println("Saldo disponibile: " + listaCc.get(iban).getSaldo());
+                System.out.println("Saldo disponibile: " + this.listaCc.get(iban).getSaldo());
 
                 int prelievo = inserisciImporto();
 
                 //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
-                if(listaCc.get(iban).getSaldo() >=prelievo)
+                if(this.listaCc.get(iban).getSaldo() >=prelievo)
                 {
                     bancomat.calcolaPrelievo(prelievo);
                     aggiornaFileBanconote();
+                    diminuisciSaldo(iban,prelievo);
                 } else {
                     System.out.println("Non hai abbastanza soldi nel conto da prelevare\n");
                     bancaIsa.menuCliente();
                 }
             }
-            else System.out.println("IBAN NON TROVATO\n");
+            else System.out.println("IBAN NON TROVATO O CREDENZIALI ERRATE\n");
 
         }
         catch(Exception e){e.printStackTrace();}
+    }
+
+    private void diminuisciSaldo(String iban, int prelievo) throws IOException
+    {
+
+        this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
+
+        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt");
+        BufferedWriter filebuf = new BufferedWriter(file);
+        PrintWriter printout = new PrintWriter(filebuf);
+
+        this.listaCc.forEach((key, value) -> printout.println
+                (value.getCf()
+                        + "\n" + key
+                        + "\n" + value.getSaldo()
+                        + "\n" + value.getNumeroCarta()
+                        + "\n" + value.getDataScadenza()
+                        + "\n" + value.getPin()
+                ));
+        printout.flush();
+        printout.close();
     }
 
     private void aggiornaFileBanconote() throws IOException {
@@ -257,12 +279,12 @@ public class BancaISA implements Observer{
     public int inserisciImporto()throws IOException
     {
         System.out.println("Selezione importo:\n" +
-                            "1) €100 \n" +
-                            "2) €200 \n" +
-                            "3) €300 \n" +
-                            "5) €500 \n" +
-                            "7) €700 \n" +
-                            "10) €1000 \n");
+                "1) €100 \n" +
+                "2) €200 \n" +
+                "3) €300 \n" +
+                "5) €500 \n" +
+                "7) €700 \n" +
+                "10) €1000 \n");
         int scelta = Integer.parseInt(tastiera.readLine());
         if(scelta==1 || scelta==2 || scelta==3 || scelta==5 || scelta==7 || scelta==10)
         {
@@ -315,8 +337,8 @@ public class BancaISA implements Observer{
     private void notificaBanconote(int codice, int numPezzi, int taglio)
     {
         String notifica = "*** Banconota in esaurimento *** \n " +
-                          "Rifornire bancomat " + codice + " per taglio " + taglio + "€\n" +
-                          "(Pezzi Rimanenti = " + numPezzi + ")\n" ;
+                "Rifornire bancomat " + codice + " per taglio " + taglio + "€\n" +
+                "(Pezzi Rimanenti = " + numPezzi + ")\n" ;
         menuDipendenteT(notifica);
     }
 }

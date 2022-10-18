@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
-    </list>
-    <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java" afterDir="false" />
-    </list>
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
+    <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,16 +22,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/Banconota.java">
-      <ranges>
-        <range start1="3" end1="4" start2="3" end2="5" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="5" end1="6" start2="6" end2="7" changelist="8c24f1f6-c768-4499-a7ce-24a5caa3a280" />
-        <range start1="8" end1="9" start2="9" end2="11" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="12" end1="12" start2="14" end2="22" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -85,6 +65,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -110,6 +101,7 @@
       <workItem from="1665155204417" duration="6972000" />
       <workItem from="1665590846213" duration="8169000" />
       <workItem from="1665653020049" duration="18180000" />
+      <workItem from="1666088949372" duration="68000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
