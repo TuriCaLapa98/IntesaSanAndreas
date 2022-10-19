@@ -310,6 +310,8 @@ public class BancaISA implements Observer{
                 Bancomat b = new Bancomat(codiceBancomat, posizione);
                 this.listaBancomat.add(b);
 
+                b.addObserver(this);
+
                 if (this.listaBancomat == null)
                     throw new Exception("Errore caricamento Bancomat");
             }
@@ -320,25 +322,54 @@ public class BancaISA implements Observer{
     @Override
     public void update(Observable obs, Object arg)
     {
-        if(((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
-            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi(), 5);
-        else if(((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
-            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi(), 10);
-        else if(((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
-            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi(), 20);
-        else if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 20)
-            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi(), 50);
-        else if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 10)
-            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi(), 100);
-        else if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 5)
-            notificaBanconote(((Bancomat) obs).getCodice(), ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi(), 200);
+        System.out.println("E' partito l'observer\n");
+        try
+        {
+            String s = "";
+
+            if(((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
+
+                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 5 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() + " pezzi;\n";
+
+            if(((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
+
+                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 10 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() + " pezzi;\n";
+
+            if(((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
+
+                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 20 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() + " pezzi;\n";
+
+            if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 20)
+
+                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 50 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() + " pezzi;\n";
+
+            if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 10)
+
+                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 100 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() + " pezzi;\n";
+
+            if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 5)
+
+                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 200 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() + " pezzi;\n";
+
+            notificaBanconote(s);
+
+        } catch (IOException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void notificaBanconote(int codice, int numPezzi, int taglio)
+    public void notificaBanconote(String s) throws IOException
     {
-        String notifica = "*** Banconota in esaurimento *** \n " +
-                "Rifornire bancomat " + codice + " per taglio " + taglio + "€\n" +
-                "(Pezzi Rimanenti = " + numPezzi + ")\n" ;
-        menuDipendenteT(notifica);
+
+        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt");
+        BufferedWriter filebuf = new BufferedWriter(file);
+        PrintWriter printout = new PrintWriter(filebuf);
+
+        printout.println (s);
+
+        printout.flush();
+        printout.close();
+
     }
 }

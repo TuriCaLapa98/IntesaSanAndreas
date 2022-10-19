@@ -190,8 +190,10 @@ public class Bancomat extends Observable {
         riduciPezzi(pz5,pz10,pz20,pz50,pz100,pz200);
     }
 
-    private void riduciPezzi(int pz5, int pz10, int pz20, int pz50, int pz100, int pz200)
+    public void riduciPezzi(int pz5, int pz10, int pz20, int pz50, int pz100, int pz200)
     {
+
+
         Banconota b5 = new Banconota(this.codice,5,(listaBanconote.get(5).getNumPezzi() - pz5));
         this.listaBanconote.replace(5, listaBanconote.get(5), b5);
         Banconota b10 = new Banconota(this.codice,10, (listaBanconote.get(10).getNumPezzi() - pz10));
