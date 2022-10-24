@@ -75,6 +75,7 @@ public class BancaISA implements Observer{
                 clienteCorrente.creaContoCorrente();
                 return false;
             } catch (Exception e) {
+                e.printStackTrace();
                 return false;
             }
         } else {
@@ -189,10 +190,117 @@ public class BancaISA implements Observer{
 
     }
 
-    /** --------------- Menu Dipendente Tecnico ----------------------- */
-    public void menuDipendenteT(String notifica) {
+    /** --------------------------------------- Menu Dipendente Tecnico --------------------------------------- **/
+    public void menuDipendenteT() throws IOException {
         System.out.println("sono nel menu T");
-        System.out.println(notifica);
+        int notifiche = 0;
+
+        //Visualizza notifiche o esci
+        //Dentro visualizza notifiche -> Aggiungi banconote o esci
+
+        try
+        {
+            /** --------------------------------------- Conta Notifiche ----------------------------------- **/
+
+            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+            BufferedReader fp = new BufferedReader(new FileReader(file));
+
+            for (String s = fp.readLine(); s != null; s = fp.readLine())
+            {
+                notifiche ++;
+            }
+        } catch(Exception e){}
+
+        int scelta = -1;
+        do {
+            try
+            {
+                System.out.println("****MENU DIPENDENTE TECNICO****\n" +
+                        "\n Hai " + notifiche + " notifiche\n" +
+                        "\nInserisci la tua scelta:" +
+                        "\n1) Visualizza le notifiche" +
+                        "\n0) Esci");
+                scelta = Integer.parseInt(tastiera.readLine());
+                if (scelta < 0 || scelta > 1) { //Aggiornare man mano che implementiamo i casi d'uso
+                    System.out.println("Scelta non valida");
+                    throw new Exception("Scelta non valida");
+                }
+            } catch(Exception e){e.printStackTrace();}
+
+            switch (scelta)
+            {
+                case 1:
+                    /** ------------------------ UC10 Gestione Banconote Bancomat ------------------------ **/
+                    leggiNotifiche();
+                    break;
+
+                default:
+                    break;
+            }
+        } while (scelta != 0);
+    }
+
+    private void leggiNotifiche() throws IOException {
+        int codiceBancomat =0;
+        int codiceBanconota =0;
+        int scelta = -1;
+
+        try
+        {
+            /** --------------------------------------- Stampa Notifiche ----------------------------------- **/
+
+            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+            BufferedReader fp = new BufferedReader(new FileReader(file));
+
+            for (String s = fp.readLine(); s != null; s = fp.readLine())
+            {
+                System.out.println(s);
+            }
+        } catch(Exception e){}
+
+        do {
+            try
+            {
+                System.out.println("****MENU DIPENDENTE TECNICO****\n" +
+                        "\nInserisci la tua scelta:" +
+                        "\n1) Inserisci Pezzi Nel Bancomat" +
+                        "\n0) Esci");
+                scelta = Integer.parseInt(tastiera.readLine());
+                if (scelta < 0 || scelta > 1) { //Aggiornare man mano che implementiamo i casi d'uso
+                    System.out.println("Scelta non valida");
+                    throw new Exception("Scelta non valida");
+                }
+            } catch(Exception e){e.printStackTrace();}
+
+            switch (scelta)
+            {
+                case 1:
+                    /** ------------------------ Aggiorna Pezzi ------------------------ **/
+                    System.out.println("\n Inserisci codice bancomat:");
+                    codiceBancomat = Integer.parseInt(tastiera.readLine());
+                    System.out.println("\n Inserisci codice banconota:");
+                    codiceBanconota = Integer.parseInt(tastiera.readLine());
+                    aggiornaPezziBanconota(codiceBancomat, codiceBanconota);
+
+                    break;
+
+                default:
+                    break;
+            }
+        } while (scelta != 0);
+    }
+
+    private void aggiornaPezziBanconota(int codiceBancomat, int codiceBanconota) throws IOException {
+        bancomat = this.listaBancomat.get(codiceBancomat);
+        Banconota b = new Banconota(codiceBancomat, codiceBanconota, 50);
+        bancomat.listaBanconote.replace(codiceBanconota, b);
+        aggiornaFileBanconote();
+        aggiornaNotifiche(codiceBancomat);
+    }
+
+    private void aggiornaNotifiche(int codiceBancomat)
+    {
+       String s =  "1 5 20";
     }
 
     /** --------------- Menu Bancomat ----------------------- */
@@ -328,27 +436,16 @@ public class BancaISA implements Observer{
             String s = "";
 
             if(((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
-
                 s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 5 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() + " pezzi;\n";
-
             if(((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
-
                 s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 10 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() + " pezzi;\n";
-
             if(((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
-
                 s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 20 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() + " pezzi;\n";
-
             if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 20)
-
                 s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 50 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() + " pezzi;\n";
-
             if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 10)
-
                 s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 100 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() + " pezzi;\n";
-
             if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 5)
-
                 s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 200 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() + " pezzi;\n";
 
             notificaBanconote(s);

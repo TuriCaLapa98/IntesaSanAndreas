@@ -67,32 +67,6 @@ public class Bancomat extends Observable {
         }
     }
 
-    /** Funzione da richiamare dal dipendente tecnico quando fa l'update delle banconote
-     * UC 10
-     * */
-    /*public void stampaListaBanconote()
-    {
-        try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt";
-            BufferedReader fp = new BufferedReader(new FileReader(file));
-
-            for (String cf = fp.readLine(); Objects.equals(cf, this.cf); cf = fp.readLine())
-            {
-                String iban = fp.readLine();
-                float saldo = Float.parseFloat(fp.readLine());
-                String numeroCarta = fp.readLine();
-                String dataScadenza = fp.readLine();
-                String pin = fp.readLine();
-
-                ContoCorrente contoCorrente = new ContoCorrente(iban, cf, saldo, numeroCarta, dataScadenza, pin);
-                this.listaContiCorrente.put(iban, contoCorrente);
-                if(this.listaContiCorrente == null)
-                    throw new Exception("Errore caricamento clienti");
-            }
-        } catch (Exception e) {e.printStackTrace();}
-
-    }*/
-
     public void calcolaPrelievo(int prelievo)
     {
         boolean operazione = false;

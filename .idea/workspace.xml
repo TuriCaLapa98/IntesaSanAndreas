@@ -4,18 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/LoginDipendenti.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/LoginDipendenti.java" afterDir="false" />
     </list>
     <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
-    <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-    </list>
+    <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
+    <list id="c9bc914f-a788-49b8-9b88-cb95f114f2d6" name="Changes by Venti" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,17 +28,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
-      <ranges>
-        <range start1="193" end1="193" start2="193" end2="194" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="311" end1="311" start2="312" end2="314" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="322" end1="334" start2="325" end2="360" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="336" end1="337" start2="362" end2="363" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="338" end1="342" start2="364" end2="374" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -61,6 +47,12 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\main\java\org\unict\domain\Filetxt" />
@@ -107,7 +99,10 @@
       <workItem from="1665653020049" duration="18180000" />
       <workItem from="1666088949372" duration="68000" />
       <workItem from="1666089040392" duration="392000" />
-      <workItem from="1666195529393" duration="5231000" />
+      <workItem from="1666195529393" duration="5675000" />
+      <workItem from="1666201501740" duration="35000" />
+      <workItem from="1666294045448" duration="6000" />
+      <workItem from="1666624125608" duration="4709000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -165,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666089261019</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt">
+      <created>1666200915795</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666200915795</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,7 +194,8 @@
     <MESSAGE value="5th Commit: Implementazione Observer, calcoloPrelievo(Bancomat)." />
     <MESSAGE value="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
     <MESSAGE value="8th Commit: Dentro BancaISA aggiunta la Funzione diminuisciSaldo()" />
-    <option name="LAST_COMMIT_MESSAGE" value="8th Commit: Dentro BancaISA aggiunta la Funzione diminuisciSaldo()" />
+    <MESSAGE value="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

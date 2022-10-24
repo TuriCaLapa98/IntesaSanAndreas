@@ -13,11 +13,10 @@ public class LoginDipendenti implements InterfacciaLogin{
         if(identificatore.contains("D")) {
             try {
                 BancaISA bancaISA = BancaISA.getInstance();
-                String notifica = null;
                 if(identificatore.equals("DN"))
                     bancaISA.menuDipendenteN();
                 else if(identificatore.equals("DT"))
-                    bancaISA.menuDipendenteT(notifica);
+                    bancaISA.menuDipendenteT();
             } catch (Exception ignored) {
             }
         }else login.login(identificatore);
