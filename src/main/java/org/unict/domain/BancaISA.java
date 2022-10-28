@@ -291,6 +291,9 @@ public class BancaISA implements Observer{
     }
 
     private void aggiornaPezziBanconota(int codiceBancomat, int codiceBanconota) throws IOException {
+
+        /** Stiamo mettendo che riempie di 50 banconote per semplicità logica*/
+
         bancomat = this.listaBancomat.get(codiceBancomat);
         Banconota b = new Banconota(codiceBancomat, codiceBanconota, 50);
         bancomat.listaBanconote.replace(codiceBanconota, b);
@@ -431,24 +434,41 @@ public class BancaISA implements Observer{
     public void update(Observable obs, Object arg)
     {
         System.out.println("E' partito l'observer\n");
-        try
-        {
-            String s = "";
+        try {
+            String a = "";
 
-            if(((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
-                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 5 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() + " pezzi;\n";
-            if(((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
-                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 10 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() + " pezzi;\n";
-            if(((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
-                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 20 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() + " pezzi;\n";
+            if (((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
+            {
+                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 5 + " " + ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi());
+                this.listaNotifiche.add(a);
+            }
+            if (((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
+            {
+                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 10 + " " + ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi());
+                this.listaNotifiche.add(a);
+            }
+            if (((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
+            {
+                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 20 + " " + ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi());
+                this.listaNotifiche.add(a);
+            }
             if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 20)
-                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 50 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() + " pezzi;\n";
+            {
+                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 50 + " " + ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi());
+                this.listaNotifiche.add(a);
+            }
             if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 10)
-                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 100 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() + " pezzi;\n";
+            {
+                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 100 + " " + ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi());
+                this.listaNotifiche.add(a);
+            }
             if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 5)
-                s = s + "Nel bancomat " + ((Bancomat) obs).getCodice() + " le banconote da €" + 200 + " sono ridotte a " + ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() + " pezzi;\n";
+            {
+                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 200 + " " + ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi());
+                this.listaNotifiche.add(a);
+            }
+            notificaBanconote();
 
-            notificaBanconote(s);
 
         } catch (IOException e)
         {
@@ -456,14 +476,23 @@ public class BancaISA implements Observer{
         }
     }
 
-    public void notificaBanconote(String s) throws IOException
+    public void notificaBanconote() throws IOException
     {
 
         FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt");
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
-        printout.println (s);
+        /** Per ogni elemento della lista fa una stampa
+        *
+        * */
+        String[] splitStr;
+
+        for(String s: this.listaNotifiche)
+        {
+            splitStr = s.split("\\s+");
+            printout.println ("Nel bancomat "+ splitStr[0] +" le banconote da €" + splitStr[1] + " sono ridotte a " + splitStr[2] + " pezzi");
+        }
 
         printout.flush();
         printout.close();
