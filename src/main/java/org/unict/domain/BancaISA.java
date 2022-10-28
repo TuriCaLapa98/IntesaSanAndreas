@@ -301,7 +301,7 @@ public class BancaISA implements Observer{
         bancomat.listaBanconote.replace(codiceBanconota, b);
         aggiornaFileBanconote();
         aggiornaNotifiche(codiceBancomat, codiceBanconota);
-        
+
     }
 
    private void aggiornaNotifiche(int codiceBancomat, int codiceBaconota) throws IOException {
