@@ -15,6 +15,7 @@ public class BancaISA implements Observer{
     private final BufferedReader tastiera;
     private Bancomat bancomat;
     public LinkedList<Bancomat> listaBancomat;
+    public LinkedList<String> listaNotifiche;
 
     private String iban;
     public Map<Integer, Banconota> listaBanconote;
@@ -26,6 +27,7 @@ public class BancaISA implements Observer{
         this.listaBanconote = new HashMap<>();
         this.listaBancomat = new LinkedList<>();
         this.tastiera = new BufferedReader(new InputStreamReader(System.in));
+        this.listaNotifiche = new LinkedList<>();
         caricaClienti();
     }
 
@@ -298,13 +300,23 @@ public class BancaISA implements Observer{
         Banconota b = new Banconota(codiceBancomat, codiceBanconota, 50);
         bancomat.listaBanconote.replace(codiceBanconota, b);
         aggiornaFileBanconote();
-        aggiornaNotifiche(codiceBancomat);
+        aggiornaNotifiche(codiceBancomat, codiceBanconota);
+        
     }
 
-    private void aggiornaNotifiche(int codiceBancomat)
-    {
-       String s =  "1 5 20";
-    }
+   private void aggiornaNotifiche(int codiceBancomat, int codiceBaconota) throws IOException {
+       String[] splitStr;
+
+       for(String s: this.listaNotifiche)
+       {
+           splitStr = s.split("\\s+");
+           if(splitStr[0].equals(codiceBancomat) && splitStr[1].equals(codiceBaconota))
+           this.listaNotifiche.remove(s);
+       }
+
+       notificaBanconote();
+   }
+
 
     /** --------------- Menu Bancomat ----------------------- */
     public void menuCliente() {
