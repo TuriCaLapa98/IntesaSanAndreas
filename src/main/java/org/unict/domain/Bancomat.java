@@ -43,7 +43,7 @@ public class Bancomat extends Observable {
             String file = "D:/OneDrive - Università degli Studi di Catania/Magistrale/Primo Anno/Ingegneria del Software/Esame/Progetto/IntesaSanAndreas/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
-            System.out.println("STO STAMPANDO LE BANCONOTE CHE CI SONO NEL BANCOMAT\n");
+            System.out.println("\nSTO STAMPANDO LE BANCONOTE CHE CI SONO NEL BANCOMAT " + this.codice);
 
             for (String s = fp.readLine(); s != null; s = fp.readLine())
             {

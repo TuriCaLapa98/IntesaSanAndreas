@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe" />
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
+    </list>
     <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
-    <list id="c9b76d5e-6870-4d25-9b70-ec9a68be363c" name="Changes by Venti" comment="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe" />
+    <list id="9bc754e3-40c2-47bf-825c-264d0ba458c5" name="Changes by Venti" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +33,31 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
+      <ranges>
+        <range start1="31" end1="31" start2="31" end2="32" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="133" end1="134" start2="134" end2="135" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="196" end1="197" start2="197" end2="197" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="219" end1="220" start2="219" end2="220" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="267" end1="268" start2="267" end2="268" changelist="9bc754e3-40c2-47bf-825c-264d0ba458c5" />
+        <range start1="299" end1="300" start2="299" end2="300" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="302" end1="303" start2="302" end2="303" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="312" end1="314" start2="312" end2="315" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="323" end1="324" start2="324" end2="324" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="346" end1="347" start2="346" end2="347" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="447" end1="448" start2="447" end2="447" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="450" end1="450" start2="449" end2="451" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="454" end1="454" start2="455" end2="464" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="455" end1="455" start2="465" end2="466" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="459" end1="459" start2="470" end2="479" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="464" end1="464" start2="484" end2="493" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="469" end1="469" start2="498" end2="507" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="474" end1="474" start2="512" end2="521" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="479" end1="479" start2="526" end2="535" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -34,6 +68,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="28nUUj9SUqnBr3rKK6iOk3zpgOS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -42,13 +79,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "settings.editor.selected.configurable": "editor.preferences.completion"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\main\java\org\unict\domain\Filetxt" />
@@ -100,7 +137,8 @@
       <workItem from="1666294045448" duration="6000" />
       <workItem from="1666624125608" duration="4869000" />
       <workItem from="1666973087744" duration="89000" />
-      <workItem from="1666973350990" duration="5048000" />
+      <workItem from="1666973350990" duration="5158000" />
+      <workItem from="1667577919495" duration="9801000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -186,7 +224,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666978401419</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe">
+      <created>1666978439942</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1666978439942</updated>
+    </task>
+    <task id="LOCAL-00014" summary="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe">
+      <created>1666978453399</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666978453399</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

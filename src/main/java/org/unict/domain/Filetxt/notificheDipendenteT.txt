@@ -1,8 +1,0 @@
-Nel bancomat 1 le banconote da €5 sono ridotte a 80 pezzi
-
-Nel bancomat 1 le banconote da €10 sono ridotte a 70 pezzi
-
-Nel bancomat 1 le banconote da €100 sono ridotte a 0 pezzi
-
-Nel bancomat 1 le banconote da €200 sono ridotte a 0 pezzi
-
