@@ -21,7 +21,7 @@ public class BancaISA implements Observer{
     public Map<Integer, Banconota> listaBanconote;
 
     /** ----------------------- BancaISA -------------------------- */
-    private BancaISA() {
+    private BancaISA() throws IOException {
         this.listaClienti = new HashMap<>();
         this.listaCc = new HashMap<>();
         this.listaBanconote = new HashMap<>();
@@ -30,11 +30,13 @@ public class BancaISA implements Observer{
         this.listaNotifiche = new LinkedList<>();
         caricaClienti();
         caricaListaBancomat();
+        aggiornaFileBanconote();
+        caricaNotifiche();
     }
 
 
     /** ------------------- getInstance ------------------------ */
-    public static BancaISA getInstance() {
+    public static BancaISA getInstance() throws IOException {
         if (bancaIsa == null)
             bancaIsa = new BancaISA();
         return bancaIsa;
@@ -62,6 +64,8 @@ public class BancaISA implements Observer{
                 if (this.listaClienti == null)
                     throw new Exception("Errore caricamento clienti");
             }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -196,25 +200,25 @@ public class BancaISA implements Observer{
     /** --------------------------------------- Menu Dipendente Tecnico --------------------------------------- **/
     public void menuDipendenteT() throws IOException {
         int notifiche = 0;
+        int scelta = -1;
 
         //Visualizza notifiche o esci
         //Dentro visualizza notifiche -> Aggiungi banconote o esci
 
-        try
-        {
-            /** --------------------------------------- Conta Notifiche ----------------------------------- **/
-
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
-            BufferedReader fp = new BufferedReader(new FileReader(file));
-
-            for (String s = fp.readLine(); s != null; s = fp.readLine())
-            {
-                notifiche ++;
-            }
-        } catch(Exception e){}
-
-        int scelta = -1;
         do {
+            try
+            {
+                /** --------------------------------------- Conta Notifiche ----------------------------------- **/
+                notifiche = 0;
+                String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+                BufferedReader fp = new BufferedReader(new FileReader(file));
+
+                for (String s = fp.readLine(); s != null; s = fp.readLine())
+                {
+                    notifiche ++;
+                }
+            } catch(Exception e){}
+
             try
             {
                 System.out.println("\n****MENU DIPENDENTE TECNICO****\n" +
@@ -296,11 +300,12 @@ public class BancaISA implements Observer{
 
         /** Stiamo mettendo che riempie di 50 banconote per semplicità logica*/
 
-        bancomat = this.listaBancomat.get(codiceBancomat);
-        Banconota b = new Banconota( (codiceBancomat+1), codiceBanconota, 50 + this.listaBanconote.get(codiceBancomat).getNumPezzi());
-        bancomat.listaBanconote.replace(codiceBanconota, b);
+        Bancomat ban = this.listaBancomat.get(codiceBancomat-1);
+        int numRicarica = (1000 - (this.listaBanconote.get((codiceBancomat+codiceBanconota)).getNumPezzi() * codiceBanconota))/codiceBanconota;
+        Banconota b = new Banconota( ban.getCodice(), codiceBanconota, numRicarica );
+        ban.listaBanconote.replace(codiceBanconota, b);
         aggiornaFileBanconote();
-        aggiornaNotifiche((codiceBancomat+1), codiceBanconota);
+        aggiornaNotifiche(ban.getCodice(), codiceBanconota);
 
     }
 
@@ -441,6 +446,29 @@ public class BancaISA implements Observer{
         } catch (Exception e) {e.printStackTrace();}
     }
 
+
+    private void caricaNotifiche()
+    {
+        try {
+            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+            BufferedReader fp = new BufferedReader(new FileReader(file));
+
+            String[] splitStr;
+
+            for (String notifica = fp.readLine(); notifica != null; notifica = fp.readLine())
+            {
+                splitStr = notifica.split("\\s+");
+                notifica = ( splitStr[2] + " " + splitStr[7] + " " + splitStr[11]);
+                this.listaNotifiche.add(notifica);
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     //Observer Pattern
     @Override
     public void update(Observable obs, Object arg)
@@ -450,7 +478,7 @@ public class BancaISA implements Observer{
             String[] splitStr;
 
 
-            if (((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 200)
+            if (((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 100)
             {
                 a = String.valueOf(((Bancomat) obs).getCodice() + " " + 5 + " " + ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi());
                 for(int i=0; i<this.listaNotifiche.size();i++)
@@ -465,7 +493,7 @@ public class BancaISA implements Observer{
                 this.listaNotifiche.add(a);
 
             }
-            if (((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 100)
+            if (((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 50)
             {
                 a = String.valueOf(((Bancomat) obs).getCodice() + " " + 10 + " " + ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi());
                 for(int i=0; i<this.listaNotifiche.size();i++)
@@ -479,7 +507,7 @@ public class BancaISA implements Observer{
                 }
                 this.listaNotifiche.add(a);
             }
-            if (((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 50)
+            if (((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 25)
             {
                 a = String.valueOf(((Bancomat) obs).getCodice() + " " + 20 + " " + ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi());
                 for(int i=0; i<this.listaNotifiche.size();i++)
@@ -493,7 +521,7 @@ public class BancaISA implements Observer{
                 }
                 this.listaNotifiche.add(a);
             }
-            if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 20)
+            if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 10)
             {
                 a = String.valueOf(((Bancomat) obs).getCodice() + " " + 50 + " " + ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi());
                 for(int i=0; i<this.listaNotifiche.size();i++)
@@ -507,7 +535,7 @@ public class BancaISA implements Observer{
                 }
                 this.listaNotifiche.add(a);
             }
-            if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 10)
+            if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 5)
             {
                 a = String.valueOf(((Bancomat) obs).getCodice() + " " + 100 + " " + ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi());
                 for(int i=0; i<this.listaNotifiche.size();i++)
@@ -521,7 +549,7 @@ public class BancaISA implements Observer{
                 }
                 this.listaNotifiche.add(a);
             }
-            if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 5)
+            if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 2)
             {
                 a = String.valueOf(((Bancomat) obs).getCodice() + " " + 200 + " " + ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi());
                 for(int i=0; i<this.listaNotifiche.size();i++)
@@ -559,7 +587,7 @@ public class BancaISA implements Observer{
         for(String s: this.listaNotifiche)
         {
             splitStr = s.split("\\s+");
-            printout.println ("Nel bancomat "+ splitStr[0] +" le banconote da €" + splitStr[1] + " sono ridotte a " + splitStr[2] + " pezzi");
+            printout.println ("Nel bancomat "+ splitStr[0] +" le banconote da € " + splitStr[1] + " sono ridotte a " + splitStr[2] + " pezzi");
         }
 
         printout.flush();

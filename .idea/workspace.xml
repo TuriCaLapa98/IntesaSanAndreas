@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe">
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
     </list>
     <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
@@ -36,25 +34,24 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
       <ranges>
-        <range start1="31" end1="31" start2="31" end2="32" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="133" end1="134" start2="134" end2="135" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="196" end1="197" start2="197" end2="197" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="219" end1="220" start2="219" end2="220" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="267" end1="268" start2="267" end2="268" changelist="9bc754e3-40c2-47bf-825c-264d0ba458c5" />
-        <range start1="299" end1="300" start2="299" end2="300" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="302" end1="303" start2="302" end2="303" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="312" end1="314" start2="312" end2="315" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="323" end1="324" start2="324" end2="324" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="346" end1="347" start2="346" end2="347" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="447" end1="448" start2="447" end2="447" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="450" end1="450" start2="449" end2="451" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="454" end1="454" start2="455" end2="464" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="455" end1="455" start2="465" end2="466" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="459" end1="459" start2="470" end2="479" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="464" end1="464" start2="484" end2="493" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="469" end1="469" start2="498" end2="507" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="474" end1="474" start2="512" end2="521" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="479" end1="479" start2="526" end2="535" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="23" end1="24" start2="23" end2="24" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="32" end1="32" start2="32" end2="34" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="36" end1="37" start2="38" end2="39" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="64" end1="64" start2="66" end2="68" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="198" end1="198" start2="202" end2="203" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="202" end1="216" start2="207" end2="207" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="217" end1="217" start2="208" end2="221" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="267" end1="268" start2="271" end2="272" changelist="9bc754e3-40c2-47bf-825c-264d0ba458c5" />
+        <range start1="298" end1="301" start2="302" end2="306" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="302" end1="303" start2="307" end2="308" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="443" end1="443" start2="448" end2="471" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="452" end1="453" start2="480" end2="481" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="467" end1="468" start2="495" end2="496" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="481" end1="482" start2="509" end2="510" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="495" end1="496" start2="523" end2="524" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="509" end1="510" start2="537" end2="538" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="523" end1="524" start2="551" end2="552" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="561" end1="562" start2="589" end2="590" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
       </ranges>
     </file>
   </component>
@@ -138,7 +135,8 @@
       <workItem from="1666624125608" duration="4869000" />
       <workItem from="1666973087744" duration="89000" />
       <workItem from="1666973350990" duration="5158000" />
-      <workItem from="1667577919495" duration="9801000" />
+      <workItem from="1667577919495" duration="10094000" />
+      <workItem from="1667837362913" duration="4604000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -238,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666978453399</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)">
+      <created>1667587913677</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1667587913677</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +285,8 @@
     <MESSAGE value="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt" />
     <MESSAGE value="11th Commit: Dentro BancaISA aggiunti campi del Dipendente Tecnico e si necessita della funzione updateListaNotifiche con una lista di notifiche dentro bancaISA" />
     <MESSAGE value="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe" />
-    <option name="LAST_COMMIT_MESSAGE" value="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe" />
+    <MESSAGE value="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)" />
+    <option name="LAST_COMMIT_MESSAGE" value="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
