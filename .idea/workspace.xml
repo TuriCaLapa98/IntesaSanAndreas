@@ -4,16 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)">
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="14th Commit: Aggiornato il controllo per le banconote del bancomat, dove prima il controllo era 1000€ per banconota ora è 500€ per banconota. All'inserzione del dipendente tecnico si metterà la differenza rimanente per arrivare a 1000 euro di quella banconota specifica&#10;&#10;P.1 UC4 (Prelievo Bancomat) da controllare.&#10;&#10;P.2 Quando si è nel prelievo da bancomat bisogna aggiungere un parametro per tornare indietro&#10;&#10;P.3 Aggiugere controllo nel case 1 di leggiNotiche per vedere che il codice bancomat inserito è valido">
+      <change afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
     </list>
     <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
     <list id="9bc754e3-40c2-47bf-825c-264d0ba458c5" name="Changes by Venti" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,24 +37,35 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
       <ranges>
-        <range start1="23" end1="24" start2="23" end2="24" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="32" end1="32" start2="32" end2="34" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="36" end1="37" start2="38" end2="39" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="64" end1="64" start2="66" end2="68" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="198" end1="198" start2="202" end2="203" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="202" end1="216" start2="207" end2="207" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="217" end1="217" start2="208" end2="221" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="267" end1="268" start2="271" end2="272" changelist="9bc754e3-40c2-47bf-825c-264d0ba458c5" />
-        <range start1="298" end1="301" start2="302" end2="306" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="302" end1="303" start2="307" end2="308" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="443" end1="443" start2="448" end2="471" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="452" end1="453" start2="480" end2="481" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="467" end1="468" start2="495" end2="496" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="481" end1="482" start2="509" end2="510" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="495" end1="496" start2="523" end2="524" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="509" end1="510" start2="537" end2="538" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="523" end1="524" start2="551" end2="552" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
-        <range start1="561" end1="562" start2="589" end2="590" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="77" end1="78" start2="77" end2="79" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="83" end1="84" start2="84" end2="86" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="95" end1="96" start2="97" end2="97" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="148" end1="149" start2="149" end2="150" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="219" end1="220" start2="220" end2="221" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="230" end1="231" start2="231" end2="232" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="233" end1="234" start2="234" end2="235" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="264" end1="265" start2="265" end2="266" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="271" end1="272" start2="272" end2="273" changelist="9bc754e3-40c2-47bf-825c-264d0ba458c5" />
+        <range start1="278" end1="279" start2="279" end2="280" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="284" end1="291" start2="285" end2="307" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="327" end1="328" start2="343" end2="345" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="346" end1="347" start2="363" end2="364" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="348" end1="352" start2="365" end2="366" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="353" end1="359" start2="367" end2="384" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="360" end1="360" start2="385" end2="386" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="361" end1="363" start2="387" end2="392" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="364" end1="365" start2="393" end2="394" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="369" end1="370" start2="398" end2="398" changelist="9bc754e3-40c2-47bf-825c-264d0ba458c5" />
+        <range start1="388" end1="389" start2="416" end2="418" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="409" end1="409" start2="438" end2="439" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="416" end1="417" start2="446" end2="451" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="426" end1="427" start2="460" end2="462" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="443" end1="443" start2="478" end2="479" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="444" end1="444" start2="480" end2="482" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="448" end1="449" start2="486" end2="486" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="456" end1="457" start2="493" end2="493" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="462" end1="463" start2="498" end2="498" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="464" end1="470" start2="499" end2="500" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
       </ranges>
     </file>
   </component>
@@ -76,19 +90,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-18",
+    "settings.editor.selected.configurable": "editor.preferences.completion"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\test\java" />
       <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\main\java\org\unict\domain\Filetxt" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="TestNG.BancaISATest.testLoadUtenti">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.unict.domain.Main" />
       <module name="IntesaSanAndreas" />
@@ -102,8 +118,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BancaISATest.testLoadUtenti" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="IntesaSanAndreas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BancaISATest" />
+      <option name="METHOD_NAME" value="testLoadUtenti" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.BancaISATest.testLoadUtenti" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -136,7 +165,8 @@
       <workItem from="1666973087744" duration="89000" />
       <workItem from="1666973350990" duration="5158000" />
       <workItem from="1667577919495" duration="10094000" />
-      <workItem from="1667837362913" duration="4604000" />
+      <workItem from="1667837362913" duration="5017000" />
+      <workItem from="1668010978222" duration="6312000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -243,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667587913677</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="14th Commit: Aggiornato il controllo per le banconote del bancomat, dove prima il controllo era 1000€ per banconota ora è 500€ per banconota. All'inserzione del dipendente tecnico si metterà la differenza rimanente per arrivare a 1000 euro di quella banconota specifica&#10;&#10;P.1 UC4 (Prelievo Bancomat) da controllare.&#10;&#10;P.2 Quando si è nel prelievo da bancomat bisogna aggiungere un parametro per tornare indietro&#10;&#10;P.3 Aggiugere controllo nel case 1 di leggiNotiche per vedere che il codice bancomat inserito è valido">
+      <created>1667842285484</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667842285484</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,7 +323,8 @@
     <MESSAGE value="11th Commit: Dentro BancaISA aggiunti campi del Dipendente Tecnico e si necessita della funzione updateListaNotifiche con una lista di notifiche dentro bancaISA" />
     <MESSAGE value="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe" />
     <MESSAGE value="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)" />
-    <option name="LAST_COMMIT_MESSAGE" value="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)" />
+    <MESSAGE value="14th Commit: Aggiornato il controllo per le banconote del bancomat, dove prima il controllo era 1000€ per banconota ora è 500€ per banconota. All'inserzione del dipendente tecnico si metterà la differenza rimanente per arrivare a 1000 euro di quella banconota specifica&#10;&#10;P.1 UC4 (Prelievo Bancomat) da controllare.&#10;&#10;P.2 Quando si è nel prelievo da bancomat bisogna aggiungere un parametro per tornare indietro&#10;&#10;P.3 Aggiugere controllo nel case 1 di leggiNotiche per vedere che il codice bancomat inserito è valido" />
+    <option name="LAST_COMMIT_MESSAGE" value="14th Commit: Aggiornato il controllo per le banconote del bancomat, dove prima il controllo era 1000€ per banconota ora è 500€ per banconota. All'inserzione del dipendente tecnico si metterà la differenza rimanente per arrivare a 1000 euro di quella banconota specifica&#10;&#10;P.1 UC4 (Prelievo Bancomat) da controllare.&#10;&#10;P.2 Quando si è nel prelievo da bancomat bisogna aggiungere un parametro per tornare indietro&#10;&#10;P.3 Aggiugere controllo nel case 1 di leggiNotiche per vedere che il codice bancomat inserito è valido" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -64,8 +64,6 @@ public class BancaISA implements Observer{
                 if (this.listaClienti == null)
                     throw new Exception("Errore caricamento clienti");
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,13 +73,15 @@ public class BancaISA implements Observer{
     /** ------------------- verificaCredenziali ------------------------- */
     public boolean verificaCredenziali(String cf) throws Exception {
         if (this.listaClienti.containsKey(cf)) {
-            try {
+            try
+            {
                 clienteCorrente = this.listaClienti.get(cf);
                 System.out.println("Cliente esistente, creazione conto corrente in corso...\n");
                 // throw new Exception("Cliente esistente, creazione conto corrente in corso...\n");
                 clienteCorrente.creaContoCorrente();
                 return false;
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 e.printStackTrace();
                 return false;
             }
@@ -93,7 +93,6 @@ public class BancaISA implements Observer{
             inserisciCredenziali(cf);
             return true;
         }
-
     }
 
     /** ---------------- inserisciCredenziali --------------------- */
@@ -146,7 +145,7 @@ public class BancaISA implements Observer{
                     System.out.println("Scelta non valida");
                     throw new Exception("Scelta non valida");
                 }
-            } catch(Exception e){e.printStackTrace();}
+            } catch(Exception ignored){}
 
             switch (scelta) {
                 case 1:
@@ -217,7 +216,7 @@ public class BancaISA implements Observer{
                 {
                     notifiche ++;
                 }
-            } catch(Exception e){}
+            } catch(Exception e){ e.printStackTrace(); }
 
             try
             {
@@ -228,10 +227,10 @@ public class BancaISA implements Observer{
                         "\n0) Esci");
                 scelta = Integer.parseInt(tastiera.readLine());
                 if (scelta < 0 || scelta > 1) { //Aggiornare man mano che implementiamo i casi d'uso
-                    System.out.println("Scelta non valida");
+                    System.out.println("\nERRORE: Scelta non valida\n");
                     throw new Exception("Scelta non valida");
                 }
-            } catch(Exception e){e.printStackTrace();}
+            } catch(Exception ignored){}
 
             switch (scelta)
             {
@@ -262,7 +261,7 @@ public class BancaISA implements Observer{
             {
                 System.out.println(s);
             }
-        } catch(Exception e){}
+        } catch(Exception e){ e.printStackTrace(); }
 
         do {
             try
@@ -276,19 +275,34 @@ public class BancaISA implements Observer{
                     System.out.println("Scelta non valida");
                     throw new Exception("Scelta non valida");
                 }
-            } catch(Exception e){e.printStackTrace();}
+            } catch(Exception ignored){}
 
             switch (scelta)
             {
                 case 1:
                     /** ------------------------ Aggiorna Pezzi ------------------------ **/
-                    System.out.println("\n Inserisci codice bancomat:");
-                    codiceBancomat = Integer.parseInt(tastiera.readLine());
-                    System.out.println("\n Inserisci codice banconota:");
-                    codiceBanconota = Integer.parseInt(tastiera.readLine());
-                    aggiornaPezziBanconota(codiceBancomat, codiceBanconota);
-
-                    break;
+                    try
+                    {
+                        System.out.println("\n Inserisci codice bancomat:");
+                        codiceBancomat = Integer.parseInt(tastiera.readLine());
+                        if(codiceBancomat<=listaBancomat.size() && codiceBancomat > 0)
+                        {
+                            System.out.println("\n Inserisci codice banconota:");
+                            codiceBanconota = Integer.parseInt(tastiera.readLine());
+                            if(codiceBanconota==5 ||codiceBanconota==10 || codiceBanconota==20 ||
+                                codiceBanconota==50 ||codiceBanconota==100 ||codiceBanconota==200)
+                            {
+                                aggiornaPezziBanconota(codiceBancomat, codiceBanconota);
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("\nErrore: Codice Bancomat o Codice Banconota Non Valido\n");
+                            throw new Exception("Errore: Codice Bancomat o Codice Banconota Non Valido");
+                        }
+                    }
+                    catch(Exception ignored) {}
 
                 default:
                     break;
@@ -325,7 +339,8 @@ public class BancaISA implements Observer{
 
 
     /** --------------- Menu Bancomat ----------------------- */
-    public void menuCliente() {
+    public void menuCliente()
+    {
         int idBancomat = 0;
         System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat + "\n");
         bancomat = this.listaBancomat.get(idBancomat);
@@ -344,25 +359,37 @@ public class BancaISA implements Observer{
 
             if (this.listaCc.containsKey(iban) && Objects.equals(this.listaCc.get(iban).getPin(), pin))
             {
-                System.out.println("Saldo disponibile: " + this.listaCc.get(iban).getSaldo());
+                System.out.println("Saldo disponibile: €" + this.listaCc.get(iban).getSaldo());
 
-                int prelievo = inserisciImporto();
-
-                //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
-                if(this.listaCc.get(iban).getSaldo() >= prelievo)
+                try
                 {
-                    bancomat.calcolaPrelievo(prelievo);
-                    aggiornaFileBanconote();
-                    diminuisciSaldo(iban,prelievo);
-                } else {
-                    System.out.println("Non hai abbastanza soldi nel conto da prelevare\n");
-                    bancaIsa.menuCliente();
+                    int prelievo = inserisciImporto();
+                    if (prelievo == 0)
+                    {
+                        return;
+                    }
+                    //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
+                    else if(this.listaCc.get(iban).getSaldo() >= prelievo)
+                    {
+                        bancomat.calcolaPrelievo(prelievo);
+                        aggiornaFileBanconote();
+                        diminuisciSaldo(iban,prelievo);
+                    }
+                    else
+                    {
+                        System.out.println("\nERRORE: Non hai abbastanza soldi nel conto da prelevare\n");
+                        throw new Exception("Non hai abbastanza soldi nel conto da prelevare");
+                    }
                 }
+                catch(Exception ignored){}
             }
-            else System.out.println("IBAN NON TROVATO O CREDENZIALI ERRATE\n");
-
+            else
+            {
+                System.out.println("IBAN NON TROVATO O CREDENZIALI ERRATE\n");
+                throw new Exception("IBAN NON TROVATO O CREDENZIALI ERRATE");
+            }
         }
-        catch(Exception e){e.printStackTrace();}
+        catch(Exception ignored){}
     }
 
     private void diminuisciSaldo(String iban, int prelievo) throws IOException
@@ -386,7 +413,8 @@ public class BancaISA implements Observer{
         printout.close();
     }
 
-    private void aggiornaFileBanconote() throws IOException {
+    private void aggiornaFileBanconote() throws IOException
+    {
 
         FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBanconote.txt");
         BufferedWriter filebuf = new BufferedWriter(file);
@@ -407,6 +435,7 @@ public class BancaISA implements Observer{
     public int inserisciImporto()throws IOException
     {
         System.out.println("Selezione importo:\n" +
+                "0) Esci\n" +
                 "1) €100 \n" +
                 "2) €200 \n" +
                 "3) €300 \n" +
@@ -414,7 +443,11 @@ public class BancaISA implements Observer{
                 "7) €700 \n" +
                 "10) €1000 \n");
         int scelta = Integer.parseInt(tastiera.readLine());
-        if(scelta==1 || scelta==2 || scelta==3 || scelta==5 || scelta==7 || scelta==10)
+
+        if (scelta==0)
+        {
+            return 0;
+        }else if(scelta==1 || scelta==2 || scelta==3 || scelta==5 || scelta==7 || scelta==10)
         {
             return scelta*100;
         }else {
@@ -424,7 +457,8 @@ public class BancaISA implements Observer{
         return 0;
     }
 
-    public void caricaListaBancomat() {
+    public void caricaListaBancomat()
+    {
         try {
             String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBancomat.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
@@ -441,11 +475,13 @@ public class BancaISA implements Observer{
                 b.addObserver(this);
 
                 if (this.listaBancomat == null)
+                {
                     throw new Exception("Errore caricamento Bancomat");
+                }
+
             }
         } catch (Exception e) {e.printStackTrace();}
     }
-
 
     private void caricaNotifiche()
     {
@@ -454,20 +490,13 @@ public class BancaISA implements Observer{
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             String[] splitStr;
-
             for (String notifica = fp.readLine(); notifica != null; notifica = fp.readLine())
             {
                 splitStr = notifica.split("\\s+");
                 notifica = ( splitStr[2] + " " + splitStr[7] + " " + splitStr[11]);
                 this.listaNotifiche.add(notifica);
-
             }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        } catch (Exception e) { e.printStackTrace(); }
     }
     //Observer Pattern
     @Override

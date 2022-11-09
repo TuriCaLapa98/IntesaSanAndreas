@@ -24,7 +24,6 @@ public class Main
             try{
                 System.out.println("\n\nInserisci la tua scelta:\n1) Login" + " \n0) Chiudi applicazione");
                 scelta = Integer.parseInt(tastiera.readLine());
-
             }catch (Exception e){e.printStackTrace();}
 
             if(scelta==1)
