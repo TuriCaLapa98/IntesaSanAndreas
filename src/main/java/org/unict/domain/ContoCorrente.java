@@ -16,6 +16,7 @@ public class ContoCorrente
     private String numeroCarta;
     private LocalDate dataScadenza;
     private String pin;
+    public Map<Integer, OperazioneBancaria> listaOperazioniBancarie;
 
 
     public ContoCorrente(String iban, String cf)
@@ -26,6 +27,8 @@ public class ContoCorrente
         this.numeroCarta =generaNumeroCarta();
         this.dataScadenza = LocalDate.now().plusYears(10);
         this.pin = generaPin();
+        this.listaOperazioniBancarie = new HashMap<>();
+        caricaOperazioniBancarie();
     }
 
     public ContoCorrente(String iban, String cf, float saldo, String numeroCarta, String dataScadenza, String pin) {
@@ -35,6 +38,7 @@ public class ContoCorrente
         this.numeroCarta = numeroCarta;
         this.dataScadenza = LocalDate.parse(dataScadenza);
         this.pin = pin;
+        caricaOperazioniBancarie();
     }
 
 
@@ -86,17 +90,6 @@ public class ContoCorrente
         this.pin = pin;
     }
 
-    public Map<String, OperazioneBancaria> getListaOperazioniBancarie() {
-        return listaOperazioniBancarie;
-    }
-
-    public void setListaOperazioniBancarie(Map<String, OperazioneBancaria> listaOperazioniBancarie) {
-        this.listaOperazioniBancarie = listaOperazioniBancarie;
-    }
-
-    private Map <String, OperazioneBancaria> listaOperazioniBancarie;
-
-
     public String generaNumeroCarta()
     {
         StringBuilder builder;
@@ -121,25 +114,8 @@ public class ContoCorrente
         return builder.toString();
     }
 
-
-    public void inserisciImporto(float importo, String nomeM, String cognomeM) {
-       //this.listaOperazioniBancarie
-    }
-
-    /*public void dettagliContoCorrente() throws IOException
+    public void caricaOperazioniBancarie()
     {
-        listaCarteBancomat.put(this.iban,this.cartaDiBancomat);
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elenco.txt");
-        BufferedWriter filebuf = new BufferedWriter(file);
-        PrintWriter printout = new PrintWriter(filebuf);
-        listaCarteBancomat.forEach((key, value) -> printout.println
-                (key
-                        + "\n" + value.getNumeroCarta()
-                        + "\n" + value.getDataScadenza()
-                        + "\n" + value.getPin()));
 
-        printout.flush();
-        printout.close();
-    }*/
-
+    }
 }

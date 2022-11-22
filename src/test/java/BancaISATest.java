@@ -1,25 +1,27 @@
+import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeClass;
+import org.unict.domain.BancaISA;
+import org.unict.domain.Cliente;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import org.unict.domain.BancaISA;
-import org.unict.domain.Cliente;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testng.AssertJUnit.assertNotNull;
+import static org.testng.AssertJUnit.fail;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
-public class BancaISATest {
+public class BancaISATest
+{
     static BancaISA bancaISA;
 
     @BeforeClass
     public static void initTest() throws IOException {bancaISA = BancaISA.getInstance();}
 
     @Test
-    public void testLoadUtenti() {
-        //verifica che una volta caricato dal file (non vuoto) l’elenco degli utenti
-        // le istanze di utenti non risultino “NULL”
+    public void testCaricaClienti() {
+        //verifica che una volta caricato dal file (non vuoto) l’elenco dei clienti
+        //le istanze di utenti non risultino “NULL”
         try{
             String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoClienti.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
@@ -34,6 +36,21 @@ public class BancaISATest {
                 assertNotNull(c);
             }}catch (IOException e){
             fail("Unexpected exception!");
+        }
+    }
+
+    @Test
+    public void TestVerificaEsistenzaCc()
+    {
+        try
+        {
+            bancaISA.verificaEsistenzaCc("9ufge", "nomebeneficiario", "cognome beneficiario");
+            System.out.println("1");
+        }
+        catch (Exception e)
+        {
+            System.out.println("2");
+            assertEquals("banana", e.getMessage());
         }
     }
 }

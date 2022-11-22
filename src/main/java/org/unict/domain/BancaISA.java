@@ -20,6 +20,7 @@ public class BancaISA implements Observer{
     private String iban;
     public Map<Integer, Banconota> listaBanconote;
 
+
     /** ----------------------- BancaISA -------------------------- */
     private BancaISA() throws IOException {
         this.listaClienti = new HashMap<>();
@@ -33,7 +34,6 @@ public class BancaISA implements Observer{
         aggiornaFileBanconote();
         caricaNotifiche();
     }
-
 
     /** ------------------- getInstance ------------------------ */
     public static BancaISA getInstance() throws IOException {
@@ -392,9 +392,27 @@ public class BancaISA implements Observer{
         catch(Exception ignored){}
     }
 
+    private void stampaOperazioniBancarieSuFile() throws IOException
+    {
+        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\operazioniBancarie.txt");
+        BufferedWriter filebuf = new BufferedWriter(file);
+        PrintWriter printout = new PrintWriter(filebuf);
+
+        this.listaCc.forEach((key, value) -> printout.println
+                (value.getCf()
+                        + "\n" + key
+                        + "\n" + value.getSaldo()
+                        + "\n" + value.getNumeroCarta()
+                        + "\n" + value.getDataScadenza()
+                        + "\n" + value.getPin()
+                ));
+        printout.flush();
+        printout.close();
+
+    }
+
     private void diminuisciSaldo(String iban, int prelievo) throws IOException
     {
-
         this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
 
         FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt");
