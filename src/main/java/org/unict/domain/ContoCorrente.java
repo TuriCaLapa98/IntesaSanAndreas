@@ -16,7 +16,7 @@ public class ContoCorrente
     private String numeroCarta;
     private LocalDate dataScadenza;
     private String pin;
-    public Map<Integer, OperazioneBancaria> listaOperazioniBancarie;
+    public Map<String, OperazioneBancaria> listaOperazioniBancarie;
 
 
     public ContoCorrente(String iban, String cf)

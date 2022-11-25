@@ -398,14 +398,21 @@ public class BancaISA implements Observer{
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
-        this.listaCc.forEach((key, value) -> printout.println
-                (value.getCf()
-                        + "\n" + key
-                        + "\n" + value.getSaldo()
-                        + "\n" + value.getNumeroCarta()
-                        + "\n" + value.getDataScadenza()
-                        + "\n" + value.getPin()
-                ));
+        this.listaCc.forEach((key, value) -> value.listaOperazioniBancarie.forEach((key2, value2) ->
+        {
+            switch (value2.getNomeOP())
+            {
+                case "PrelievoBancomat": printout.println (value2.getNomeOP()
+                                            + "\n" + key2
+                                            + "\n" + value2.getImporto()
+                                            + "\n" + value2.getData()
+                                            );
+                                        System.out.println("Sono nel case");
+                                        break;
+                default: break;
+            }
+        }));
+
         printout.flush();
         printout.close();
 
