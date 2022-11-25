@@ -21,8 +21,9 @@ public class Main
         /* ---------------- Menu ---------------- */
         do
         {
-            try{
-                System.out.println("\n\nInserisci la tua scelta:\n1) Login" + " \n0) Chiudi applicazione");
+            try
+            {
+                System.out.println("\n\nInserisci la tua scelta:" + "\n1) Login" + " \n0) Chiudi applicazione");
                 scelta = Integer.parseInt(tastiera.readLine());
             }catch (Exception e){e.printStackTrace();}
 
@@ -36,7 +37,6 @@ public class Main
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
 
         }while(scelta !=0);

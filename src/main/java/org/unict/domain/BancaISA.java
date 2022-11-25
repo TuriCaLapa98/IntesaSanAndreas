@@ -171,14 +171,21 @@ public class BancaISA implements Observer{
         } while (scelta != 0);
     }
 
-    private void verificaEsistenzaCc(String iban, String nomeBeneficiario, String cognomeBeneficiario) throws Exception {
-        if (this.listaCc.get(iban) != null) {
-            verificaBeneficiario(iban, nomeBeneficiario, cognomeBeneficiario);
-        } else
-            System.out.println("IBAN NON ESISTENTE");
+    public void verificaEsistenzaCc(String iban, String nomeBeneficiario, String cognomeBeneficiario) {
+        try
+        {
+            if (this.listaCc.get(iban) != null) {
+                verificaBeneficiario(iban, nomeBeneficiario, cognomeBeneficiario);
+            } else
+            {
+                System.out.println("IBAN NON ESISTENTE");
+                throw new Exception("IBAN NON ESISTENTE");
+            }
+        }
+        catch(Exception ignored){}
     }
 
-    private void verificaBeneficiario(String iban, String nomeBeneficiario, String cognomeBeneficiario) throws Exception {
+    public void verificaBeneficiario(String iban, String nomeBeneficiario, String cognomeBeneficiario) throws Exception {
 
 
         if (this.listaClienti.get(this.listaCc.get(iban).getCf()).getNome().equals(nomeBeneficiario) &&
@@ -191,7 +198,7 @@ public class BancaISA implements Observer{
             System.out.println("Inserisci Cognome Mittente");
             String cognomeM = tastiera.readLine();
 
-            this.listaCc.get(iban).inserisciImporto(importo, nomeM, cognomeM);
+           // this.listaCc.get(iban).inserisciImporto(importo, nomeM, cognomeM);
         }
 
     }
@@ -268,7 +275,7 @@ public class BancaISA implements Observer{
             {
                 System.out.println("****MENU DIPENDENTE TECNICO****\n" +
                         "\nInserisci la tua scelta:" +
-                        "\n1) Inserisci Pezzi Nel Bancomat" +
+                        "\n1) Inserisci pezzi nel Bancomat" +
                         "\n0) Esci");
                 scelta = Integer.parseInt(tastiera.readLine());
                 if (scelta < 0 || scelta > 1) { //Aggiornare man mano che implementiamo i casi d'uso
@@ -374,6 +381,12 @@ public class BancaISA implements Observer{
                         bancomat.calcolaPrelievo(prelievo);
                         aggiornaFileBanconote();
                         diminuisciSaldo(iban,prelievo);
+
+                        /** ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- **/
+                        OperazioneBancaria operazioneBancaria = new OperazioneBancaria("PrelievoBancomat", prelievo);
+                        this.listaCc.get(iban).listaOperazioniBancarie.put((operazioneBancaria.getId()), operazioneBancaria);
+                        stampaOperazioniBancarieSuFile();
+                        /**....**/
                     }
                     else
                     {
