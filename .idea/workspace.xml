@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put" />
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Deposito.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Prelievo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/PrelievoBancomat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BancaISATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
+    </list>
     <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
-    <list id="9bc754e3-40c2-47bf-825c-264d0ba458c5" name="Changes by Venti" comment="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1: Riga 387 Nullpointer exception, non si riesce a fare il put">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Deposito.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Prelievo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/PrelievoBancomat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Main.java" afterDir="false" />
-    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -162,7 +167,8 @@
       <workItem from="1669106007539" duration="47000" />
       <workItem from="1669106081574" duration="8840000" />
       <workItem from="1669392569036" duration="7291000" />
-      <workItem from="1669399905861" duration="349000" />
+      <workItem from="1669399905861" duration="598000" />
+      <workItem from="1669820302961" duration="6068000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -297,7 +303,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669400229839</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put">
+      <created>1669400310464</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1669400310464</updated>
+    </task>
+    <task id="LOCAL-00021" summary="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put">
+      <created>1669400438552</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1669400438552</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,15 +368,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java</url>
-          <line>385</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.unict.domain.Bancomat" memberName="listaBanconote" />

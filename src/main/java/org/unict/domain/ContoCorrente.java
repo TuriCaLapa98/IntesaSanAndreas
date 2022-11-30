@@ -38,6 +38,7 @@ public class ContoCorrente
         this.numeroCarta = numeroCarta;
         this.dataScadenza = LocalDate.parse(dataScadenza);
         this.pin = pin;
+        this.listaOperazioniBancarie = new HashMap<>();
         caricaOperazioniBancarie();
     }
 

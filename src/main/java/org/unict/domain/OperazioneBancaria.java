@@ -8,21 +8,24 @@ public class OperazioneBancaria
     private String nomeOP;
     private float importo;
     private LocalDate data;
+    private String info;
 
-    public OperazioneBancaria(String nomeOP, float importo)
+    public OperazioneBancaria(String nomeOP, float importo, String info)
     {
         this.id = generaID();
         this.nomeOP = nomeOP;
         this.importo = importo;
         this.data = LocalDate.now();
+        this.info = info;
     }
 
-    public OperazioneBancaria(String id, String nomeOP, float importo, String data)
+    public OperazioneBancaria(String id, String nomeOP, float importo, String data, String info)
     {
         this.id = id;
         this.nomeOP = nomeOP;
         this.importo = importo;
         this.data = LocalDate.parse(data);
+        this.info = info;
     }
 
     public OperazioneBancaria() {
@@ -59,6 +62,14 @@ public class OperazioneBancaria
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public String generaID()

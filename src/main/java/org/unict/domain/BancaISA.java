@@ -383,7 +383,7 @@ public class BancaISA implements Observer{
                         diminuisciSaldo(iban,prelievo);
 
                         /** ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- **/
-                        OperazioneBancaria operazioneBancaria = new OperazioneBancaria("PrelievoBancomat", prelievo);
+                        OperazioneBancaria operazioneBancaria = new OperazioneBancaria("PrelievoBancomat", prelievo, String.valueOf(idBancomat));
                         this.listaCc.get(iban).listaOperazioniBancarie.put((operazioneBancaria.getId()), operazioneBancaria);
                         stampaOperazioniBancarieSuFile();
                         /**....**/
@@ -417,10 +417,10 @@ public class BancaISA implements Observer{
             {
                 case "PrelievoBancomat": printout.println (value2.getNomeOP()
                                             + "\n" + key2
+                                            + "\n" + value2.getInfo()
                                             + "\n" + value2.getImporto()
                                             + "\n" + value2.getData()
                                             );
-                                        System.out.println("Sono nel case");
                                         break;
                 default: break;
             }

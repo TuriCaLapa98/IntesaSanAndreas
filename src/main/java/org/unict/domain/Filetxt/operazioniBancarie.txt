@@ -1,6 +1,4 @@
-IT88A7174727847774516670157
-Deposito
-19849
-150€
-Andrea
-Battaglia
+PrelievoBancomat
+30886
+300.0
+2022-11-30
