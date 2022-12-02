@@ -9,15 +9,12 @@ import java.util.Observer;
 public class BancaISA implements Observer{
     private static BancaISA bancaIsa;
     private Cliente clienteCorrente;
-    private ContoCorrente ccCorrente;
     private Map<String, Cliente> listaClienti;
     public Map<String, ContoCorrente> listaCc;
     private final BufferedReader tastiera;
     private Bancomat bancomat;
     public LinkedList<Bancomat> listaBancomat;
     public LinkedList<String> listaNotifiche;
-
-    private String iban;
     public Map<Integer, Banconota> listaBanconote;
 
 
@@ -383,8 +380,8 @@ public class BancaISA implements Observer{
                         diminuisciSaldo(iban,prelievo);
 
                         /** ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- **/
-                        OperazioneBancaria operazioneBancaria = new OperazioneBancaria("PrelievoBancomat", prelievo, String.valueOf(idBancomat));
-                        this.listaCc.get(iban).listaOperazioniBancarie.put((operazioneBancaria.getId()), operazioneBancaria);
+                        PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, String.valueOf(idBancomat),idBancomat+1);
+                        this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
                         stampaOperazioniBancarieSuFile();
                         /**....**/
                     }
@@ -411,13 +408,13 @@ public class BancaISA implements Observer{
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
-        this.listaCc.forEach((key, value) -> value.listaOperazioniBancarie.forEach((key2, value2) ->
+        this.listaCc.forEach((key, value) -> value.listaPrelieviBancomat.forEach((key2, value2) ->
         {
             switch (value2.getNomeOP())
             {
                 case "PrelievoBancomat": printout.println (value2.getNomeOP()
                                             + "\n" + key2
-                                            + "\n" + value2.getInfo()
+                                            + "\n" + value2.getCodiceBancomat()
                                             + "\n" + value2.getImporto()
                                             + "\n" + value2.getData()
                                             );

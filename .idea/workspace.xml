@@ -4,21 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put">
+    <list default="true" id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="18th Commit: Annullata la gestione dei vari prelievi in filiale o in bancomat e dei depositi con superclasse, ora saranno gestiti tramite un attributo &quot;info&quot; in OperazioneBancaria&#10;&#10;Aggiungere le altre OperazioniBancarie, nonché la lettura delle operazioni da file&#10;&#10;P1: Mettere l'iban del cc nella classe OperazioneBancaria per facilitare il processo da lettura da file">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Deposito.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/PrelievoBancomat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Deposito.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Prelievo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/PrelievoBancomat.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BancaISATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
     </list>
     <list id="8c24f1f6-c768-4499-a7ce-24a5caa3a280" name="Changes by Enrica Spataro" comment="" />
     <list id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
+    <list id="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" name="Changes by Venti" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Prelievo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +35,32 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
+      <ranges>
+        <range start1="11" end1="12" start2="11" end2="11" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="18" end1="20" start2="17" end2="17" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="354" end1="354" start2="351" end2="352" changelist="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" />
+        <range start1="385" end1="387" start2="383" end2="385" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="388" end1="388" start2="386" end2="387" changelist="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" />
+        <range start1="413" end1="414" start2="412" end2="413" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="419" end1="420" start2="418" end2="419" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java">
+      <ranges>
+        <range start1="4" end1="5" start2="4" end2="5" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="6" end1="11" start2="6" end2="11" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="12" end1="13" start2="12" end2="13" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="18" end1="19" start2="18" end2="19" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="21" end1="22" start2="21" end2="22" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="27" end1="28" start2="27" end2="28" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="66" end1="68" start2="66" end2="68" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="70" end1="72" start2="70" end2="72" changelist="4745c416-917e-49c1-99ba-eb73e8928e12" />
+        <range start1="85" end1="85" start2="85" end2="86" changelist="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,14 +83,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-18&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "WebServerToolWindowFactoryState": "false",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-18",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\test\java" />
@@ -168,7 +200,10 @@
       <workItem from="1669106081574" duration="8840000" />
       <workItem from="1669392569036" duration="7291000" />
       <workItem from="1669399905861" duration="598000" />
-      <workItem from="1669820302961" duration="6068000" />
+      <workItem from="1669820302961" duration="6498000" />
+      <workItem from="1669995473783" duration="63000" />
+      <workItem from="1669995654724" duration="502000" />
+      <workItem from="1669996329139" duration="6554000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -317,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669400438552</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="18th Commit: Annullata la gestione dei vari prelievi in filiale o in bancomat e dei depositi con superclasse, ora saranno gestiti tramite un attributo &quot;info&quot; in OperazioneBancaria&#10;&#10;Aggiungere le altre OperazioniBancarie, nonché la lettura delle operazioni da file&#10;&#10;P1: Mettere l'iban del cc nella classe OperazioneBancaria per facilitare il processo da lettura da file">
+      <created>1669826801051</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1669826801051</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -365,7 +407,8 @@
     <MESSAGE value="16th Commit: creazione del caricamento delle operazioni bancarie su file e classe OperazioneBancaria&#10;&#10;P1. Aggiustare in riga 407 (stampaOperzioniBancarieSuFile, foreach dentro foreach)" />
     <MESSAGE value="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1: Riga 387 Nullpointer exception, non si riesce a fare il put" />
     <MESSAGE value="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put" />
-    <option name="LAST_COMMIT_MESSAGE" value="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put" />
+    <MESSAGE value="18th Commit: Annullata la gestione dei vari prelievi in filiale o in bancomat e dei depositi con superclasse, ora saranno gestiti tramite un attributo &quot;info&quot; in OperazioneBancaria&#10;&#10;Aggiungere le altre OperazioniBancarie, nonché la lettura delle operazioni da file&#10;&#10;P1: Mettere l'iban del cc nella classe OperazioneBancaria per facilitare il processo da lettura da file" />
+    <option name="LAST_COMMIT_MESSAGE" value="18th Commit: Annullata la gestione dei vari prelievi in filiale o in bancomat e dei depositi con superclasse, ora saranno gestiti tramite un attributo &quot;info&quot; in OperazioneBancaria&#10;&#10;Aggiungere le altre OperazioniBancarie, nonché la lettura delle operazioni da file&#10;&#10;P1: Mettere l'iban del cc nella classe OperazioneBancaria per facilitare il processo da lettura da file" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

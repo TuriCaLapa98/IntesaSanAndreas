@@ -2,30 +2,30 @@ package org.unict.domain;
 
 import java.time.LocalDate;
 
-public class OperazioneBancaria
+public abstract class OperazioneBancaria
 {
-    private String id;
-    private String nomeOP;
-    private float importo;
-    private LocalDate data;
-    private String info;
+    protected String id;
+    protected String nomeOP;
+    protected float importo;
+    protected LocalDate data;
+    protected String iban;
 
-    public OperazioneBancaria(String nomeOP, float importo, String info)
+    public OperazioneBancaria(String nomeOP, float importo, String iban)
     {
         this.id = generaID();
         this.nomeOP = nomeOP;
         this.importo = importo;
         this.data = LocalDate.now();
-        this.info = info;
+        this.iban = iban;
     }
 
-    public OperazioneBancaria(String id, String nomeOP, float importo, String data, String info)
+    public OperazioneBancaria(String id, String nomeOP, float importo, String data, String iban)
     {
         this.id = id;
         this.nomeOP = nomeOP;
         this.importo = importo;
         this.data = LocalDate.parse(data);
-        this.info = info;
+        this.iban = iban;
     }
 
     public OperazioneBancaria() {
@@ -64,12 +64,12 @@ public class OperazioneBancaria
         this.data = data;
     }
 
-    public String getInfo() {
-        return info;
+    public String getIban() {
+        return iban;
     }
 
-    public void setInfo(String info) {
-        this.info = info;
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public String generaID()

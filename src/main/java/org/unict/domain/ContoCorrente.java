@@ -1,9 +1,5 @@
 package org.unict.domain;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +12,9 @@ public class ContoCorrente
     private String numeroCarta;
     private LocalDate dataScadenza;
     private String pin;
-    public Map<String, OperazioneBancaria> listaOperazioniBancarie;
+    public Map<String, PrelievoBancomat> listaPrelieviBancomat;
+    public Map<String, Prelievo> listaPrelievi;
+    public Map<String, Deposito> listaDepositi;
 
 
     public ContoCorrente(String iban, String cf)
@@ -27,7 +25,9 @@ public class ContoCorrente
         this.numeroCarta =generaNumeroCarta();
         this.dataScadenza = LocalDate.now().plusYears(10);
         this.pin = generaPin();
-        this.listaOperazioniBancarie = new HashMap<>();
+        this.listaPrelieviBancomat = new HashMap<>();
+        this.listaPrelievi = new HashMap<>();
+        this.listaDepositi = new HashMap<>();
         caricaOperazioniBancarie();
     }
 
@@ -38,7 +38,7 @@ public class ContoCorrente
         this.numeroCarta = numeroCarta;
         this.dataScadenza = LocalDate.parse(dataScadenza);
         this.pin = pin;
-        this.listaOperazioniBancarie = new HashMap<>();
+        this.listaPrelieviBancomat = new HashMap<>();
         caricaOperazioniBancarie();
     }
 
