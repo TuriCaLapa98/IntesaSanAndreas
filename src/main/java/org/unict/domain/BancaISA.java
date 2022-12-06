@@ -136,6 +136,10 @@ public class BancaISA implements Observer{
                         "\nInserisci la tua scelta:" +
                         "\n1) Crea conto corrente" +
                         "\n2) Deposito" +
+                        "\n3) Prelievo" +
+                        "\n4) Mutuo" +
+                        "\n5) Prestito" +
+                        "\n6) Visualizza cronologia delle operazioni bancarie" +
                         "\n0) Esci");
                 scelta = Integer.parseInt(tastiera.readLine());
                 if (scelta < 0 || scelta > 2) { //Aggiornare man mano che implementiamo i casi d'uso
@@ -160,6 +164,19 @@ public class BancaISA implements Observer{
                     System.out.println("Inserisci Cognome Beneficiario");
                     String CognomeBeneficiario = tastiera.readLine();
                     verificaEsistenzaCc(IBAN, NomeBeneficiario, CognomeBeneficiario);
+                    break;
+
+                case 3:
+                    break;
+
+                case 4:
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+
                     break;
 
                 default:
