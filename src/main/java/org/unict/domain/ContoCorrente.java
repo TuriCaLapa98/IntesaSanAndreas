@@ -17,8 +17,7 @@ public class ContoCorrente
     public Map<String, Deposito> listaDepositi;
 
 
-    public ContoCorrente(String iban, String cf)
-    {
+    public ContoCorrente(String iban, String cf) throws FileNotFoundException {
         this.cf=cf;
         this.iban = iban;
         this.saldo = 1000;
@@ -31,7 +30,7 @@ public class ContoCorrente
         caricaOperazioniBancarie();
     }
 
-    public ContoCorrente(String iban, String cf, float saldo, String numeroCarta, String dataScadenza, String pin) {
+    public ContoCorrente(String iban, String cf, float saldo, String numeroCarta, String dataScadenza, String pin) throws FileNotFoundException {
         this.cf = cf;
         this.iban = iban;
         this.saldo = saldo;
@@ -39,6 +38,8 @@ public class ContoCorrente
         this.dataScadenza = LocalDate.parse(dataScadenza);
         this.pin = pin;
         this.listaPrelieviBancomat = new HashMap<>();
+        this.listaPrelievi = new HashMap<>();
+        this.listaDepositi = new HashMap<>();
         caricaOperazioniBancarie();
     }
 
@@ -117,6 +118,40 @@ public class ContoCorrente
 
     public void caricaOperazioniBancarie()
     {
+        try {
+            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\operazioniBancarie.txt";
+            BufferedReader fp = new BufferedReader(new FileReader(file));
 
+            for (String iban = fp.readLine(); iban != null; iban = fp.readLine() )
+            {
+                if (iban.equals(this.iban))
+                {
+                    String nomeOP = fp.readLine();
+                    switch (nomeOP)
+                    {
+                        case "PrelievoBancomat":
+                            String id = fp.readLine();
+                            int codiceBancomat = Integer.parseInt(fp.readLine());
+                            float importo = Float.parseFloat(fp.readLine());
+                            String data = fp.readLine();
+
+                            PrelievoBancomat prelievoBancomat = new PrelievoBancomat(id, nomeOP, importo, data, iban, codiceBancomat);
+                            this.listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
+
+                            if (this.listaPrelieviBancomat == null)
+                                throw new Exception("Errore caricamento operazioni bancarie dei bancomat");
+                            break;
+
+                        case "Prelievo": break;
+
+                        case "Deposito": break;
+
+                        default: break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public abstract class OperazioneBancaria
 {
-    protected String id;
+    protected String iban;
     protected String nomeOP;
+    protected String id;
     protected float importo;
     protected LocalDate data;
-    protected String iban;
 
     public OperazioneBancaria(String nomeOP, float importo, String iban)
     {
@@ -83,5 +83,6 @@ public abstract class OperazioneBancaria
         }
         return builder.toString();
     }
+
 }
 

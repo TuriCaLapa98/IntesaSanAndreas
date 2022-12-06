@@ -350,6 +350,7 @@ public class BancaISA implements Observer{
         bancomat = this.listaBancomat.get(idBancomat);
         bancomat.caricaListaBanconote();
 
+
         try
         {
             /** ------------- UC4 Prelievo Bancomat ------------- */
@@ -380,9 +381,10 @@ public class BancaISA implements Observer{
                         diminuisciSaldo(iban,prelievo);
 
                         /** ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- **/
-                        PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, String.valueOf(idBancomat),idBancomat+1);
+                        PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
                         this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
                         stampaOperazioniBancarieSuFile();
+
                         /**....**/
                     }
                     else
@@ -412,7 +414,8 @@ public class BancaISA implements Observer{
         {
             switch (value2.getNomeOP())
             {
-                case "PrelievoBancomat": printout.println (value2.getNomeOP()
+                case "PrelievoBancomat": printout.println (value2.getIban()
+                                            + "\n" + value2.getNomeOP()
                                             + "\n" + key2
                                             + "\n" + value2.getCodiceBancomat()
                                             + "\n" + value2.getImporto()
