@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="20th Commit: Implementata la lettura di ogni cc nel file e l'inserzione di ogni prelievo bancomat nella lista dedicata. (UC4)&#10;&#10;In BancaISA, riga 179, implementare la stampa su console del dipendente di tutte le operazioni bancarie del cc">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/OperazioneBancaria.java" afterDir="false" />
-    </list>
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="21th Commit: Implementata la stampa su console con funzione stampaOperazioniBancarieSuConsole() all'interno del menù dipendente normale, introdotta anche la stampa dei prelievi e depositi commentata.&#10;&#10;Implementare il Prelievo in filiale e il Deposito in filiale, aggiungerli alle liste cc e stamparle sia su file che su console." />
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
-    <list id="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" name="Changes by Venti" comment="Changes by Venti">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
-    </list>
+    <list id="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" name="Changes by Venti" comment="Changes by Venti" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,17 +22,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
-      <ranges>
-        <range start1="144" end1="145" start2="144" end2="145" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="153" end1="153" start2="153" end2="154" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="159" end1="159" start2="160" end2="161" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="178" end1="179" start2="180" end2="185" changelist="d1f5451c-c86f-43e4-9f95-243e7d7ba3e8" />
-        <range start1="450" end1="450" start2="456" end2="491" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -193,7 +175,7 @@
       <workItem from="1670859906327" duration="156000" />
       <workItem from="1670860081902" duration="1726000" />
       <workItem from="1670862180189" duration="48000" />
-      <workItem from="1670862235578" duration="2596000" />
+      <workItem from="1670862235578" duration="3118000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -384,7 +366,21 @@
       <option name="project" value="LOCAL" />
       <updated>1670325631746</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="21th Commit: Implementata la stampa su console con funzione stampaOperazioniBancarieSuConsole() all'interno del menù dipendente normale, introdotta anche la stampa dei prelievi e depositi commentata.&#10;&#10;Implementare il Prelievo in filiale e il Deposito in filiale, aggiungerli alle liste cc e stamparle sia su file che su console.">
+      <created>1670865317834</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1670865317834</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Changes by Venti">
+      <created>1670865341864</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1670865341864</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,9 +430,10 @@
     <MESSAGE value="17th Commit: Creata la funzione StampaOperazioniBancarieSuFile che stampa tutte le liste di operazioni bancarie di tutti i conti correnti&#10;&#10;P1. Riga 387 Nullpointer exception, non si riesce a fare il put" />
     <MESSAGE value="18th Commit: Annullata la gestione dei vari prelievi in filiale o in bancomat e dei depositi con superclasse, ora saranno gestiti tramite un attributo &quot;info&quot; in OperazioneBancaria&#10;&#10;Aggiungere le altre OperazioniBancarie, nonché la lettura delle operazioni da file&#10;&#10;P1: Mettere l'iban del cc nella classe OperazioneBancaria per facilitare il processo da lettura da file" />
     <MESSAGE value="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
-    <MESSAGE value="Changes by Venti" />
     <MESSAGE value="20th Commit: Implementata la lettura di ogni cc nel file e l'inserzione di ogni prelievo bancomat nella lista dedicata. (UC4)&#10;&#10;In BancaISA, riga 179, implementare la stampa su console del dipendente di tutte le operazioni bancarie del cc" />
-    <option name="LAST_COMMIT_MESSAGE" value="20th Commit: Implementata la lettura di ogni cc nel file e l'inserzione di ogni prelievo bancomat nella lista dedicata. (UC4)&#10;&#10;In BancaISA, riga 179, implementare la stampa su console del dipendente di tutte le operazioni bancarie del cc" />
+    <MESSAGE value="21th Commit: Implementata la stampa su console con funzione stampaOperazioniBancarieSuConsole() all'interno del menù dipendente normale, introdotta anche la stampa dei prelievi e depositi commentata.&#10;&#10;Implementare il Prelievo in filiale e il Deposito in filiale, aggiungerli alle liste cc e stamparle sia su file che su console." />
+    <MESSAGE value="Changes by Venti" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by Venti" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
