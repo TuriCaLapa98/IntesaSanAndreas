@@ -178,7 +178,11 @@ public class BancaISA implements Observer{
                     break;
 
                 case 6:
-
+                    /* ------- UC11 Visualizza Operazioni Bancarie ------- */
+                    System.out.println("\n------------- LISTA TRANSAZIONI BANCARIE -------------\n");
+                    System.out.println("Inserisci IBAN");
+                    String IBAN2 = tastiera.readLine();
+                    stampaOperazioniBancarieSuConsole(IBAN2);
                     break;
 
                 default:
