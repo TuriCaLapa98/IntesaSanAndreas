@@ -142,7 +142,7 @@ public class BancaISA implements Observer{
                         "\n6) Visualizza cronologia delle operazioni bancarie" +
                         "\n0) Esci");
                 scelta = Integer.parseInt(tastiera.readLine());
-                if (scelta < 0 || scelta > 2) { //Aggiornare man mano che implementiamo i casi d'uso
+                if (scelta < 0 || scelta > 6) { //Aggiornare man mano che implementiamo i casi d'uso
                     System.out.println("Scelta non valida");
                     throw new Exception("Scelta non valida");
                 }
@@ -151,12 +151,14 @@ public class BancaISA implements Observer{
             switch (scelta) {
                 case 1:
                     /* ------- UC1 CreaContoCorrente ------- */
+                    System.out.println("----- CREAZIONE CONTO CORRENTE -----\n\n");
                     System.out.println("Inserisci codice fiscale");
                     verificaCredenziali(tastiera.readLine()); //verifichiamo le credenziali del cliente
                     break;
 
                 case 2:
                     /* ------- UC5 Deposito ------- */
+                    System.out.println("----- DEPOSITO -----\n\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN = tastiera.readLine();
                     System.out.println("Inserisci Nome Beneficiario");
@@ -446,6 +448,43 @@ public class BancaISA implements Observer{
         printout.flush();
         printout.close();
 
+    }
+
+    private void stampaOperazioniBancarieSuConsole(String IBAN)
+    {
+
+        System.out.println("\n----- LISTA PRELIEVI BANCOMAT -----\n");
+        this.listaCc.get(IBAN).listaPrelieviBancomat.forEach((key, value)->
+            System.out.println
+                (
+                    "Data: " + value.getData() + "\n" +
+                    "ID: " + key + "\n" +
+                    "Codice Bancomat: " + value.getCodiceBancomat() + "\n" +
+                    "Importo: " + value.getImporto() + "\n"
+                )
+        );
+
+        /*System.out.println("\n----- LISTA PRELIEVI -----\n");
+        this.listaCc.get(IBAN).listaPrelieviBancomat.forEach((key, value)->
+            System.out.println
+                (
+                    "Data: " + value.getData() + "\n" +
+                    "ID: " + key + "\n" +
+                    "Codice Bancomat: " + value.getCodiceBancomat() + "\n" +
+                    "Importo: " + value.getImporto() + "\n"
+                )
+        );
+
+        System.out.println("\n----- LISTA DEPOSITI -----\n");
+        this.listaCc.get(IBAN).listaPrelieviBancomat.forEach((key, value)->
+            System.out.println
+                (
+                    "Data: " + value.getData() + "\n" +
+                    "ID: " + key + "\n" +
+                    "Codice Bancomat: " + value.getCodiceBancomat() + "\n" +
+                    "Importo: " + value.getImporto() + "\n"
+                )
+        );*/
     }
 
     private void diminuisciSaldo(String iban, int prelievo) throws IOException

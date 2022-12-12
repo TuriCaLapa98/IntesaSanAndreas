@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public abstract class OperazioneBancaria
 {
+    protected String id;
     protected String iban;
     protected String nomeOP;
-    protected String id;
     protected float importo;
     protected LocalDate data;
 
