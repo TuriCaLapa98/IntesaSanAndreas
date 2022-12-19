@@ -66,7 +66,6 @@ public class BancaISA implements Observer{
         }
     }
 
-
     /** ------------------- verificaCredenziali ------------------------- */
     public boolean verificaCredenziali(String cf) throws Exception {
         if (this.listaClienti.containsKey(cf)) {
@@ -151,24 +150,29 @@ public class BancaISA implements Observer{
             switch (scelta) {
                 case 1:
                     /* ------- UC1 CreaContoCorrente ------- */
-                    System.out.println("----- CREAZIONE CONTO CORRENTE -----\n\n");
+                    System.out.println("\n\n ------------- CREAZIONE CONTO CORRENTE -------------\n");
                     System.out.println("Inserisci codice fiscale");
                     verificaCredenziali(tastiera.readLine()); //verifichiamo le credenziali del cliente
                     break;
 
                 case 2:
                     /* ------- UC5 Deposito ------- */
-                    System.out.println("----- DEPOSITO -----\n\n");
+                    System.out.println("\n\n ------------- DEPOSITO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN = tastiera.readLine();
-                    System.out.println("Inserisci Nome Beneficiario");
-                    String NomeBeneficiario = tastiera.readLine();
-                    System.out.println("Inserisci Cognome Beneficiario");
-                    String CognomeBeneficiario = tastiera.readLine();
-                    verificaEsistenzaCc(IBAN, NomeBeneficiario, CognomeBeneficiario);
+                    System.out.println("Inserisci il Codice Fiscale del Beneficiario");
+                    String codiceFiscale = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN, codiceFiscale, "Deposito");
                     break;
 
                 case 3:
+                    /* ------- UC3 Prelievo ------- */
+                    System.out.println("\n\n ------------- Prelievo -------------\n");
+                    System.out.println("Inserisci IBAN");
+                    String IBAN2 = tastiera.readLine();
+                    System.out.println("Inserisci il Codice Fiscale del Beneficiario");
+                    String codiceFiscale2 = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN2, codiceFiscale2, "Prelievo");
                     break;
 
                 case 4:
@@ -179,10 +183,10 @@ public class BancaISA implements Observer{
 
                 case 6:
                     /* ------- UC11 Visualizza Operazioni Bancarie ------- */
-                    System.out.println("\n------------- LISTA TRANSAZIONI BANCARIE -------------\n");
+                    System.out.println("\n\n ------------- LISTA TRANSAZIONI BANCARIE -------------\n");
                     System.out.println("Inserisci IBAN");
-                    String IBAN2 = tastiera.readLine();
-                    stampaOperazioniBancarieSuConsole(IBAN2);
+                    String IBAN3= tastiera.readLine();
+                    stampaOperazioniBancarieSuConsole(IBAN3);
                     break;
 
                 default:
@@ -191,36 +195,72 @@ public class BancaISA implements Observer{
         } while (scelta != 0);
     }
 
-    public void verificaEsistenzaCc(String iban, String nomeBeneficiario, String cognomeBeneficiario) {
+    public void verificaEsistenzaCc(String iban, String codiceFiscale, String operazione) {
         try
         {
             if (this.listaCc.get(iban) != null) {
-                verificaBeneficiario(iban, nomeBeneficiario, cognomeBeneficiario);
+                verificaBeneficiario(iban, codiceFiscale, operazione);
             } else
             {
-                System.out.println("IBAN NON ESISTENTE");
-                throw new Exception("IBAN NON ESISTENTE");
+                System.out.println("\nERRORE: IBAN NON ESISTENTE");
+                throw new Exception("ERRORE: IBAN NON ESISTENTE");
             }
         }
         catch(Exception ignored){}
     }
 
-    public void verificaBeneficiario(String iban, String nomeBeneficiario, String cognomeBeneficiario) throws Exception {
-
-
-        if (this.listaClienti.get(this.listaCc.get(iban).getCf()).getNome().equals(nomeBeneficiario) &&
-                this.listaClienti.get(this.listaCc.get(iban).getCf()).getCognome().equals(cognomeBeneficiario))
+    public void verificaBeneficiario(String iban, String codiceFiscale, String operazione)
+    {
+        try
         {
-            System.out.println("Inserisci Importo");
-            float importo = Float.parseFloat(tastiera.readLine());
-            System.out.println("Inserisci Nome Mittente");
-            String nomeM = tastiera.readLine();
-            System.out.println("Inserisci Cognome Mittente");
-            String cognomeM = tastiera.readLine();
+            switch (operazione)
+            {
+                case "Prelievo": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
+                                    {
+                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Prelevare");
+                                        float importo = Float.parseFloat(tastiera.readLine());
 
-           // this.listaCc.get(iban).inserisciImporto(importo, nomeM, cognomeM);
+                                        this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() - importo);
+                                        StampaCcSuFile();
+
+                                        Prelievo prelievo = new Prelievo("Prelievo", importo, iban);
+                                        this.listaCc.get(iban).listaPrelievi.put(prelievo.getId(),prelievo);
+                                        stampaOperazioniBancarieSuFile();
+                                    }
+                                    else
+                                    {
+                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                    }
+                                break;
+
+                case "Deposito": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
+                                    {
+                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Depositare");
+                                        float importo = Float.parseFloat(tastiera.readLine());
+                                        System.out.println("Inserisci Nome Mittente");
+                                        String nomeM = tastiera.readLine();
+                                        System.out.println("Inserisci Cognome Mittente");
+                                        String cognomeM = tastiera.readLine();
+
+                                        this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo);
+                                        StampaCcSuFile();
+
+                                        Deposito deposito = new Deposito("Deposito", importo, iban, nomeM, cognomeM);
+                                        this.listaCc.get(iban).listaDepositi.put(deposito.getId(),deposito);
+                                        stampaOperazioniBancarieSuFile();
+                                    }
+                                    else
+                                    {
+                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                    }
+                                break;
+
+                default: break;
+            }
         }
-
+        catch(Exception ignored){}
     }
 
     /** --------------------------------------- Menu Dipendente Tecnico --------------------------------------- **/
@@ -401,14 +441,13 @@ public class BancaISA implements Observer{
                     {
                         bancomat.calcolaPrelievo(prelievo);
                         aggiornaFileBanconote();
-                        diminuisciSaldo(iban,prelievo);
+                        this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
+                        StampaCcSuFile();
 
                         /** ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- **/
                         PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
                         this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
                         stampaOperazioniBancarieSuFile();
-
-                        /**....**/
                     }
                     else
                     {
@@ -435,18 +474,35 @@ public class BancaISA implements Observer{
 
         this.listaCc.forEach((key, value) -> value.listaPrelieviBancomat.forEach((key2, value2) ->
         {
-            switch (value2.getNomeOP())
-            {
-                case "PrelievoBancomat": printout.println (value2.getIban()
-                                            + "\n" + value2.getNomeOP()
-                                            + "\n" + key2
-                                            + "\n" + value2.getCodiceBancomat()
-                                            + "\n" + value2.getImporto()
-                                            + "\n" + value2.getData()
-                                            );
-                                        break;
-                default: break;
-            }
+            printout.println (value2.getIban()
+                    + "\n" + value2.getNomeOP()
+                    + "\n" + key2
+                    + "\n" + value2.getCodiceBancomat()
+                    + "\n" + value2.getImporto()
+                    + "\n" + value2.getData()
+            );
+        }));
+
+        this.listaCc.forEach((key, value) -> value.listaPrelievi.forEach((key2, value2) ->
+        {
+            printout.println (value2.getIban()
+                    + "\n" + value2.getNomeOP()
+                    + "\n" + key2
+                    + "\n" + value2.getImporto()
+                    + "\n" + value2.getData()
+            );
+        }));
+
+        this.listaCc.forEach((key, value) -> value.listaDepositi.forEach((key2, value2) ->
+        {
+            printout.println (value2.getIban()
+                    + "\n" + value2.getNomeOP()
+                    + "\n" + key2
+                    + "\n" + value2.getImporto()
+                    + "\n" + value2.getNomeMittente()
+                    + "\n" + value2.getCognomeMittente()
+                    + "\n" + value2.getData()
+            );
         }));
 
         printout.flush();
@@ -468,33 +524,31 @@ public class BancaISA implements Observer{
                 )
         );
 
-        /*System.out.println("\n----- LISTA PRELIEVI -----\n");
-        this.listaCc.get(IBAN).listaPrelieviBancomat.forEach((key, value)->
+        System.out.println("\n----- LISTA PRELIEVI -----\n");
+        this.listaCc.get(IBAN).listaPrelievi.forEach((key, value)->
             System.out.println
                 (
                     "Data: " + value.getData() + "\n" +
                     "ID: " + key + "\n" +
-                    "Codice Bancomat: " + value.getCodiceBancomat() + "\n" +
                     "Importo: " + value.getImporto() + "\n"
                 )
         );
 
         System.out.println("\n----- LISTA DEPOSITI -----\n");
-        this.listaCc.get(IBAN).listaPrelieviBancomat.forEach((key, value)->
+        this.listaCc.get(IBAN).listaDepositi.forEach((key, value)->
             System.out.println
                 (
                     "Data: " + value.getData() + "\n" +
                     "ID: " + key + "\n" +
-                    "Codice Bancomat: " + value.getCodiceBancomat() + "\n" +
-                    "Importo: " + value.getImporto() + "\n"
+                    "Importo: " + value.getImporto() + "\n" +
+                    "Nome Mittente: " + value.getNomeMittente() + "\n" +
+                    "Cognome Mittente: " + value.getCognomeMittente() + "\n"
                 )
-        );*/
+        );
     }
 
-    private void diminuisciSaldo(String iban, int prelievo) throws IOException
+    private void StampaCcSuFile() throws IOException
     {
-        this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
-
         FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt");
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
@@ -507,6 +561,7 @@ public class BancaISA implements Observer{
                         + "\n" + value.getDataScadenza()
                         + "\n" + value.getPin()
                 ));
+
         printout.flush();
         printout.close();
     }

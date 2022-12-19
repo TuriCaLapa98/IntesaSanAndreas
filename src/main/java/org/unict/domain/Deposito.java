@@ -5,7 +5,7 @@ public class Deposito extends OperazioneBancaria
     private String nomeMittente;
     private String cognomeMittente;
 
-    public Deposito(String nomeOP, float importo, String nomeMittente, String iban, String cognomeMittente)
+    public Deposito(String nomeOP, float importo, String iban, String nomeMittente, String cognomeMittente)
     {
         super (nomeOP, importo, iban);
         this.nomeMittente = nomeMittente;

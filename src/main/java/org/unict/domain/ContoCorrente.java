@@ -61,7 +61,7 @@ public class ContoCorrente
         this.iban = iban;
     }
 
-    public double getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
@@ -130,22 +130,41 @@ public class ContoCorrente
                     String nomeOP = fp.readLine();
                     switch (nomeOP)
                     {
-                        case "PrelievoBancomat":
-                            String id = fp.readLine();
-                            int codiceBancomat = Integer.parseInt(fp.readLine());
-                            float importo = Float.parseFloat(fp.readLine());
-                            String data = fp.readLine();
+                        case "PrelievoBancomat": String id = fp.readLine();
+                                                    int codiceBancomat = Integer.parseInt(fp.readLine());
+                                                    float importo = Float.parseFloat(fp.readLine());
+                                                    String data = fp.readLine();
 
-                            PrelievoBancomat prelievoBancomat = new PrelievoBancomat(id, nomeOP, importo, data, iban, codiceBancomat);
-                            this.listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
+                                                    PrelievoBancomat prelievoBancomat = new PrelievoBancomat(id, nomeOP, importo, data, iban, codiceBancomat);
+                                                    this.listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
 
-                            if (this.listaPrelieviBancomat == null)
-                                throw new Exception("Errore caricamento operazioni bancarie dei bancomat");
-                            break;
+                                                    if (this.listaPrelieviBancomat == null)
+                                                        throw new Exception("Errore caricamento operazioni bancarie dei bancomat");
+                                                break;
 
-                        case "Prelievo": break;
+                        case "Prelievo": String id2 = fp.readLine();
+                                            float importo2 = Float.parseFloat(fp.readLine());
+                                            String data2 = fp.readLine();
 
-                        case "Deposito": break;
+                                            Prelievo prelievo = new Prelievo(id2, nomeOP, importo2, data2, iban);
+                                            this.listaPrelievi.put(prelievo.getId(), prelievo);
+
+                                            if (this.listaPrelieviBancomat == null)
+                                                throw new Exception("Errore caricamento operazioni bancarie dei bancomat");
+                                        break;
+
+                        case "Deposito": String id3 = fp.readLine();
+                                            float importo3 = Float.parseFloat(fp.readLine());
+                                            String nomeMittente = fp.readLine();
+                                            String cognomeMittente = fp.readLine();
+                                            String data3 = fp.readLine();
+
+                                            Deposito deposito = new Deposito(id3, nomeOP, importo3, data3, iban, nomeMittente, cognomeMittente);
+                                            this.listaDepositi.put(deposito.getId(), deposito);
+
+                                            if (this.listaPrelieviBancomat == null)
+                                                throw new Exception("Errore caricamento operazioni bancarie dei bancomat");
+                                        break;
 
                         default: break;
                     }

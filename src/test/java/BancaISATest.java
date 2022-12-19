@@ -43,7 +43,7 @@ public class BancaISATest
         try
         {
             BancaISA bancaISA = BancaISA.getInstance();
-            bancaISA.verificaEsistenzaCc("9ufge", "nomebeneficiario", "cognome beneficiario");
+            bancaISA.verificaEsistenzaCc("9ufge", "codiceFiscale", "Prelievo");
             System.out.println("1");
         }
         catch (Exception e)
