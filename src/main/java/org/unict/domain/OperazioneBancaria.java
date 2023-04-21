@@ -28,9 +28,7 @@ public abstract class OperazioneBancaria
         this.iban = iban;
     }
 
-    public OperazioneBancaria() {
-
-    }
+    public OperazioneBancaria() {}
 
     public String getId() {
         return id;

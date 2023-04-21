@@ -72,7 +72,7 @@ public class Bancomat extends Observable {
         System.out.println("HO FINITO DI CALCOLARE LE BANCONOTE DA DARTI");
         System.out.println("Il totale è:");
 
-        /** ---------- Pz taglio 200 ----------- **/
+        /* ---------- Pz taglio 200 ----------- **/
         int tmpPz1;
         int tmpPz2 = prelievo / 200;
 
@@ -86,7 +86,7 @@ public class Bancomat extends Observable {
             pz200 = listaBanconote.get(200).getNumPezzi();
             System.out.println(pz200 + " Banconote da 200;");
 
-            /** ---------- Pz taglio 100 ----------- **/
+            /* ---------- Pz taglio 100 ----------- **/
             tmpPz1 = prelievo - (pz200*200);
             tmpPz2 = tmpPz1/100;
 
@@ -99,7 +99,7 @@ public class Bancomat extends Observable {
                 pz100 = listaBanconote.get(100).getNumPezzi();
                 System.out.println(pz100 + " Banconote da 100;");
 
-                /** ---------- Pz taglio 50 ----------- **/
+                /* ---------- Pz taglio 50 ----------- **/
                 tmpPz1 = tmpPz1 - (pz100*100);
                 tmpPz2 = tmpPz1/50;
 
@@ -112,7 +112,7 @@ public class Bancomat extends Observable {
                     pz50 = listaBanconote.get(50).getNumPezzi();
                     System.out.println(pz50 + " Banconote da 50;");
 
-                    /** ---------- Pz taglio 20 ----------- **/
+                    /* ---------- Pz taglio 20 ----------- **/
                     tmpPz1 = tmpPz1 - (pz50*50);
                     tmpPz2 = tmpPz1/20;
 
@@ -125,7 +125,7 @@ public class Bancomat extends Observable {
                         pz20 = listaBanconote.get(20).getNumPezzi();
                         System.out.println(pz20 + " Banconote da 20;");
 
-                        /** ---------- Pz taglio 10 ----------- **/
+                        /* ---------- Pz taglio 10 ----------- **/
                         tmpPz1 = tmpPz1 - (pz20*20);
                         tmpPz2 = tmpPz1/10;
 
@@ -138,7 +138,7 @@ public class Bancomat extends Observable {
                             pz10 = listaBanconote.get(10).getNumPezzi();
                             System.out.println(pz10 + " Banconote da 10;");
 
-                            /** ---------- Pz taglio 5 ----------- **/
+                            /* ---------- Pz taglio 5 ----------- **/
                             tmpPz1 = tmpPz1 - (pz10*10);
                             tmpPz2 = tmpPz1/5;
 

@@ -1,6 +1,6 @@
 package org.unict.domain;
 
-public class LoginCliente implements InterfacciaLogin{
+public class LoginBancomat implements InterfacciaLogin{
     private InterfacciaLogin login;
     @Override
     public void setMetodoAccesso(InterfacciaLogin login) {
@@ -12,7 +12,7 @@ public class LoginCliente implements InterfacciaLogin{
         BancaISA bancaISA = BancaISA.getInstance();
 
         try {
-            bancaISA.menuCliente();
+            bancaISA.menuBancomat();
         }catch (Exception ignored) {
         }
     }

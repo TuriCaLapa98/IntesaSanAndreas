@@ -1,9 +1,6 @@
 package org.unict.domain;
 
-import org.unict.domain.BancaISA;
-
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Main
@@ -15,7 +12,7 @@ public class Main
         int scelta =-1;
         String identificatore;
         InterfacciaLogin loginDipendente = new LoginDipendenti();
-        InterfacciaLogin loginCliente = new LoginCliente();
+        InterfacciaLogin loginCliente = new LoginBancomat();
 
 
         /* ---------------- Menu ---------------- */
@@ -31,7 +28,10 @@ public class Main
             {
                 loginDipendente.setMetodoAccesso(loginCliente);
                 try{
-                    System.out.println("Inserisci identificatore o premi invio");
+                    System.out.println("Inserisci: \n" +
+                            " DN - Dipendente Normale\n" +
+                            " DT - Dipendente Tecnico\n" +
+                            " Invio - Accedere Al Bancomat\n");
                     identificatore = tastiera.readLine();
                     loginDipendente.login(identificatore);
                 }catch (Exception e){

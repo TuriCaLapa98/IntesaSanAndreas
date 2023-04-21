@@ -82,7 +82,7 @@ public class BancaISA implements Observer{
                 return false;
             }
         } else {
-            /** ------------------- UC12 CreaCliente ------------------- */
+            /* ------------------- UC12 CreaCliente ------------------- */
             //Chiedere da console se si vuole creare il nuovo cliente
 
             System.out.println("Cliente non esistente, creazione conto corrente in corso...\n");
@@ -131,15 +131,19 @@ public class BancaISA implements Observer{
         do {
             try
             {
-                System.out.println("\n****MENU DIPENDENTE NORMALE****\n" +
-                        "\nInserisci la tua scelta:" +
-                        "\n1) Crea conto corrente" +
-                        "\n2) Deposito" +
-                        "\n3) Prelievo" +
-                        "\n4) Mutuo" +
-                        "\n5) Prestito" +
-                        "\n6) Visualizza cronologia delle operazioni bancarie" +
-                        "\n0) Esci");
+                System.out.println("""
+
+                        ****MENU DIPENDENTE NORMALE****
+
+                        Inserisci la tua scelta:
+                        1) Crea conto corrente
+                        2) Deposito
+                        3) Prelievo
+                        4) Mutuo
+                        5) Prestito
+                        6) Visualizza cronologia delle operazioni bancarie
+                        0) Esci""");
+
                 scelta = Integer.parseInt(tastiera.readLine());
                 if (scelta < 0 || scelta > 6) { //Aggiornare man mano che implementiamo i casi d'uso
                     System.out.println("Scelta non valida");
@@ -274,7 +278,7 @@ public class BancaISA implements Observer{
         do {
             try
             {
-                /** --------------------------------------- Conta Notifiche ----------------------------------- **/
+                /* --------------------------------------- Conta Notifiche ----------------------------------- */
                 notifiche = 0;
                 String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
                 BufferedReader fp = new BufferedReader(new FileReader(file));
@@ -302,7 +306,7 @@ public class BancaISA implements Observer{
             switch (scelta)
             {
                 case 1:
-                    /** ------------------------ UC10 Gestione Banconote Bancomat ------------------------ **/
+                    /* ------------------------ UC10 Gestione Banconote Bancomat ------------------------ **/
                     leggiNotifiche();
                     break;
 
@@ -319,7 +323,7 @@ public class BancaISA implements Observer{
 
         try
         {
-            /** --------------------------------------- Stampa Notifiche ----------------------------------- **/
+            /* --------------------------------------- Stampa Notifiche ----------------------------------- **/
 
             String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
             BufferedReader fp = new BufferedReader(new FileReader(file));
@@ -333,10 +337,14 @@ public class BancaISA implements Observer{
         do {
             try
             {
-                System.out.println("****MENU DIPENDENTE TECNICO****\n" +
-                        "\nInserisci la tua scelta:" +
-                        "\n1) Inserisci pezzi nel Bancomat" +
-                        "\n0) Esci");
+                System.out.println("""
+                        ****MENU DIPENDENTE TECNICO****
+
+                        Inserisci la tua scelta:
+                        1) Inserisci pezzi nel Bancomat
+                        0) Esci
+                        """);
+
                 scelta = Integer.parseInt(tastiera.readLine());
                 if (scelta < 0 || scelta > 1) { //Aggiornare man mano che implementiamo i casi d'uso
                     System.out.println("Scelta non valida");
@@ -347,7 +355,7 @@ public class BancaISA implements Observer{
             switch (scelta)
             {
                 case 1:
-                    /** ------------------------ Aggiorna Pezzi ------------------------ **/
+                    /* ------------------------ Aggiorna Pezzi ------------------------ **/
                     try
                     {
                         System.out.println("\n Inserisci codice bancomat:");
@@ -379,7 +387,7 @@ public class BancaISA implements Observer{
 
     private void aggiornaPezziBanconota(int codiceBancomat, int codiceBanconota) throws IOException {
 
-        /** Stiamo mettendo che riempie di 50 banconote per semplicità logica*/
+        /* Stiamo mettendo che riempie di 50 banconote per semplicità logica*/
 
         Bancomat ban = this.listaBancomat.get(codiceBancomat-1);
         int numRicarica = (1000 - (this.listaBanconote.get((codiceBancomat+codiceBanconota)).getNumPezzi() * codiceBanconota))/codiceBanconota;
@@ -406,7 +414,7 @@ public class BancaISA implements Observer{
 
 
     /** --------------- Menu Bancomat ----------------------- */
-    public void menuCliente()
+    public void menuBancomat()
     {
         int idBancomat = 0;
         System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat + "\n");
@@ -416,7 +424,7 @@ public class BancaISA implements Observer{
 
         try
         {
-            /** ------------- UC4 Prelievo Bancomat ------------- */
+            /* ------------- UC4 Prelievo Bancomat ------------- */
             System.out.println("****INSERIMENTO CREDENZIALI****\n");
             System.out.println("Inserisci iban\n");
             //String iban = tastiera.readLine();
@@ -444,7 +452,7 @@ public class BancaISA implements Observer{
                         this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
                         StampaCcSuFile();
 
-                        /** ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- **/
+                        /* ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- */
                         PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
                         this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
                         stampaOperazioniBancarieSuFile();
@@ -573,8 +581,8 @@ public class BancaISA implements Observer{
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
-        for(int i=0; i< this.listaBancomat.size();i++ )
-            this.listaBancomat.get(i).listaBanconote.forEach((key,value) -> this.listaBanconote.put((value.getCodiceBancomat()+value.getCodice()),value));
+        for (Bancomat item : this.listaBancomat)
+            item.listaBanconote.forEach((key, value) -> this.listaBanconote.put((value.getCodiceBancomat() + value.getCodice()), value));
 
         this.listaBanconote.forEach((key, value) -> printout.println
                 (value.getCodiceBancomat()
@@ -587,14 +595,16 @@ public class BancaISA implements Observer{
 
     public int inserisciImporto()throws IOException
     {
-        System.out.println("Selezione importo:\n" +
-                "0) Esci\n" +
-                "1) €100 \n" +
-                "2) €200 \n" +
-                "3) €300 \n" +
-                "5) €500 \n" +
-                "7) €700 \n" +
-                "10) €1000 \n");
+        System.out.println("""
+                Selezione importo:
+                0) Esci
+                1) €100\s
+                2) €200\s
+                3) €300\s
+                5) €500\s
+                7) €700\s
+                10) €1000\s
+                """);
         int scelta = Integer.parseInt(tastiera.readLine());
 
         if (scelta==0)
@@ -761,9 +771,7 @@ public class BancaISA implements Observer{
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
-        /** Per ogni elemento della lista fa una stampa
-        *
-        * */
+        /* Per ogni elemento della lista fa una stampa  */
         String[] splitStr;
 
         for(String s: this.listaNotifiche)
