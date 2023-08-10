@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="23th Commit: Implementate le classi ServizioBancario, Mutuo, Prestito, Rata.&#10;&#10;Implementare Pattern Strategy per gli interessi.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Mutuo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Prestito.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" afterDir="false" />
-    </list>
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
-    <list id="b79b82b5-a840-4417-8bf3-1790cdb6f69e" name="Changes by Venti" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-    </list>
+    <list id="b79b82b5-a840-4417-8bf3-1790cdb6f69e" name="Changes by Venti" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,19 +40,6 @@
         <option name="url" value="https://github.com/TuriCaLapa98/IntesaSanAndreas.git" />
       </UrlAndAccount>
     </option>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
-      <ranges>
-        <range start1="276" end1="277" start2="276" end2="276" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="663" end1="664" start2="662" end2="665" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="665" end1="667" start2="666" end2="677" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="668" end1="685" start2="678" end2="683" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="686" end1="763" start2="684" end2="697" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="768" end1="769" start2="702" end2="702" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
-        <range start1="784" end1="785" start2="717" end2="717" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -228,7 +202,7 @@
       <workItem from="1682087125411" duration="3046000" />
       <workItem from="1691051659647" duration="286000" />
       <workItem from="1691158104636" duration="2082000" />
-      <workItem from="1691679482843" duration="6040000" />
+      <workItem from="1691679482843" duration="6426000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -454,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682095297766</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi.">
+      <created>1691685938809</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1691685938809</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +461,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -511,7 +504,8 @@
     <MESSAGE value="Changes by Venti" />
     <MESSAGE value="21th Commit: Implementata la stampa su console con funzione stampaOperazioniBancarieSuConsole() all'interno del menù dipendente normale, introdotta anche la stampa dei prelievi e depositi commentata.&#10;&#10;Implementare il Prelievo in filiale e il Deposito in filiale, aggiungerli alle liste cc e stamparle sia su file che su console." />
     <MESSAGE value="23th Commit: Implementate le classi ServizioBancario, Mutuo, Prestito, Rata.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
-    <option name="LAST_COMMIT_MESSAGE" value="23th Commit: Implementate le classi ServizioBancario, Mutuo, Prestito, Rata.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
+    <MESSAGE value="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
+    <option name="LAST_COMMIT_MESSAGE" value="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
