@@ -274,7 +274,6 @@ public class BancaISA implements Observer{
 
         //Visualizza notifiche o esci
         //Dentro visualizza notifiche -> Aggiungi banconote o esci
-
         do {
             try
             {
@@ -661,112 +660,46 @@ public class BancaISA implements Observer{
             }
         } catch (Exception e) { e.printStackTrace(); }
     }
-    //Observer Pattern
+
+
+    //------------------------------------------------  Observer Pattern ------------------------------------------------------
     @Override
-    public void update(Observable obs, Object arg)
-    {
+    public void update(Observable obs, Object arg) {
+        Bancomat bancomat = (Bancomat) obs;
+
+        verificaEAggiungiNotifica(bancomat, 5, 100);
+        verificaEAggiungiNotifica(bancomat, 10, 50);
+        verificaEAggiungiNotifica(bancomat, 20, 25);
+        verificaEAggiungiNotifica(bancomat, 50, 10);
+        verificaEAggiungiNotifica(bancomat, 100, 5);
+        verificaEAggiungiNotifica(bancomat, 200, 2);
+
+        //Riscriviamo il file con tutte le notifiche
         try {
-            String a = "";
-            String[] splitStr;
-
-
-            if (((Bancomat) obs).getListaBanconote().get(5).getNumPezzi() < 100)
-            {
-                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 5 + " " + ((Bancomat) obs).getListaBanconote().get(5).getNumPezzi());
-                for(int i=0; i<this.listaNotifiche.size();i++)
-                {
-                    splitStr = this.listaNotifiche.get(i).split("\\s+");
-                    if(splitStr[0].equals(String.valueOf(((Bancomat) obs).getCodice())) && splitStr[1].equals(String.valueOf(5)))
-                    {
-                        this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                        System.out.println("Ho Trovato un doppione 5");
-                    }
-                }
-                this.listaNotifiche.add(a);
-
-            }
-            if (((Bancomat) obs).getListaBanconote().get(10).getNumPezzi() < 50)
-            {
-                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 10 + " " + ((Bancomat) obs).getListaBanconote().get(10).getNumPezzi());
-                for(int i=0; i<this.listaNotifiche.size();i++)
-                {
-                    splitStr = this.listaNotifiche.get(i).split("\\s+");
-                    if(splitStr[0].equals(String.valueOf(((Bancomat) obs).getCodice())) && splitStr[1].equals(String.valueOf(10)))
-                    {
-                        this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                        System.out.println("Ho Trovato un doppione 10");
-                    }
-                }
-                this.listaNotifiche.add(a);
-            }
-            if (((Bancomat) obs).getListaBanconote().get(20).getNumPezzi() < 25)
-            {
-                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 20 + " " + ((Bancomat) obs).getListaBanconote().get(20).getNumPezzi());
-                for(int i=0; i<this.listaNotifiche.size();i++)
-                {
-                    splitStr = this.listaNotifiche.get(i).split("\\s+");
-                    if(splitStr[0].equals(String.valueOf(((Bancomat) obs).getCodice())) && splitStr[1].equals(String.valueOf(20)))
-                    {
-                        this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                        System.out.println("Ho Trovato un doppione 20");
-                    }
-                }
-                this.listaNotifiche.add(a);
-            }
-            if (((Bancomat) obs).getListaBanconote().get(50).getNumPezzi() < 10)
-            {
-                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 50 + " " + ((Bancomat) obs).getListaBanconote().get(50).getNumPezzi());
-                for(int i=0; i<this.listaNotifiche.size();i++)
-                {
-                    splitStr = this.listaNotifiche.get(i).split("\\s+");
-                    if(splitStr[0].equals(String.valueOf(((Bancomat) obs).getCodice())) && splitStr[1].equals(String.valueOf(50)))
-                    {
-                        this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                        System.out.println("Ho Trovato un doppione 50");
-                    }
-                }
-                this.listaNotifiche.add(a);
-            }
-            if (((Bancomat) obs).getListaBanconote().get(100).getNumPezzi() < 5)
-            {
-                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 100 + " " + ((Bancomat) obs).getListaBanconote().get(100).getNumPezzi());
-                for(int i=0; i<this.listaNotifiche.size();i++)
-                {
-                    splitStr = this.listaNotifiche.get(i).split("\\s+");
-                    if(splitStr[0].equals(String.valueOf(((Bancomat) obs).getCodice())) && splitStr[1].equals(String.valueOf(100)))
-                    {
-                        this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                        System.out.println("Ho Trovato un doppione 100");
-                    }
-                }
-                this.listaNotifiche.add(a);
-            }
-            if(((Bancomat) obs).getListaBanconote().get(200).getNumPezzi() < 2)
-            {
-                a = String.valueOf(((Bancomat) obs).getCodice() + " " + 200 + " " + ((Bancomat) obs).getListaBanconote().get(200).getNumPezzi());
-                for(int i=0; i<this.listaNotifiche.size();i++)
-                {
-                    splitStr = this.listaNotifiche.get(i).split("\\s+");
-                    if(splitStr[0].equals(String.valueOf(((Bancomat) obs).getCodice())) && splitStr[1].equals(String.valueOf(200)))
-                    {
-                        this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                        System.out.println("Ho Trovato un doppione 200");
-                    }
-                }
-                this.listaNotifiche.add(a);
-            }
             notificaBanconote();
-
-
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void verificaEAggiungiNotifica(Bancomat bancomat, int taglio, int soglia) {
+        int numPezzi = bancomat.getListaBanconote().get(taglio).getNumPezzi();
+        String a = String.valueOf(bancomat.getCodice() + " " + taglio + " " + numPezzi);
+
+        if (numPezzi < soglia) {
+            for (int i = 0; i < this.listaNotifiche.size(); i++) {
+                String[] splitStr = this.listaNotifiche.get(i).split("\\s+");
+                if (splitStr[0].equals(String.valueOf(bancomat.getCodice())) && splitStr[1].equals(String.valueOf(taglio))) {
+                    this.listaNotifiche.remove(this.listaNotifiche.get(i));
+                    System.out.println("Ho Trovato un doppione " + taglio);
+                }
+            }
+            this.listaNotifiche.add(a);
         }
     }
 
     public void notificaBanconote() throws IOException
     {
-
         FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt");
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
@@ -782,6 +715,5 @@ public class BancaISA implements Observer{
 
         printout.flush();
         printout.close();
-
     }
 }

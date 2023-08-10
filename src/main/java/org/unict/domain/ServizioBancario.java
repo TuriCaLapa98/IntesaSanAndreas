@@ -1,6 +1,7 @@
 package org.unict.domain;
 import java.time.LocalDate;
 
+
 public abstract class ServizioBancario
 {
     protected String id;
