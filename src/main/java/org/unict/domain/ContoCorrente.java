@@ -120,7 +120,7 @@ public class ContoCorrente
     public void caricaOperazioniBancarie()
     {
         try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\operazioniBancarie.txt";
+            String file = FilePaths.OPERAZIONI_BANCARIE_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             for (String iban = fp.readLine(); iban != null; iban = fp.readLine() )

@@ -114,7 +114,7 @@ public class Cliente
         this.listaContiCorrente.put(IBAN,contoCorrente);
         bancaISA.listaCc.put(IBAN,contoCorrente);
 
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt");
+        FileWriter file = new FileWriter(FilePaths.ELENCO_CC_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
         bancaISA.listaCc.forEach((key, value) -> printout.println
@@ -128,6 +128,7 @@ public class Cliente
         printout.flush();
         printout.close();
     }
+
 
     public String generaIban()
     {
@@ -145,7 +146,7 @@ public class Cliente
     public void caricaCc()
     {
         try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt";
+            String file = FilePaths.ELENCO_CC_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             for (String cf = fp.readLine(); cf != null; cf = fp.readLine())

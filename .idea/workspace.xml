@@ -4,9 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseAlto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseBasso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseMedio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Rata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Rata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" afterDir="false" />
+    </list>
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
-    <list id="b79b82b5-a840-4417-8bf3-1790cdb6f69e" name="Changes by Venti" comment="" />
+    <list id="b79b82b5-a840-4417-8bf3-1790cdb6f69e" name="Changes by Venti" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/FilePaths.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +32,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -40,6 +57,40 @@
         <option name="url" value="https://github.com/TuriCaLapa98/IntesaSanAndreas.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
+      <ranges>
+        <range start1="3" end1="3" start2="3" end2="4" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="45" end1="46" start2="46" end2="47" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="108" end1="109" start2="109" end2="110" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="157" end1="158" start2="158" end2="159" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="173" end1="174" start2="174" end2="175" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="176" end1="177" start2="177" end2="178" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="182" end1="182" start2="183" end2="184" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="185" end1="185" start2="187" end2="194" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="191" end1="193" start2="200" end2="202" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="205" end1="206" start2="214" end2="215" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="215" end1="216" start2="224" end2="225" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="262" end1="262" start2="271" end2="277" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="263" end1="263" start2="278" end2="303" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="281" end1="282" start2="321" end2="322" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="326" end1="327" start2="366" end2="367" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="477" end1="478" start2="517" end2="518" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="558" end1="559" start2="598" end2="599" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="578" end1="579" start2="618" end2="619" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="624" end1="625" start2="664" end2="665" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="650" end1="651" start2="690" end2="691" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="702" end1="703" start2="742" end2="743" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/Cliente.java">
+      <ranges>
+        <range start1="116" end1="117" start2="116" end2="117" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="130" end1="130" start2="130" end2="131" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+        <range start1="147" end1="148" start2="148" end2="149" changelist="b79b82b5-a840-4417-8bf3-1790cdb6f69e" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -80,6 +131,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.unict.domain" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\test\java" />
       <recent name="D:\OneDrive - Università degli Studi di Catania\Magistrale\Primo Anno\Ingegneria del Software\Esame\Progetto\IntesaSanAndreas\src\main\java\org\unict\domain\Filetxt" />
@@ -202,7 +256,8 @@
       <workItem from="1682087125411" duration="3046000" />
       <workItem from="1691051659647" duration="286000" />
       <workItem from="1691158104636" duration="2082000" />
-      <workItem from="1691679482843" duration="6426000" />
+      <workItem from="1691679482843" duration="6796000" />
+      <workItem from="1692194585113" duration="10683000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -435,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691685938809</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi.">
+      <created>1691686131584</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1691686131584</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

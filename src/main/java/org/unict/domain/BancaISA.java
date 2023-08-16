@@ -1,6 +1,7 @@
 package org.unict.domain;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.Observable;
 import java.util.Observer;
@@ -43,7 +44,7 @@ public class BancaISA implements Observer{
     public void caricaClienti()
     {
         try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoClienti.txt";
+            String file = FilePaths.ELENCO_CLIENTI_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             for (String cf = fp.readLine(); cf != null; cf = fp.readLine())
@@ -106,7 +107,7 @@ public class BancaISA implements Observer{
 
         clienteCorrente = new Cliente(cf, nome, cognome, dataNascita, email, telefono);
         this.listaClienti.put(cf, clienteCorrente);
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoClienti.txt");
+        FileWriter file = new FileWriter(FilePaths.ELENCO_CLIENTI_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
         this.listaClienti.forEach((key, value) -> printout.println
@@ -155,7 +156,7 @@ public class BancaISA implements Observer{
                 case 1:
                     /* ------- UC1 CreaContoCorrente ------- */
                     System.out.println("\n\n ------------- CREAZIONE CONTO CORRENTE -------------\n");
-                    System.out.println("Inserisci codice fiscale");
+                    System.out.println("Inserisci il Codice Fiscale");
                     verificaCredenziali(tastiera.readLine()); //verifichiamo le credenziali del cliente
                     break;
 
@@ -171,26 +172,34 @@ public class BancaISA implements Observer{
 
                 case 3:
                     /* ------- UC3 Prelievo ------- */
-                    System.out.println("\n\n ------------- Prelievo -------------\n");
+                    System.out.println("\n\n ------------- PRELIEVO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN2 = tastiera.readLine();
-                    System.out.println("Inserisci il Codice Fiscale del Beneficiario");
+                    System.out.println("Inserisci il Codice Fiscale");
                     String codiceFiscale2 = tastiera.readLine();
                     verificaEsistenzaCc(IBAN2, codiceFiscale2, "Prelievo");
                     break;
 
                 case 4:
+                    /* ------- UC6 Mutuo ------- */
                     break;
 
                 case 5:
+                    /* ------- UC6 Prestito ------- */
+                    System.out.println("\n\n ------------- PRESTITO -------------\n");
+                    System.out.println("Inserisci IBAN");
+                    String IBAN4 = tastiera.readLine();
+                    System.out.println("Inserisci il Codice Fiscale del Beneficiario");
+                    String codiceFiscale4 = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN4, codiceFiscale4, "Prestito");
                     break;
 
                 case 6:
                     /* ------- UC11 Visualizza Operazioni Bancarie ------- */
                     System.out.println("\n\n ------------- LISTA TRANSAZIONI BANCARIE -------------\n");
                     System.out.println("Inserisci IBAN");
-                    String IBAN3= tastiera.readLine();
-                    stampaOperazioniBancarieSuConsole(IBAN3);
+                    String IBAN5= tastiera.readLine();
+                    stampaOperazioniBancarieSuConsole(IBAN5);
                     break;
 
                 default:
@@ -203,7 +212,7 @@ public class BancaISA implements Observer{
         try
         {
             if (this.listaCc.get(iban) != null) {
-                verificaBeneficiario(iban, codiceFiscale, operazione);
+                verificaOperazione(iban, codiceFiscale, operazione);
             } else
             {
                 System.out.println("\nERRORE: IBAN NON ESISTENTE");
@@ -213,7 +222,7 @@ public class BancaISA implements Observer{
         catch(Exception ignored){}
     }
 
-    public void verificaBeneficiario(String iban, String codiceFiscale, String operazione)
+    public void verificaOperazione(String iban, String codiceFiscale, String operazione)
     {
         try
         {
@@ -260,7 +269,38 @@ public class BancaISA implements Observer{
                                         throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
                                     }
                                 break;
+                case "Prestito": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
+                                    {
+                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci il Prestito richiesto");
+                                        float importo = Float.parseFloat(tastiera.readLine());
+                                        System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
+                                        float stipendio = Float.parseFloat(tastiera.readLine());
 
+                                        if(importo < stipendio*5)
+                                        {
+                                            ServizioBancario prestito = new ServizioBancario(importo, LocalDate.now().plusYears(4), 48, "Prestito");
+                                            if(importo < stipendio*5/2)
+                                                prestito.setStrategyInteresse(new StrategyInteresseBasso());
+                                            else
+                                                prestito.setStrategyInteresse(new StrategyInteresseMedio());
+                                            Rata rata = new Rata(LocalDate.now(), prestito.calcolaInteresse());
+                                            //INSERIRE IN QUESTA RIGA LA DIMUZIONE DEL CC PERCHé STA PAGANDO LA PRIMA RATA ALL'ATTO DELLA CREAZIONE
+                                            //CREARE LA LISTA DI RATE ALL'INTERNO DI SERVIZIO BANCARIO, COLLEGARE SERVIZIO BANCARIO AL CC (FARE UNA LISTA DI SERVIZI BANCARI ATTIVI NEL CC)
+                                            //INSERIRE L'OPZIONE DI PAGARE LA RATA ALL'INTERNO DEL MENU' DN
+                                            //
+                                        }
+                                        else
+                                        {
+                                            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
+                                        }
+                                        stampaOperazioniBancarieSuFile();
+                                    }
+                                    else
+                                    {
+                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                    }
+                    break;
                 default: break;
             }
         }
@@ -279,7 +319,7 @@ public class BancaISA implements Observer{
             {
                 /* --------------------------------------- Conta Notifiche ----------------------------------- */
                 notifiche = 0;
-                String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+                String file = FilePaths.NOTIFICHE_DIPENDENTE_T_PATH;
                 BufferedReader fp = new BufferedReader(new FileReader(file));
 
                 for (String s = fp.readLine(); s != null; s = fp.readLine())
@@ -324,7 +364,7 @@ public class BancaISA implements Observer{
         {
             /* --------------------------------------- Stampa Notifiche ----------------------------------- **/
 
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+            String file = FilePaths.NOTIFICHE_DIPENDENTE_T_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             for (String s = fp.readLine(); s != null; s = fp.readLine())
@@ -475,7 +515,7 @@ public class BancaISA implements Observer{
 
     private void stampaOperazioniBancarieSuFile() throws IOException
     {
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\operazioniBancarie.txt");
+        FileWriter file = new FileWriter(FilePaths.OPERAZIONI_BANCARIE_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
@@ -556,7 +596,7 @@ public class BancaISA implements Observer{
 
     private void StampaCcSuFile() throws IOException
     {
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoCc.txt");
+        FileWriter file = new FileWriter(FilePaths.ELENCO_CC_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
@@ -576,7 +616,7 @@ public class BancaISA implements Observer{
     private void aggiornaFileBanconote() throws IOException
     {
 
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBanconote.txt");
+        FileWriter file = new FileWriter(FilePaths.ELENCO_BANCONOTE_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
@@ -622,7 +662,7 @@ public class BancaISA implements Observer{
     public void caricaListaBancomat()
     {
         try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\elencoBancomat.txt";
+            String file = FilePaths.ELENCO_BANCOMAT_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             int codiceBancomat = 0;
@@ -648,7 +688,7 @@ public class BancaISA implements Observer{
     private void caricaNotifiche()
     {
         try {
-            String file = "D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt";
+            String file = FilePaths.NOTIFICHE_DIPENDENTE_T_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));
 
             String[] splitStr;
@@ -700,7 +740,7 @@ public class BancaISA implements Observer{
 
     public void notificaBanconote() throws IOException
     {
-        FileWriter file = new FileWriter("D:\\OneDrive - Università degli Studi di Catania\\Magistrale\\Primo Anno\\Ingegneria del Software\\Esame\\Progetto\\IntesaSanAndreas\\src\\main\\java\\org\\unict\\domain\\Filetxt\\notificheDipendenteT.txt");
+        FileWriter file = new FileWriter(FilePaths.NOTIFICHE_DIPENDENTE_T_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);
         PrintWriter printout = new PrintWriter(filebuf);
 
