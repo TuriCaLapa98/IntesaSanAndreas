@@ -1,34 +1,84 @@
 package org.unict.domain;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Random;
 
 
 public class ServizioBancario
 {
     private String id;
+    private String iban;
     private float importo;
     private LocalDate data;
     private boolean attivo;
     private LocalDate dataScadenza;
     private int numeroRate;
-    //INSERIRE VALORE RATA
+    private float valoreRata;
     private String tipologia;
+    private float interesse;
+    public Map<String,Rata> listaRate;
     private StrategyInteresse strategyInteresse;
 
-    public ServizioBancario(float importo, LocalDate dataScadenza, int numeroRate, String tipologia)
+    public ServizioBancario(String iban, float importo, LocalDate dataScadenza, int numeroRate, float valoreRata, String tipologia)
     {
         this.id = generaID();
+        this.iban = iban;
         this.importo = importo;
         this.data = LocalDate.now();
         this.attivo = true;
         this.dataScadenza = dataScadenza;
         this.numeroRate = numeroRate;
+        this.valoreRata = valoreRata;
         this.tipologia = tipologia;
+        this.interesse = 0;
         this.strategyInteresse = new StrategyInteresse() {
             @Override
-            public double calcolaInteresse(double importo, int numRate) {
+            public float calcolaInteresse(float importo, int numRate) {
                 return importo;
             }
         };
+        caricaRate();
+    }
+
+    public ServizioBancario(String id, String iban, float importo,LocalDate data, LocalDate dataScadenza, boolean attivo, int numeroRate, float valoreRata, String tipologia, float interesse) throws Exception {
+        this.id = id;
+        this.iban = iban;
+        this.importo = importo;
+        this.data = data;
+        this.attivo = attivo;
+        this.dataScadenza = dataScadenza;
+        this.numeroRate = numeroRate;
+        this.valoreRata = valoreRata;
+        this.tipologia = tipologia;
+        this.interesse = interesse;
+
+        //IN BASE AL PARAMETRO D'APPOGGIO "INTERESSE" RIESCO AD APPLICARE IL PATTERN STRATEGY AL CARICAMENTO DEL SERVIZIO
+        if (interesse == 0.02f)
+        {
+            this.strategyInteresse = new StrategyInteresseBasso();
+        } else if (interesse == 0.05f)
+        {
+            this.strategyInteresse = new StrategyInteresseMedio();
+        } else if (interesse == 0.1f)
+        {
+            this.strategyInteresse = new StrategyInteresseAlto();
+        } else if (interesse == 1F)
+        {
+            this.strategyInteresse = new StrategyInteresseVariabile();
+        }else
+        {
+            this.strategyInteresse = new StrategyInteresse() {
+                @Override
+                public float calcolaInteresse(float importo, int numRate) {
+                    return importo;
+                }
+            };
+            throw new Exception("Errore nel rilevare l'interesse");
+        }
+        caricaRate();
     }
 
     public String generaID()
@@ -49,6 +99,14 @@ public class ServizioBancario
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
     }
 
     public float getImporto() {
@@ -99,6 +157,22 @@ public class ServizioBancario
         this.tipologia = tipologia;
     }
 
+    public float getValoreRata() {
+        return valoreRata;
+    }
+
+    public void setValoreRata(float valoreRata) {
+        this.valoreRata = valoreRata;
+    }
+
+    public float getInteresse() {
+        return interesse;
+    }
+
+    public void setInteresse(float interesse) {
+        this.interesse = interesse;
+    }
+
     public StrategyInteresse getStrategyInteresse() {
         return strategyInteresse;
     }
@@ -107,8 +181,34 @@ public class ServizioBancario
         this.strategyInteresse = strategyInteresse;
     }
 
-    public double calcolaInteresse() {
+    public float calcolaInteresse() {
         return strategyInteresse.calcolaInteresse(importo, numeroRate);
+    }
+
+    public void caricaRate()
+    {
+        try {
+            String file = FilePaths.ELENCO_RATE_PATH;
+            BufferedReader fp = new BufferedReader(new FileReader(file));
+
+            for (String id = fp.readLine(); id != null; id = fp.readLine() )
+            {
+                if (id.equals(this.id))
+                {
+                    String idRata = fp.readLine();
+                    LocalDate data = LocalDate.parse(fp.readLine());
+                    float importo = Float.parseFloat(fp.readLine());
+
+                    Rata rata = new Rata(idRata, id, data, importo);
+                    this.listaRate.put(rata.getId(), rata);
+
+                    if(this.listaRate == null)
+                        throw new Exception("Errore caricamento Servizi Bancari");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

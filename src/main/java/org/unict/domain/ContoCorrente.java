@@ -16,6 +16,7 @@ public class ContoCorrente
     public Map<String, PrelievoBancomat> listaPrelieviBancomat;
     public Map<String, Prelievo> listaPrelievi;
     public Map<String, Deposito> listaDepositi;
+    public Map<String, ServizioBancario> listaServiziBancari;
 
 
     public ContoCorrente(String iban, String cf) throws FileNotFoundException {
@@ -28,7 +29,9 @@ public class ContoCorrente
         this.listaPrelieviBancomat = new HashMap<>();
         this.listaPrelievi = new HashMap<>();
         this.listaDepositi = new HashMap<>();
+        this.listaServiziBancari = new HashMap<>();
         caricaOperazioniBancarie();
+        caricaServiziBancari();
     }
 
     public ContoCorrente(String iban, String cf, float saldo, String numeroCarta, String dataScadenza, String pin) throws FileNotFoundException {
@@ -41,9 +44,10 @@ public class ContoCorrente
         this.listaPrelieviBancomat = new HashMap<>();
         this.listaPrelievi = new HashMap<>();
         this.listaDepositi = new HashMap<>();
+        this.listaServiziBancari = new HashMap<>();
         caricaOperazioniBancarie();
+        caricaServiziBancari();
     }
-
 
     public String getCf() {
         return cf;
@@ -168,6 +172,39 @@ public class ContoCorrente
 
                         default: break;
                     }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void caricaServiziBancari()
+    {
+        try {
+            String file = FilePaths.SERVIZI_BANCARI_PATH;
+            BufferedReader fp = new BufferedReader(new FileReader(file));
+
+            for (String iban = fp.readLine(); iban != null; iban = fp.readLine() )
+            {
+                if (iban.equals(this.iban))
+                {
+                    String id = fp.readLine();
+                    String tipologia = fp.readLine();
+                    float importo = Float.parseFloat(fp.readLine());
+                    LocalDate data = LocalDate.parse(fp.readLine());
+                    boolean attivo = Boolean.parseBoolean(fp.readLine());
+                    LocalDate dataScadenza = LocalDate.parse(fp.readLine());
+                    int numeroRate = Integer.parseInt(fp.readLine());
+                    float valoreRata = Float.parseFloat(fp.readLine());
+                    float interesse = Float.parseFloat(fp.readLine());
+
+                    ServizioBancario servizio = new ServizioBancario(id, iban, importo, data, dataScadenza, attivo, numeroRate, valoreRata, tipologia, interesse);
+                    this.listaServiziBancari.put(servizio.getId(), servizio);
+
+                    if(this.listaServiziBancari == null)
+                        throw new Exception("Errore caricamento Servizi Bancari");
                 }
             }
         } catch (Exception e) {

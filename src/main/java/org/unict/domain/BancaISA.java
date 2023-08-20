@@ -10,23 +10,23 @@ import java.util.Observer;
 public class BancaISA implements Observer{
     private static BancaISA bancaIsa;
     private Cliente clienteCorrente;
-    private Map<String, Cliente> listaClienti;
-    public Map<String, ContoCorrente> listaCc;
     private final BufferedReader tastiera;
     private Bancomat bancomat;
     public LinkedList<Bancomat> listaBancomat;
     public LinkedList<String> listaNotifiche;
+    private Map<String, Cliente> listaClienti;
+    public Map<String, ContoCorrente> listaCc;
     public Map<Integer, Banconota> listaBanconote;
 
 
     /** ----------------------- BancaISA -------------------------- */
     private BancaISA() throws IOException {
+        this.tastiera = new BufferedReader(new InputStreamReader(System.in));
+        this.listaBancomat = new LinkedList<>();
+        this.listaNotifiche = new LinkedList<>();
         this.listaClienti = new HashMap<>();
         this.listaCc = new HashMap<>();
         this.listaBanconote = new HashMap<>();
-        this.listaBancomat = new LinkedList<>();
-        this.tastiera = new BufferedReader(new InputStreamReader(System.in));
-        this.listaNotifiche = new LinkedList<>();
         caricaClienti();
         caricaListaBancomat();
         aggiornaFileBanconote();
@@ -84,10 +84,34 @@ public class BancaISA implements Observer{
             }
         } else {
             /* ------------------- UC12 CreaCliente ------------------- */
-            //Chiedere da console se si vuole creare il nuovo cliente
 
-            System.out.println("Cliente non esistente, creazione conto corrente in corso...\n");
-            inserisciCredenziali(cf);
+            int scelta2 = -1;
+            do
+            {  try
+                {
+                    System.out.println("""
+
+                        VUOI CREARE UN NUOVO CLIENTE?
+
+                        Inserisci la tua scelta:
+                        0) Si
+                        1) No
+                        """);
+
+                    scelta2 = Integer.parseInt(tastiera.readLine());
+                    if (scelta2 < 0 || scelta2 > 1) {
+                        System.out.println("Scelta non valida");
+                        throw new Exception("Scelta non valida");
+                    }
+                } catch(Exception ignored){}
+                switch (scelta2) {
+                    case 1: inserisciCredenziali(cf);
+                        break;
+                    default:
+                        break;
+                }
+            }while(scelta2 != 0);
+
             return true;
         }
     }
@@ -142,11 +166,13 @@ public class BancaISA implements Observer{
                         3) Prelievo
                         4) Mutuo
                         5) Prestito
-                        6) Visualizza cronologia delle operazioni bancarie
+                        6) Visualizza lista delle operazioni bancarie
+                        7) Visualizza lista dei servizi bancari
+                        8) Paga rata
                         0) Esci""");
 
                 scelta = Integer.parseInt(tastiera.readLine());
-                if (scelta < 0 || scelta > 6) { //Aggiornare man mano che implementiamo i casi d'uso
+                if (scelta < 0 || scelta > 8) {
                     System.out.println("Scelta non valida");
                     throw new Exception("Scelta non valida");
                 }
@@ -182,6 +208,12 @@ public class BancaISA implements Observer{
 
                 case 4:
                     /* ------- UC6 Mutuo ------- */
+                    System.out.println("\n\n ------------- MUTUO -------------\n");
+                    System.out.println("Inserisci IBAN");
+                    String IBAN3 = tastiera.readLine();
+                    System.out.println("Inserisci il Codice Fiscale");
+                    String codiceFiscale3 = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN3, codiceFiscale3, "Mutuo");
                     break;
 
                 case 5:
@@ -189,7 +221,7 @@ public class BancaISA implements Observer{
                     System.out.println("\n\n ------------- PRESTITO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN4 = tastiera.readLine();
-                    System.out.println("Inserisci il Codice Fiscale del Beneficiario");
+                    System.out.println("Inserisci il Codice Fiscale");
                     String codiceFiscale4 = tastiera.readLine();
                     verificaEsistenzaCc(IBAN4, codiceFiscale4, "Prestito");
                     break;
@@ -200,6 +232,22 @@ public class BancaISA implements Observer{
                     System.out.println("Inserisci IBAN");
                     String IBAN5= tastiera.readLine();
                     stampaOperazioniBancarieSuConsole(IBAN5);
+                    break;
+
+                case 7:
+                    /* ------- UC11 Visualizza Servizi Bancari ------- */
+                    System.out.println("\n\n ------------- LISTA SERVIZI BANCARI -------------\n");
+                    System.out.println("Inserisci IBAN");
+                    String IBAN6= tastiera.readLine();
+                    stampaServiziBancariSuConsole(IBAN6);
+                    break;
+
+                case 8:
+                    /* ------- UC6.2 Paga Rata ------- */
+                    System.out.println("\n\n ------------- PAGA RATA -------------\n");
+                    System.out.println("Inserisci IBAN");
+                    String IBAN7= tastiera.readLine();
+                    pagaRata(IBAN7);
                     break;
 
                 default:
@@ -269,6 +317,66 @@ public class BancaISA implements Observer{
                                         throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
                                     }
                                 break;
+                case "Mutuo": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
+                                    {
+                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci il Mutuo richiesto");
+                                        float importo = Float.parseFloat(tastiera.readLine());
+                                        System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
+                                        float stipendio = Float.parseFloat(tastiera.readLine());
+
+                                        if(importo < stipendio*8)
+                                        {
+                                            ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0,"Mutuo");
+
+                                            int scelta2 = -1;
+                                            do
+                                            {   try
+                                                {
+                                                    System.out.println("""
+
+                                                        TASSO FISSO O VARIABILE
+                                
+                                                        Inserisci la tua scelta:
+                                                        1) Tasso Fisso
+                                                        2) Tasso Variabile
+                                                        0) Esci""");
+
+                                                    scelta2 = Integer.parseInt(tastiera.readLine());
+                                                    if (scelta2 < 0 || scelta2 > 2) {
+                                                        System.out.println("Scelta non valida");
+                                                        throw new Exception("Scelta non valida");
+                                                    }
+                                                } catch(Exception ignored){}
+
+                                                switch (scelta2) {
+                                                    case 1: mutuo.setStrategyInteresse(new StrategyInteresseAlto());
+                                                            mutuo.setInteresse(0.1F);
+                                                        break;
+                                                    case 2: mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
+                                                            mutuo.setInteresse(1F);
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }
+                                            }while(scelta2 != 0);
+
+                                            mutuo.setValoreRata(mutuo.calcolaInteresse());
+                                            this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
+                                            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-mutuo.getValoreRata());
+                                            StampaCcSuFile();
+                                            stampaServiziBancariSuFile();
+                                        }
+                                        else
+                                        {
+                                            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+                                    }
+                                    break;
                 case "Prestito": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
                                     {
                                         System.out.println("*Dati Convalidati\n\n"+"Inserisci il Prestito richiesto");
@@ -278,29 +386,31 @@ public class BancaISA implements Observer{
 
                                         if(importo < stipendio*5)
                                         {
-                                            ServizioBancario prestito = new ServizioBancario(importo, LocalDate.now().plusYears(4), 48, "Prestito");
-                                            if(importo < stipendio*5/2)
+                                            ServizioBancario prestito = new ServizioBancario(iban, importo, LocalDate.now().plusYears(4), 47, 0,"Prestito");
+                                            if(importo < stipendio*5/2) {
                                                 prestito.setStrategyInteresse(new StrategyInteresseBasso());
-                                            else
+                                                prestito.setInteresse(0.02F);
+                                            }else {
                                                 prestito.setStrategyInteresse(new StrategyInteresseMedio());
-                                            Rata rata = new Rata(LocalDate.now(), prestito.calcolaInteresse());
-                                            //INSERIRE IN QUESTA RIGA LA DIMUZIONE DEL CC PERCHé STA PAGANDO LA PRIMA RATA ALL'ATTO DELLA CREAZIONE
-                                            //CREARE LA LISTA DI RATE ALL'INTERNO DI SERVIZIO BANCARIO, COLLEGARE SERVIZIO BANCARIO AL CC (FARE UNA LISTA DI SERVIZI BANCARI ATTIVI NEL CC)
-                                            //INSERIRE L'OPZIONE DI PAGARE LA RATA ALL'INTERNO DEL MENU' DN
-                                            //
+                                                prestito.setInteresse(0.05F);
+                                            }
+                                            prestito.setValoreRata(prestito.calcolaInteresse());
+                                            this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
+                                            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-prestito.getValoreRata());
+                                            StampaCcSuFile();
+                                            stampaServiziBancariSuFile();
                                         }
                                         else
                                         {
                                             System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
                                         }
-                                        stampaOperazioniBancarieSuFile();
                                     }
                                     else
                                     {
                                         System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
                                         throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
                                     }
-                    break;
+                                    break;
                 default: break;
             }
         }
@@ -557,11 +667,11 @@ public class BancaISA implements Observer{
 
     }
 
-    private void stampaOperazioniBancarieSuConsole(String IBAN)
+    private void stampaOperazioniBancarieSuConsole(String iban)
     {
 
         System.out.println("\n----- LISTA PRELIEVI BANCOMAT -----\n");
-        this.listaCc.get(IBAN).listaPrelieviBancomat.forEach((key, value)->
+        this.listaCc.get(iban).listaPrelieviBancomat.forEach((key, value)->
             System.out.println
                 (
                     "Data: " + value.getData() + "\n" +
@@ -572,7 +682,7 @@ public class BancaISA implements Observer{
         );
 
         System.out.println("\n----- LISTA PRELIEVI -----\n");
-        this.listaCc.get(IBAN).listaPrelievi.forEach((key, value)->
+        this.listaCc.get(iban).listaPrelievi.forEach((key, value)->
             System.out.println
                 (
                     "Data: " + value.getData() + "\n" +
@@ -582,7 +692,7 @@ public class BancaISA implements Observer{
         );
 
         System.out.println("\n----- LISTA DEPOSITI -----\n");
-        this.listaCc.get(IBAN).listaDepositi.forEach((key, value)->
+        this.listaCc.get(iban).listaDepositi.forEach((key, value)->
             System.out.println
                 (
                     "Data: " + value.getData() + "\n" +
@@ -592,6 +702,84 @@ public class BancaISA implements Observer{
                     "Cognome Mittente: " + value.getCognomeMittente() + "\n"
                 )
         );
+    }
+
+    private void stampaServiziBancariSuFile() throws IOException
+    {
+        FileWriter file = new FileWriter(FilePaths.SERVIZI_BANCARI_PATH);
+        BufferedWriter filebuf = new BufferedWriter(file);
+        PrintWriter printout = new PrintWriter(filebuf);
+
+        this.listaCc.forEach((key, value) -> value.listaServiziBancari.forEach((key2, value2) ->
+        {
+            printout.println (value2.getIban()
+                    + "\n" + key2   //id
+                    + "\n" + value2.getTipologia()
+                    + "\n" + value2.getImporto()
+                    + "\n" + value2.getData()
+                    + "\n" + value2.isAttivo()
+                    + "\n" + value2.getDataScadenza()
+                    + "\n" + value2.getNumeroRate()
+                    + "\n" + value2.getValoreRata()
+                    + "\n" + value2.getInteresse()
+            );
+        }));
+
+        printout.flush();
+        printout.close();
+    }
+
+    private void stampaServiziBancariSuConsole(String iban)
+    {
+        System.out.println("----------------------- LISTA SERVIZI BANCARI -----------------------");
+        this.listaCc.get(iban).listaServiziBancari.forEach((key, value)->
+            System.out.println
+                (
+                    "IBAN: " + value.getIban() + "\n" +
+                    "ID: " + key + "\n" +
+                    "Tipologia: " + value.getTipologia() + "\n" +
+                    "Importo: " + value.getImporto() + "\n" +
+                    "Data: " + value.getData() + "\n" +
+                    "Attivo: " + value.isAttivo() + "\n" +
+                    "Data Scadenza: " + value.getDataScadenza() + "\n" +
+                    "Numero Rate: " + value.getNumeroRate() + "\n" +
+                    "Valore Rata: " + value.getValoreRata() + "\n" +
+                    "Interesse: " + value.getInteresse() + "\n\n"
+                )
+        );
+    }
+
+    private void pagaRata(String iban) throws IOException {
+        stampaServiziBancariSuConsole(iban);
+        System.out.println("Inserire l'id del servizio di cui si vuole pagare la rata\n");
+        String id = tastiera.readLine();
+
+        if (this.listaCc.get(iban).listaServiziBancari.containsKey(id)) {
+            try
+            {
+                ServizioBancario servizio = this.listaCc.get(iban).listaServiziBancari.get(id);
+
+                System.out.println("Servizio trovato...\n");
+                System.out.println("Inserire il numero di rate che si vogliono pagare\n");
+                int nRate = Integer.parseInt(tastiera.readLine());
+                float importo = nRate*servizio.getValoreRata();
+
+                if(this.listaCc.get(iban).getSaldo() > importo)
+                {
+                    this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-importo);
+                    servizio.setNumeroRate(servizio.getNumeroRate()-nRate);
+                    //CREARE LE RATE QUA DENTRO
+                    //CREARE FUNZIONE STAMPARATE()
+                    StampaCcSuFile();
+                    stampaServiziBancariSuFile();
+                }
+                else
+                    System.out.println("Non hai abbastanza saldo per effettuare questa operazione\n");
+
+            } catch (Exception e){e.printStackTrace();}
+        } else {
+            System.out.println("Servizio non trovato...\n");
+        }
     }
 
     private void StampaCcSuFile() throws IOException

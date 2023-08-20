@@ -1,0 +1,10 @@
+iban
+tipologia
+id
+importo;
+data;
+attivo;
+dataScadenza;
+numeroRate;
+valoreRata;
+interesse;
