@@ -83,7 +83,7 @@ public class BancaISA implements Observer{
                 return false;
             }
         } else {
-            /* ------------------- UC12 CreaCliente ------------------- */
+            /* ------------------- UC3 REGISTRA CLIENTE ------------------- */
 
             int scelta2 = -1;
             do
@@ -187,7 +187,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 2:
-                    /* ------- UC5 Deposito ------- */
+                    /* ------- UC7 Deposito ------- */
                     System.out.println("\n\n ------------- DEPOSITO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN = tastiera.readLine();
@@ -197,7 +197,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 3:
-                    /* ------- UC3 Prelievo ------- */
+                    /* ------- UC5 Prelievo Filiale ------- */
                     System.out.println("\n\n ------------- PRELIEVO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN2 = tastiera.readLine();
@@ -207,7 +207,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 4:
-                    /* ------- UC6 Mutuo ------- */
+                    /* ------- UC10 Mutuo ------- */
                     System.out.println("\n\n ------------- MUTUO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN3 = tastiera.readLine();
@@ -217,7 +217,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 5:
-                    /* ------- UC6 Prestito ------- */
+                    /* ------- UC10 Prestito ------- */
                     System.out.println("\n\n ------------- PRESTITO -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN4 = tastiera.readLine();
@@ -227,7 +227,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 6:
-                    /* ------- UC11 Visualizza Operazioni Bancarie ------- */
+                    /* ------- UC9 Visualizza Operazioni Bancarie ------- */
                     System.out.println("\n\n ------------- LISTA TRANSAZIONI BANCARIE -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN5= tastiera.readLine();
@@ -235,7 +235,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 7:
-                    /* ------- UC11 Visualizza Servizi Bancari ------- */
+                    /* ------- UC12 Visualizza Servizi Bancari ------- */
                     System.out.println("\n\n ------------- LISTA SERVIZI BANCARI ------------- \n");
                     System.out.println("Inserisci IBAN");
                     String IBAN6= tastiera.readLine();
@@ -243,7 +243,7 @@ public class BancaISA implements Observer{
                     break;
 
                 case 8:
-                    /* ------- UC6.2 Paga Rata ------- */
+                    /* ------- UC11 Paga Rata ------- */
                     System.out.println("\n\n ------------- PAGA RATA -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN7= tastiera.readLine();
@@ -448,14 +448,14 @@ public class BancaISA implements Observer{
                 scelta = Integer.parseInt(tastiera.readLine());
                 if (scelta < 0 || scelta > 1) { //Aggiornare man mano che implementiamo i casi d'uso
                     System.out.println("\nERRORE: Scelta non valida\n");
-                    throw new Exception("Scelta non valida");
+                    throw new Exception("ERRORE: Scelta non valida");
                 }
             } catch(Exception ignored){}
 
             switch (scelta)
             {
                 case 1:
-                    /* ------------------------ UC10 Gestione Banconote Bancomat ------------------------ **/
+                    /* ------------------------ UC8 Gestione Banconote Bancomat ------------------------ **/
                     leggiNotifiche();
                     break;
 
@@ -536,8 +536,6 @@ public class BancaISA implements Observer{
 
     private void aggiornaPezziBanconota(int codiceBancomat, int codiceBanconota) throws IOException {
 
-        /* Stiamo mettendo che riempie di 50 banconote per semplicità logica*/
-
         Bancomat ban = this.listaBancomat.get(codiceBancomat-1);
         int numRicarica = (1000 - (this.listaBanconote.get((codiceBancomat+codiceBanconota)).getNumPezzi() * codiceBanconota))/codiceBanconota;
         Banconota b = new Banconota( ban.getCodice(), codiceBanconota, numRicarica );
@@ -573,14 +571,14 @@ public class BancaISA implements Observer{
 
         try
         {
-            /* ------------- UC4 Prelievo Bancomat ------------- */
+            /* ------------- UC6 Prelievo Bancomat ------------- */
             System.out.println("****INSERIMENTO CREDENZIALI****\n");
             System.out.println("Inserisci iban\n");
-            //String iban = tastiera.readLine();
-            String iban = "IT88A5315876888350827758213";
+            String iban = tastiera.readLine();
+            //String iban = "IT88A5315876888350827758213";
             System.out.println("Inserisci pin\n");
-            //String pin = tastiera.readLine();
-            String pin = "4532";
+            String pin = tastiera.readLine();
+            //String pin = "4532";
 
             if (this.listaCc.containsKey(iban) && Objects.equals(this.listaCc.get(iban).getPin(), pin))
             {
