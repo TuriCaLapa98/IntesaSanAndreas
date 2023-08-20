@@ -236,7 +236,7 @@ public class BancaISA implements Observer{
 
                 case 7:
                     /* ------- UC11 Visualizza Servizi Bancari ------- */
-                    System.out.println("\n\n ------------- LISTA SERVIZI BANCARI -------------\n");
+                    System.out.println("\n\n ------------- LISTA SERVIZI BANCARI ------------- \n");
                     System.out.println("Inserisci IBAN");
                     String IBAN6= tastiera.readLine();
                     stampaServiziBancariSuConsole(IBAN6);
@@ -282,7 +282,7 @@ public class BancaISA implements Observer{
                                         float importo = Float.parseFloat(tastiera.readLine());
 
                                         this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() - importo);
-                                        StampaCcSuFile();
+                                        stampaCcSuFile();
 
                                         Prelievo prelievo = new Prelievo("Prelievo", importo, iban);
                                         this.listaCc.get(iban).listaPrelievi.put(prelievo.getId(),prelievo);
@@ -305,7 +305,7 @@ public class BancaISA implements Observer{
                                         String cognomeM = tastiera.readLine();
 
                                         this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo);
-                                        StampaCcSuFile();
+                                        stampaCcSuFile();
 
                                         Deposito deposito = new Deposito("Deposito", importo, iban, nomeM, cognomeM);
                                         this.listaCc.get(iban).listaDepositi.put(deposito.getId(),deposito);
@@ -329,46 +329,45 @@ public class BancaISA implements Observer{
                                             ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0,"Mutuo");
 
                                             int scelta2 = -1;
-                                            do
-                                            {   try
-                                                {
-                                                    System.out.println("""
+                                            try
+                                            {
+                                                System.out.println("""
 
-                                                        TASSO FISSO O VARIABILE
-                                
-                                                        Inserisci la tua scelta:
-                                                        1) Tasso Fisso
-                                                        2) Tasso Variabile
-                                                        0) Esci""");
+                                                    TASSO FISSO O VARIABILE
+                            
+                                                    Inserisci la tua scelta:
+                                                    1) Tasso Fisso
+                                                    2) Tasso Variabile
+                                                    0) Esci""");
 
-                                                    scelta2 = Integer.parseInt(tastiera.readLine());
-                                                    if (scelta2 < 0 || scelta2 > 2) {
-                                                        System.out.println("Scelta non valida");
-                                                        throw new Exception("Scelta non valida");
-                                                    }
-                                                } catch(Exception ignored){}
-
-                                                switch (scelta2) {
-                                                    case 1: mutuo.setStrategyInteresse(new StrategyInteresseAlto());
-                                                            mutuo.setInteresse(0.1F);
-                                                        break;
-                                                    case 2: mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
-                                                            mutuo.setInteresse(1F);
-                                                        break;
-                                                    default:
-                                                        break;
+                                                scelta2 = Integer.parseInt(tastiera.readLine());
+                                                if (scelta2 < 0 || scelta2 > 2) {
+                                                    System.out.println("Scelta non valida");
+                                                    throw new Exception("Scelta non valida");
                                                 }
-                                            }while(scelta2 != 0);
+                                            } catch(Exception ignored){}
+
+                                            switch (scelta2) {
+                                                case 1: mutuo.setStrategyInteresse(new StrategyInteresseAlto());
+                                                        mutuo.setInteresse(0.1F);
+                                                    break;
+                                                case 2: mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
+                                                        mutuo.setInteresse(1F);
+                                                    break;
+                                                default:
+                                                    break;
+                                            }
 
                                             mutuo.setValoreRata(mutuo.calcolaInteresse());
                                             this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
                                             this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-mutuo.getValoreRata());
-                                            StampaCcSuFile();
+                                            stampaCcSuFile();
                                             stampaServiziBancariSuFile();
+                                            System.out.println("\nMutuo creato correttamente");
                                         }
                                         else
                                         {
-                                            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
+                                            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"La banca non può fornire all'utente il mutuo richiesto");
                                         }
                                     }
                                     else
@@ -397,8 +396,9 @@ public class BancaISA implements Observer{
                                             prestito.setValoreRata(prestito.calcolaInteresse());
                                             this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
                                             this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-prestito.getValoreRata());
-                                            StampaCcSuFile();
+                                            stampaCcSuFile();
                                             stampaServiziBancariSuFile();
+                                            System.out.println("\nPrestito creato correttamente");
                                         }
                                         else
                                         {
@@ -599,7 +599,7 @@ public class BancaISA implements Observer{
                         bancomat.calcolaPrelievo(prelievo);
                         aggiornaFileBanconote();
                         this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
-                        StampaCcSuFile();
+                        stampaCcSuFile();
 
                         /* ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- */
                         PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
@@ -758,23 +758,44 @@ public class BancaISA implements Observer{
             try
             {
                 ServizioBancario servizio = this.listaCc.get(iban).listaServiziBancari.get(id);
-
-                System.out.println("Servizio trovato...\n");
-                System.out.println("Inserire il numero di rate che si vogliono pagare\n");
-                int nRate = Integer.parseInt(tastiera.readLine());
-                float importo = nRate*servizio.getValoreRata();
-
-                if(this.listaCc.get(iban).getSaldo() > importo)
+                if (servizio.isAttivo())
                 {
-                    this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-importo);
-                    servizio.setNumeroRate(servizio.getNumeroRate()-nRate);
-                    //CREARE LE RATE QUA DENTRO
-                    //CREARE FUNZIONE STAMPARATE()
-                    StampaCcSuFile();
-                    stampaServiziBancariSuFile();
+                    System.out.println("Servizio trovato...\n");
+                    System.out.println("Inserire il numero di rate che si vogliono pagare\n");
+                    int nRate = Integer.parseInt(tastiera.readLine());
+
+                    if (nRate <= servizio.getNumeroRate())
+                    {
+                        float importo = nRate*servizio.getValoreRata();
+
+                        if(this.listaCc.get(iban).getSaldo() > importo)
+                        {
+                            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-importo);
+                            servizio.setNumeroRate(servizio.getNumeroRate()-nRate);
+
+                            if (servizio.getNumeroRate()==0)
+                                servizio.setAttivo(false);
+
+                            for (int i = 0; i < nRate; i++)
+                            {
+                                Rata rataAttuale = new Rata(servizio.getId(), LocalDate.now(), servizio.getValoreRata());
+                                servizio.listaRate.put(rataAttuale.getId(), rataAttuale);
+                            }
+
+                            stampaCcSuFile();
+                            stampaServiziBancariSuFile();
+                            stampaRateSuFile();
+                            System.out.println("\nRate pagate correttamente");
+                        }
+
+                        else
+                            System.out.println("Non hai abbastanza saldo per effettuare questa operazione\n");
+                    }
+                    else
+                        System.out.println("Numero di rate selezionate superiore a quelle rimanenti\n");
                 }
                 else
-                    System.out.println("Non hai abbastanza saldo per effettuare questa operazione\n");
+                    System.out.println("Il servizio selezionato non è attivo\n");
 
             } catch (Exception e){e.printStackTrace();}
         } else {
@@ -782,7 +803,24 @@ public class BancaISA implements Observer{
         }
     }
 
-    private void StampaCcSuFile() throws IOException
+    private void stampaRateSuFile() throws IOException
+    {
+        FileWriter file = new FileWriter(FilePaths.ELENCO_RATE_PATH);
+        BufferedWriter filebuf = new BufferedWriter(file);
+        PrintWriter printout = new PrintWriter(filebuf);
+
+        this.listaCc.forEach((key, value) -> value.listaServiziBancari.forEach((key2, value2) -> value2.listaRate.forEach((key3, value3) ->
+                printout.println (key2 //id del servizio bancario
+                        + "\n" + key3  //id della rata
+                        + "\n" + value3.getData()
+                        + "\n" + value3.getImporto()
+                ))));
+
+        printout.flush();
+        printout.close();
+    }
+
+    private void stampaCcSuFile() throws IOException
     {
         FileWriter file = new FileWriter(FilePaths.ELENCO_CC_PATH);
         BufferedWriter filebuf = new BufferedWriter(file);

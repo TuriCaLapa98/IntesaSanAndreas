@@ -4,23 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="25th Commit: Creato pattern Strategy ed applicato agli interessi, creata la voce &quot;prestito&quot; nel DN&#10;&#10;INSERIRE VALORE RATA IN SERVIZIOBANCARIO&#10;INSERIRE LA DIMUZIONE DEL CC PERCHé STA PAGANDO LA PRIMA RATA ALL'ATTO DELLA CREAZIONE&#10;CREARE LA LISTA DI RATE ALL'INTERNO DI SERVIZIO BANCARIO, COLLEGARE SERVIZIO BANCARIO AL CC (FARE UNA LISTA DI SERVIZI BANCARI ATTIVI NEL CC)&#10;INSERIRE L'OPZIONE DI PAGARE LA RATA ALL'INTERNO DEL MENU' DN">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseVariabile.java" afterDir="false" />
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Rata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Rata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseAlto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseAlto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseBasso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseBasso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseMedio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/StrategyInteresseMedio.java" afterDir="false" />
     </list>
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
-    <list id="b79b82b5-a840-4417-8bf3-1790cdb6f69e" name="Changes by Venti" comment="Changes by Venti">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/FilePaths.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/FilePaths.java" afterDir="false" />
+    <list id="2fac75b6-cf96-4e81-ae5b-85160a68e121" name="Changes by Venti" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +50,29 @@
         <option name="url" value="https://github.com/TuriCaLapa98/IntesaSanAndreas.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
+      <ranges>
+        <range start1="238" end1="239" start2="238" end2="239" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="284" end1="285" start2="284" end2="285" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="307" end1="308" start2="307" end2="308" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="331" end1="335" start2="331" end2="334" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="336" end1="342" start2="335" end2="341" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="343" end1="349" start2="342" end2="348" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="350" end1="361" start2="349" end2="359" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="365" end1="366" start2="363" end2="364" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="367" end1="367" start2="365" end2="366" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="370" end1="371" start2="369" end2="370" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="399" end1="400" start2="398" end2="399" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="401" end1="401" start2="400" end2="401" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="601" end1="602" start2="601" end2="602" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="770" end1="773" start2="770" end2="777" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="774" end1="774" start2="778" end2="780" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="775" end1="775" start2="781" end2="782" changelist="2fac75b6-cf96-4e81-ae5b-85160a68e121" />
+        <range start1="784" end1="785" start2="791" end2="809" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -229,6 +246,10 @@
       <workItem from="1692287543583" duration="5788000" />
       <workItem from="1692455012218" duration="9531000" />
       <workItem from="1692540790182" duration="96000" />
+      <workItem from="1692540894658" duration="235000" />
+      <workItem from="1692541137441" duration="142000" />
+      <workItem from="1692541283424" duration="6000" />
+      <workItem from="1692541302316" duration="4342000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -475,7 +496,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692206221434</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file">
+      <created>1692541095924</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1692541095924</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -520,7 +548,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Olè" />
     <MESSAGE value="1st Commit" />
     <MESSAGE value="2st Commit: Creazione di: Bancomat, Banconota, elencoBanconote, funz. caricaPezzi(Bancomat), funz. StampaListaBanconote(Bancomat)" />
     <MESSAGE value="3st Commit: Creazione di: caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat) (da verificare).&#10;Modifica di menuCliente" />
@@ -545,7 +572,8 @@
     <MESSAGE value="23th Commit: Implementate le classi ServizioBancario, Mutuo, Prestito, Rata.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
     <MESSAGE value="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
     <MESSAGE value="25th Commit: Creato pattern Strategy ed applicato agli interessi, creata la voce &quot;prestito&quot; nel DN&#10;&#10;INSERIRE VALORE RATA IN SERVIZIOBANCARIO&#10;INSERIRE LA DIMUZIONE DEL CC PERCHé STA PAGANDO LA PRIMA RATA ALL'ATTO DELLA CREAZIONE&#10;CREARE LA LISTA DI RATE ALL'INTERNO DI SERVIZIO BANCARIO, COLLEGARE SERVIZIO BANCARIO AL CC (FARE UNA LISTA DI SERVIZI BANCARI ATTIVI NEL CC)&#10;INSERIRE L'OPZIONE DI PAGARE LA RATA ALL'INTERNO DEL MENU' DN" />
-    <option name="LAST_COMMIT_MESSAGE" value="25th Commit: Creato pattern Strategy ed applicato agli interessi, creata la voce &quot;prestito&quot; nel DN&#10;&#10;INSERIRE VALORE RATA IN SERVIZIOBANCARIO&#10;INSERIRE LA DIMUZIONE DEL CC PERCHé STA PAGANDO LA PRIMA RATA ALL'ATTO DELLA CREAZIONE&#10;CREARE LA LISTA DI RATE ALL'INTERNO DI SERVIZIO BANCARIO, COLLEGARE SERVIZIO BANCARIO AL CC (FARE UNA LISTA DI SERVIZI BANCARI ATTIVI NEL CC)&#10;INSERIRE L'OPZIONE DI PAGARE LA RATA ALL'INTERNO DEL MENU' DN" />
+    <MESSAGE value="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file" />
+    <option name="LAST_COMMIT_MESSAGE" value="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

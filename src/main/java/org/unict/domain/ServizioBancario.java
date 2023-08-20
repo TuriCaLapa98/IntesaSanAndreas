@@ -2,6 +2,7 @@ package org.unict.domain;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
@@ -34,6 +35,7 @@ public class ServizioBancario
         this.valoreRata = valoreRata;
         this.tipologia = tipologia;
         this.interesse = 0;
+        this.listaRate = new HashMap<>();
         this.strategyInteresse = new StrategyInteresse() {
             @Override
             public float calcolaInteresse(float importo, int numRate) {
@@ -54,6 +56,7 @@ public class ServizioBancario
         this.valoreRata = valoreRata;
         this.tipologia = tipologia;
         this.interesse = interesse;
+        this.listaRate = new HashMap<>();
 
         //IN BASE AL PARAMETRO D'APPOGGIO "INTERESSE" RIESCO AD APPLICARE IL PATTERN STRATEGY AL CARICAMENTO DEL SERVIZIO
         if (interesse == 0.02f)
@@ -68,6 +71,7 @@ public class ServizioBancario
         } else if (interesse == 1F)
         {
             this.strategyInteresse = new StrategyInteresseVariabile();
+            setValoreRata(calcolaInteresseVariabile());
         }else
         {
             this.strategyInteresse = new StrategyInteresse() {
@@ -183,6 +187,10 @@ public class ServizioBancario
 
     public float calcolaInteresse() {
         return strategyInteresse.calcolaInteresse(importo, numeroRate);
+    }
+
+    public float calcolaInteresseVariabile() {
+        return strategyInteresse.calcolaInteresse(importo, 120);
     }
 
     public void caricaRate()
