@@ -77,7 +77,6 @@ public class Bancomat extends Observable {
             prelievo -= pezziBanconote[i] * tagliBanconote[i];
             System.out.println(pezziBanconote[i] + " Banconote da " + tagliBanconote[i] + ";");
         }
-
         System.out.println("\n");
 
         riduciPezzi(pezziBanconote[5], pezziBanconote[4], pezziBanconote[3], pezziBanconote[2], pezziBanconote[1], pezziBanconote[0]);

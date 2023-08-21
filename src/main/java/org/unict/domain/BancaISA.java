@@ -14,7 +14,7 @@ public class BancaISA implements Observer{
     private Bancomat bancomat;
     public LinkedList<Bancomat> listaBancomat;
     public LinkedList<String> listaNotifiche;
-    private Map<String, Cliente> listaClienti;
+    public Map<String, Cliente> listaClienti;
     public Map<String, ContoCorrente> listaCc;
     public Map<Integer, Banconota> listaBanconote;
 
@@ -274,148 +274,178 @@ public class BancaISA implements Observer{
     {
         try
         {
-            switch (operazione)
+            if(controlloCodiceFiscale(iban, codiceFiscale))
             {
-                case "Prelievo": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
-                                    {
-                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Prelevare");
-                                        float importo = Float.parseFloat(tastiera.readLine());
+                switch (operazione)
+                {
+                    case "Prelievo":
+                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Prelevare");
+                                    float importo = Float.parseFloat(tastiera.readLine());
 
-                                        this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() - importo);
-                                        stampaCcSuFile();
+                                    prelievo(importo, iban);
+                        break;
 
-                                        Prelievo prelievo = new Prelievo("Prelievo", importo, iban);
-                                        this.listaCc.get(iban).listaPrelievi.put(prelievo.getId(),prelievo);
-                                        stampaOperazioniBancarieSuFile();
-                                    }
-                                    else
-                                    {
-                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                    }
-                                break;
+                    case "Deposito":
+                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Depositare");
+                                    float importo2 = Float.parseFloat(tastiera.readLine());
+                                    System.out.println("Inserisci Nome Mittente");
+                                    String nomeM = tastiera.readLine();
+                                    System.out.println("Inserisci Cognome Mittente");
+                                    String cognomeM = tastiera.readLine();
 
-                case "Deposito": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
-                                    {
-                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Depositare");
-                                        float importo = Float.parseFloat(tastiera.readLine());
-                                        System.out.println("Inserisci Nome Mittente");
-                                        String nomeM = tastiera.readLine();
-                                        System.out.println("Inserisci Cognome Mittente");
-                                        String cognomeM = tastiera.readLine();
+                                    deposito(importo2, nomeM, cognomeM, iban);
+                        break;
 
-                                        this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo);
-                                        stampaCcSuFile();
+                    case "Mutuo":
+                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci il Mutuo richiesto");
+                                    float importo3 = Float.parseFloat(tastiera.readLine());
+                                    System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
+                                    float stipendio1 = Float.parseFloat(tastiera.readLine());
 
-                                        Deposito deposito = new Deposito("Deposito", importo, iban, nomeM, cognomeM);
-                                        this.listaCc.get(iban).listaDepositi.put(deposito.getId(),deposito);
-                                        stampaOperazioniBancarieSuFile();
-                                    }
-                                    else
-                                    {
-                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                    }
-                                break;
-                case "Mutuo": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
-                                    {
-                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci il Mutuo richiesto");
-                                        float importo = Float.parseFloat(tastiera.readLine());
-                                        System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
-                                        float stipendio = Float.parseFloat(tastiera.readLine());
+                                    mutuo(importo3, stipendio1, iban);
+                        break;
 
-                                        if(importo < stipendio*8)
-                                        {
-                                            ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0,"Mutuo");
+                    case "Prestito":
+                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci il Prestito richiesto");
+                                    float importo4 = Float.parseFloat(tastiera.readLine());
+                                    System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
+                                    float stipendio2 = Float.parseFloat(tastiera.readLine());
 
-                                            int scelta2 = -1;
-                                            try
-                                            {
-                                                System.out.println("""
+                                    prestito(importo4, stipendio2, iban);
 
-                                                    TASSO FISSO O VARIABILE
-                            
-                                                    Inserisci la tua scelta:
-                                                    1) Tasso Fisso
-                                                    2) Tasso Variabile
-                                                    0) Esci""");
+                        break;
 
-                                                scelta2 = Integer.parseInt(tastiera.readLine());
-                                                if (scelta2 < 0 || scelta2 > 2) {
-                                                    System.out.println("Scelta non valida");
-                                                    throw new Exception("Scelta non valida");
-                                                }
-                                            } catch(Exception ignored){}
-
-                                            switch (scelta2) {
-                                                case 1: mutuo.setStrategyInteresse(new StrategyInteresseAlto());
-                                                        mutuo.setInteresse(0.1F);
-                                                    break;
-                                                case 2: mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
-                                                        mutuo.setInteresse(1F);
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-
-                                            mutuo.setValoreRata(mutuo.calcolaInteresse());
-                                            this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
-                                            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-mutuo.getValoreRata());
-                                            stampaCcSuFile();
-                                            stampaServiziBancariSuFile();
-                                            System.out.println("\nMutuo creato correttamente");
-                                        }
-                                        else
-                                        {
-                                            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"La banca non può fornire all'utente il mutuo richiesto");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                    }
-                                    break;
-                case "Prestito": if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
-                                    {
-                                        System.out.println("*Dati Convalidati\n\n"+"Inserisci il Prestito richiesto");
-                                        float importo = Float.parseFloat(tastiera.readLine());
-                                        System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
-                                        float stipendio = Float.parseFloat(tastiera.readLine());
-
-                                        if(importo < stipendio*5)
-                                        {
-                                            ServizioBancario prestito = new ServizioBancario(iban, importo, LocalDate.now().plusYears(4), 47, 0,"Prestito");
-                                            if(importo < stipendio*5/2) {
-                                                prestito.setStrategyInteresse(new StrategyInteresseBasso());
-                                                prestito.setInteresse(0.02F);
-                                            }else {
-                                                prestito.setStrategyInteresse(new StrategyInteresseMedio());
-                                                prestito.setInteresse(0.05F);
-                                            }
-                                            prestito.setValoreRata(prestito.calcolaInteresse());
-                                            this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
-                                            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-prestito.getValoreRata());
-                                            stampaCcSuFile();
-                                            stampaServiziBancariSuFile();
-                                            System.out.println("\nPrestito creato correttamente");
-                                        }
-                                        else
-                                        {
-                                            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                        throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
-                                    }
-                                    break;
-                default: break;
+                    default: break;
+                }
             }
+
         }
         catch(Exception ignored){}
     }
+
+    public boolean controlloCodiceFiscale(String iban, String codiceFiscale) throws Exception
+    {
+        if(this.listaClienti.get(this.listaCc.get(iban).getCf()).getCf().equals(codiceFiscale))
+        {
+            return true;
+        }
+        else
+        {
+            System.out.println("\nERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+            throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
+        }
+    }
+
+    public void prelievo(float importo, String iban) throws Exception
+    {
+        if (importo < this.listaCc.get(iban).getSaldo())
+        {
+            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() - importo);
+            stampaCcSuFile();
+
+            Prelievo prelievo = new Prelievo("Prelievo", importo, iban);
+            this.listaCc.get(iban).listaPrelievi.put(prelievo.getId(),prelievo);
+            stampaOperazioniBancarieSuFile();
+        }
+        else
+        {
+            System.out.println("\nERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO");
+            throw new Exception("ERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO");
+        }
+    }
+
+    public void deposito(float importo, String iban, String nomeM, String cognomeM) throws Exception
+    {
+        this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo);
+        stampaCcSuFile();
+
+        Deposito deposito = new Deposito("Deposito", importo, iban, nomeM, cognomeM);
+        this.listaCc.get(iban).listaDepositi.put(deposito.getId(),deposito);
+        if ( this.listaCc.get(iban).listaDepositi.get(deposito.getId()) == null)
+        {
+            System.out.println("\nERRORE: DEPOSITO NON CREATO");
+            throw new Exception("ERRORE: DEPOSITO NON CREATO");
+        }
+
+        stampaOperazioniBancarieSuFile();
+    }
+
+    public void mutuo(float importo, float stipendio, String iban) throws IOException
+    {
+        if(importo < stipendio*8)
+        {
+            ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0,"Mutuo");
+
+            int scelta2 = -1;
+            try
+            {
+                System.out.println("""
+            
+                                    TASSO FISSO O VARIABILE
+            
+                                    Inserisci la tua scelta:
+                                    1) Tasso Fisso
+                                    2) Tasso Variabile
+                                    0) Esci
+                                    """);
+
+                scelta2 = Integer.parseInt(tastiera.readLine());
+                if (scelta2 < 0 || scelta2 > 2) {
+                    System.out.println("Scelta non valida");
+                    throw new Exception("Scelta non valida");
+                }
+            } catch(Exception ignored){}
+
+            switch (scelta2) {
+                case 1: mutuo.setStrategyInteresse(new StrategyInteresseAlto());
+                    mutuo.setInteresse(0.1F);
+                    break;
+                case 2: mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
+                    mutuo.setInteresse(1F);
+                    break;
+                default:
+                    break;
+            }
+
+            mutuo.setValoreRata(mutuo.calcolaInteresse());
+            this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
+            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-mutuo.getValoreRata());
+            stampaCcSuFile();
+            stampaServiziBancariSuFile();
+            System.out.println("\nMutuo creato correttamente");
+        }
+        else
+        {
+            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"La banca non può fornire all'utente il mutuo richiesto");
+        }
+    }
+
+    public void prestito(float importo, float stipendio, String iban) throws Exception
+    {
+        if(importo < stipendio*5)
+        {
+            ServizioBancario prestito = new ServizioBancario(iban, importo, LocalDate.now().plusYears(4), 47, 0,"Prestito");
+            if(importo < stipendio*5/2) {
+                prestito.setStrategyInteresse(new StrategyInteresseBasso());
+                prestito.setInteresse(0.02F);
+            }else {
+                prestito.setStrategyInteresse(new StrategyInteresseMedio());
+                prestito.setInteresse(0.05F);
+            }
+            prestito.setValoreRata(prestito.calcolaInteresse());
+            this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
+            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-prestito.getValoreRata());
+            stampaCcSuFile();
+            stampaServiziBancariSuFile();
+            System.out.println("\nPrestito creato correttamente");
+        }
+        else
+        {
+            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
+            throw new Exception("L'importo inserito è troppo alto in proporzione allo stipendio");
+        }
+    }
+
 
     /** --------------------------------------- Menu Dipendente Tecnico --------------------------------------- **/
     public void menuDipendenteT() throws IOException {
@@ -564,10 +594,9 @@ public class BancaISA implements Observer{
     public void menuBancomat()
     {
         int idBancomat = 0;
-        System.out.println("Sono Nel Menu Cliente del Bancomat " + idBancomat + "\n");
+        System.out.println("Sono Nel Menu Cliente del Bancomat " + (idBancomat+1) + "\n");
         bancomat = this.listaBancomat.get(idBancomat);
         bancomat.caricaListaBanconote();
-
 
         try
         {
@@ -837,7 +866,7 @@ public class BancaISA implements Observer{
         printout.close();
     }
 
-    private void aggiornaFileBanconote() throws IOException
+    public void aggiornaFileBanconote() throws IOException
     {
 
         FileWriter file = new FileWriter(FilePaths.ELENCO_BANCONOTE_PATH);
@@ -955,7 +984,6 @@ public class BancaISA implements Observer{
                 String[] splitStr = this.listaNotifiche.get(i).split("\\s+");
                 if (splitStr[0].equals(String.valueOf(bancomat.getCodice())) && splitStr[1].equals(String.valueOf(taglio))) {
                     this.listaNotifiche.remove(this.listaNotifiche.get(i));
-                    System.out.println("Ho Trovato un doppione " + taglio);
                 }
             }
             this.listaNotifiche.add(a);

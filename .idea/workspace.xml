@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file">
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="28th Commit: Riordinato il codice&#10;&#10;&#10;Sistemare le eccezioni">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BancaISATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
     </list>
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
-    <list id="2fac75b6-cf96-4e81-ae5b-85160a68e121" name="Changes by Venti" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+    <list id="98cf9fc7-ecac-4334-a3a5-734b009e6797" name="Changes by Venti" comment="">
+      <change beforePath="$PROJECT_DIR$/src/test/java/BancaISATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,25 +54,19 @@
     </option>
   </component>
   <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java">
+    <file path="$PROJECT_DIR$/src/test/java/BancaISATest.java">
       <ranges>
-        <range start1="238" end1="239" start2="238" end2="239" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="284" end1="285" start2="284" end2="285" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="307" end1="308" start2="307" end2="308" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="331" end1="335" start2="331" end2="334" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="336" end1="342" start2="335" end2="341" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="343" end1="349" start2="342" end2="348" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="350" end1="361" start2="349" end2="359" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="365" end1="366" start2="363" end2="364" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="367" end1="367" start2="365" end2="366" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="370" end1="371" start2="369" end2="370" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="399" end1="400" start2="398" end2="399" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="401" end1="401" start2="400" end2="401" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="601" end1="602" start2="601" end2="602" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="770" end1="773" start2="770" end2="777" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="774" end1="774" start2="778" end2="780" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
-        <range start1="775" end1="775" start2="781" end2="782" changelist="2fac75b6-cf96-4e81-ae5b-85160a68e121" />
-        <range start1="784" end1="785" start2="791" end2="809" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="2" end1="4" start2="2" end2="3" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="8" end1="8" start2="7" end2="8" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="10" end1="10" start2="10" end2="11" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="19" end1="20" start2="20" end2="22" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="23" end1="24" start2="25" end2="26" changelist="98cf9fc7-ecac-4334-a3a5-734b009e6797" />
+        <range start1="38" end1="39" start2="40" end2="40" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="40" end1="41" start2="41" end2="42" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="42" end1="42" start2="43" end2="44" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="45" end1="47" start2="47" end2="48" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="50" end1="52" start2="51" end2="52" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
+        <range start1="54" end1="54" start2="54" end2="145" changelist="700f21ae-d9fb-41b4-9a77-a45e56d014c0" />
       </ranges>
     </file>
   </component>
@@ -124,54 +120,52 @@
       <recent name="org.unict.domain" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.unict.domain.Main" />
-      <module name="IntesaSanAndreas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.unict.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BancaISATest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BancaISATest.testObserver">
+    <configuration name="BancaISATest.testDeposito" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IntesaSanAndreas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BancaISATest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BancaISATest.TestVerificaEsistenzaCc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="IntesaSanAndreas" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BancaISATest" />
-      <option name="METHOD_NAME" value="TestVerificaEsistenzaCc" />
+      <option name="METHOD_NAME" value="testDeposito" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BancaISATest.testCaricaClienti" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BancaISATest.testObserver" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IntesaSanAndreas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BancaISATest" />
-      <option name="METHOD_NAME" value="testCaricaClienti" />
+      <option name="METHOD_NAME" value="testObserver" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BancaISATest.theAnswer" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BancaISATest.testPrelievo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IntesaSanAndreas" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="BancaISATest" />
-      <option name="METHOD_NAME" value="theAnswer" />
+      <option name="METHOD_NAME" value="testPrelievo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BancaISATest.testPrestito" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IntesaSanAndreas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BancaISATest" />
+      <option name="METHOD_NAME" value="testPrestito" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BancaISATest.testVerificaEsistenzaCc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IntesaSanAndreas" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BancaISATest" />
+      <option name="METHOD_NAME" value="testVerificaEsistenzaCc" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -179,11 +173,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.BancaISATest.TestVerificaEsistenzaCc" />
-        <item itemvalue="JUnit.BancaISATest.testCaricaClienti" />
-        <item itemvalue="JUnit.BancaISATest" />
-        <item itemvalue="JUnit.BancaISATest.theAnswer" />
+        <item itemvalue="JUnit.BancaISATest.testObserver" />
+        <item itemvalue="JUnit.BancaISATest.testPrestito" />
+        <item itemvalue="JUnit.BancaISATest.testPrelievo" />
+        <item itemvalue="JUnit.BancaISATest.testDeposito" />
+        <item itemvalue="JUnit.BancaISATest.testVerificaEsistenzaCc" />
       </list>
     </recent_temporary>
   </component>
@@ -249,7 +243,8 @@
       <workItem from="1692540894658" duration="235000" />
       <workItem from="1692541137441" duration="142000" />
       <workItem from="1692541283424" duration="6000" />
-      <workItem from="1692541302316" duration="4342000" />
+      <workItem from="1692541302316" duration="7056000" />
+      <workItem from="1692627830090" duration="10724000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -503,7 +498,21 @@
       <option name="project" value="LOCAL" />
       <updated>1692541095924</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="27th Commit: Creata la funzione pagaRata() e tutti i salvataggi dei elencoServizioBancario ed elencoRate">
+      <created>1692546145127</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1692546145127</updated>
+    </task>
+    <task id="LOCAL-00038" summary="28th Commit: Riordinato il codice&#10;&#10;&#10;Sistemare le eccezioni">
+      <created>1692548219170</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1692548219170</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,8 +557,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1st Commit" />
-    <MESSAGE value="2st Commit: Creazione di: Bancomat, Banconota, elencoBanconote, funz. caricaPezzi(Bancomat), funz. StampaListaBanconote(Bancomat)" />
     <MESSAGE value="3st Commit: Creazione di: caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat) (da verificare).&#10;Modifica di menuCliente" />
     <MESSAGE value="4th Commit: Correzione di caricaListaBancomat(BancaISA), caricaListaBanconote(Bancomat), e vari errori di inizializzazione su Banconota.java." />
     <MESSAGE value="5th Commit: Implementazione Observer, calcoloPrelievo(Bancomat)." />
@@ -573,7 +580,9 @@
     <MESSAGE value="24th Commit: Eliminate le classi Mutuo e Prestito perché da ora saranno gestite solo tramite ServizioBancario.&#10;Sistemato il meccanismo di notifica e quello di gestione e prelievo dal bancomat ed ottimizzato il relativo codice.&#10;&#10;Implementare Pattern Strategy per gli interessi." />
     <MESSAGE value="25th Commit: Creato pattern Strategy ed applicato agli interessi, creata la voce &quot;prestito&quot; nel DN&#10;&#10;INSERIRE VALORE RATA IN SERVIZIOBANCARIO&#10;INSERIRE LA DIMUZIONE DEL CC PERCHé STA PAGANDO LA PRIMA RATA ALL'ATTO DELLA CREAZIONE&#10;CREARE LA LISTA DI RATE ALL'INTERNO DI SERVIZIO BANCARIO, COLLEGARE SERVIZIO BANCARIO AL CC (FARE UNA LISTA DI SERVIZI BANCARI ATTIVI NEL CC)&#10;INSERIRE L'OPZIONE DI PAGARE LA RATA ALL'INTERNO DEL MENU' DN" />
     <MESSAGE value="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file" />
-    <option name="LAST_COMMIT_MESSAGE" value="26th Commit: Creata classe Rata, pagamento della rata, implementate le varie liste e stampe su file" />
+    <MESSAGE value="27th Commit: Creata la funzione pagaRata() e tutti i salvataggi dei elencoServizioBancario ed elencoRate" />
+    <MESSAGE value="28th Commit: Riordinato il codice&#10;&#10;&#10;Sistemare le eccezioni" />
+    <option name="LAST_COMMIT_MESSAGE" value="28th Commit: Riordinato il codice&#10;&#10;&#10;Sistemare le eccezioni" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
