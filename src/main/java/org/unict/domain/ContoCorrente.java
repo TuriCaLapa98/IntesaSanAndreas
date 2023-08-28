@@ -22,9 +22,9 @@ public class ContoCorrente
     public ContoCorrente(String iban, String cf) throws FileNotFoundException {
         this.cf=cf;
         this.iban = iban;
-        this.saldo = 1000;
+        this.saldo = 0;
         this.numeroCarta =generaNumeroCarta();
-        this.dataScadenza = LocalDate.now().plusYears(10);
+        this.dataScadenza = LocalDate.now().plusYears(20);
         this.pin = generaPin();
         this.listaPrelieviBancomat = new HashMap<>();
         this.listaPrelievi = new HashMap<>();

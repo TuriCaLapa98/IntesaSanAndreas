@@ -94,8 +94,8 @@ public class BancaISA implements Observer{
                         VUOI CREARE UN NUOVO CLIENTE?
 
                         Inserisci la tua scelta:
-                        0) Si
-                        1) No
+                        1) Si
+                        0) No
                         """);
 
                     scelta2 = Integer.parseInt(tastiera.readLine());
@@ -612,34 +612,38 @@ public class BancaISA implements Observer{
             if (this.listaCc.containsKey(iban) && Objects.equals(this.listaCc.get(iban).getPin(), pin))
             {
                 System.out.println("Saldo disponibile: €" + this.listaCc.get(iban).getSaldo());
-
-                try
+                do
                 {
-                    int prelievo = inserisciImporto();
-                    if (prelievo == 0)
+                    try
                     {
-                        return;
-                    }
-                    //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
-                    else if(this.listaCc.get(iban).getSaldo() >= prelievo)
-                    {
-                        bancomat.calcolaPrelievo(prelievo);
-                        aggiornaFileBanconote();
-                        this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
-                        stampaCcSuFile();
+                        int prelievo = inserisciImporto();
+                        if (prelievo == 0)
+                        {
+                            return;
+                        }
+                        //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
+                        else if(this.listaCc.get(iban).getSaldo() >= prelievo)
+                        {
+                            bancomat.calcolaPrelievo(prelievo);
+                            aggiornaFileBanconote();
+                            this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
+                            stampaCcSuFile();
 
-                        /* ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- */
-                        PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
-                        this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
-                        stampaOperazioniBancarieSuFile();
+                            /* ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- */
+                            PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
+                            this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
+                            stampaOperazioniBancarieSuFile();
+                            return;
+                        }
+                        else
+                        {
+                            System.out.println("\nERRORE: Non hai abbastanza soldi nel conto da prelevare\n");
+                            throw new Exception("Non hai abbastanza soldi nel conto da prelevare");
+                        }
                     }
-                    else
-                    {
-                        System.out.println("\nERRORE: Non hai abbastanza soldi nel conto da prelevare\n");
-                        throw new Exception("Non hai abbastanza soldi nel conto da prelevare");
-                    }
+                    catch(Exception ignored){}
                 }
-                catch(Exception ignored){}
+                while (true);
             }
             else
             {

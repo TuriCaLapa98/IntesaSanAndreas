@@ -127,6 +127,10 @@ public class Cliente
 
         printout.flush();
         printout.close();
+
+        System.out.println("Conto corrente creato con successo"
+                        + "\nIBAN: "+ IBAN
+                        + "\nPin: " + contoCorrente.getPin());
     }
 
 
