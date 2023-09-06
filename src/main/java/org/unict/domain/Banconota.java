@@ -4,7 +4,6 @@ public class Banconota {
 
     private  int codiceBancomat;
     private int codice;
-    
     private int numPezzi;
 
     public Banconota(int codiceBancomat, int codiceBanconota, int numeroPezzi) {

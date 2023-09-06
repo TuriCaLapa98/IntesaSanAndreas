@@ -231,7 +231,9 @@ public class BancaISA implements Observer{
                     System.out.println("\n\n ------------- LISTA TRANSAZIONI BANCARIE -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN5= tastiera.readLine();
-                    stampaOperazioniBancarieSuConsole(IBAN5);
+                    System.out.println("Inserisci il Codice Fiscale");
+                    String codiceFiscale5 = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN5, codiceFiscale5, "OperazioneBancaria");
                     break;
 
                 case 7:
@@ -239,7 +241,9 @@ public class BancaISA implements Observer{
                     System.out.println("\n\n ------------- LISTA SERVIZI BANCARI ------------- \n");
                     System.out.println("Inserisci IBAN");
                     String IBAN6= tastiera.readLine();
-                    stampaServiziBancariSuConsole(IBAN6);
+                    System.out.println("Inserisci il Codice Fiscale");
+                    String codiceFiscale6 = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN6, codiceFiscale6, "ServizioBancario");
                     break;
 
                 case 8:
@@ -247,7 +251,9 @@ public class BancaISA implements Observer{
                     System.out.println("\n\n ------------- PAGA RATA -------------\n");
                     System.out.println("Inserisci IBAN");
                     String IBAN7= tastiera.readLine();
-                    pagaRata(IBAN7);
+                    System.out.println("Inserisci il Codice Fiscale");
+                    String codiceFiscale7 = tastiera.readLine();
+                    verificaEsistenzaCc(IBAN7, codiceFiscale7, "PagaRata");
                     break;
 
                 default:
@@ -313,6 +319,15 @@ public class BancaISA implements Observer{
 
                                     prestito(importo4, stipendio2, iban);
 
+                        break;
+
+                    case "OperazioneBancaria": stampaOperazioniBancarieSuConsole(iban);
+                        break;
+
+                    case "ServizioBancario": stampaServiziBancariSuConsole(iban);
+                        break;
+
+                    case "PagaRata": pagaRata(iban);
                         break;
 
                     default: break;
@@ -409,7 +424,7 @@ public class BancaISA implements Observer{
 
             mutuo.setValoreRata(mutuo.calcolaInteresse());
             this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
-            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-mutuo.getValoreRata());
+            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo - mutuo.getValoreRata());
             stampaCcSuFile();
             stampaServiziBancariSuFile();
             System.out.println("\nMutuo creato correttamente");
@@ -434,7 +449,7 @@ public class BancaISA implements Observer{
             }
             prestito.setValoreRata(prestito.calcolaInteresse());
             this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
-            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-prestito.getValoreRata());
+            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo - prestito.getValoreRata());
             stampaCcSuFile();
             stampaServiziBancariSuFile();
             System.out.println("\nPrestito creato correttamente");

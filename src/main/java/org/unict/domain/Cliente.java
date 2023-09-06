@@ -11,9 +11,6 @@ public class Cliente
     private String dataNascita;
     private String email;
     private String telefono;
-    private float prelievoGiornaliero; //prelievo corrente che verra decrementato = 1500;
-    private boolean attivo;
-    private int valorePrelievo = 1500;
     private Map <String, ContoCorrente> listaContiCorrente;
 
     public Cliente(String cf, String nome, String cognome, String dataNascita, String email, String telefono)
@@ -24,9 +21,7 @@ public class Cliente
         this.dataNascita = dataNascita;
         this.email = email;
         this.telefono = telefono;
-        this.prelievoGiornaliero = valorePrelievo;
         this.listaContiCorrente=new HashMap<>();
-        this.attivo = true;
         caricaCc();
     }
 
@@ -78,30 +73,6 @@ public class Cliente
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public float getPrelievoGiornaliero() {
-        return prelievoGiornaliero;
-    }
-
-    public void setPrelievoGiornaliero(float prelievoGiornaliero) {
-        this.prelievoGiornaliero = prelievoGiornaliero;
-    }
-
-    public boolean isAttivo() {
-        return attivo;
-    }
-
-    public void setAttivo(boolean attivo) {
-        this.attivo = attivo;}
-
-    public int getValorePrelievo() {
-        return valorePrelievo;
-    }
-
-    public void setValorePrelievo(int valorePrelievo)
-    {
-        this.valorePrelievo = valorePrelievo;
     }
 
     public HashMap<String,ContoCorrente> getListaCc(){ return (HashMap<String, ContoCorrente>) this.listaContiCorrente;}
