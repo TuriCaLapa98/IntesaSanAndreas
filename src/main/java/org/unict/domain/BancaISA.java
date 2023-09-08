@@ -303,22 +303,19 @@ public class BancaISA implements Observer{
                         break;
 
                     case "Mutuo":
-                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci il Mutuo richiesto");
+                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci l'importo del Mutuo");
                                     float importo3 = Float.parseFloat(tastiera.readLine());
                                     System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
                                     float stipendio1 = Float.parseFloat(tastiera.readLine());
-
                                     mutuo(importo3, stipendio1, iban);
                         break;
 
                     case "Prestito":
-                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci il Prestito richiesto");
+                                    System.out.println("*Dati Convalidati\n\n"+"Inserisci l'importo del Prestito");
                                     float importo4 = Float.parseFloat(tastiera.readLine());
                                     System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
                                     float stipendio2 = Float.parseFloat(tastiera.readLine());
-
                                     prestito(importo4, stipendio2, iban);
-
                         break;
 
                     case "OperazioneBancaria": stampaOperazioniBancarieSuConsole(iban);
@@ -385,7 +382,7 @@ public class BancaISA implements Observer{
         stampaOperazioniBancarieSuFile();
     }
 
-    public void mutuo(float importo, float stipendio, String iban) throws IOException
+    public void mutuo(float importo, float stipendio, String iban) throws Exception
     {
         if(importo < stipendio*8)
         {
@@ -411,18 +408,19 @@ public class BancaISA implements Observer{
                 }
             } catch(Exception ignored){}
 
+            GestioneInteresse gest = new GestioneInteresse();
             switch (scelta2) {
-                case 1: mutuo.setStrategyInteresse(new StrategyInteresseAlto());
+                case 1: gest.setStrategyInteresse(new StrategyInteresseAlto());
                     mutuo.setInteresse(0.1F);
                     break;
-                case 2: mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
+                case 2: gest.setStrategyInteresse(new StrategyInteresseVariabile());
                     mutuo.setInteresse(1F);
                     break;
                 default:
                     break;
             }
 
-            mutuo.setValoreRata(mutuo.calcolaInteresse());
+            mutuo.setValoreRata(gest.calcola(importo, 120));
             this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
             this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo - mutuo.getValoreRata());
             stampaCcSuFile();
@@ -440,14 +438,15 @@ public class BancaISA implements Observer{
         if(importo < stipendio*5)
         {
             ServizioBancario prestito = new ServizioBancario(iban, importo, LocalDate.now().plusYears(4), 47, 0,"Prestito");
+            GestioneInteresse gest = new GestioneInteresse();
             if(importo < stipendio*5/2) {
-                prestito.setStrategyInteresse(new StrategyInteresseBasso());
+                gest.setStrategyInteresse(new StrategyInteresseBasso());
                 prestito.setInteresse(0.02F);
             }else {
-                prestito.setStrategyInteresse(new StrategyInteresseMedio());
+                gest.setStrategyInteresse(new StrategyInteresseMedio());
                 prestito.setInteresse(0.05F);
             }
-            prestito.setValoreRata(prestito.calcolaInteresse());
+            prestito.setValoreRata(gest.calcola(importo, 48));
             this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
             this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo - prestito.getValoreRata());
             stampaCcSuFile();

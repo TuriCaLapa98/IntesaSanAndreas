@@ -99,10 +99,11 @@ public class BancaISATest
             if (importo < stipendio * 8) {
                 ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0, "Mutuo");
 
-                mutuo.setStrategyInteresse(new StrategyInteresseVariabile());
-                assertNotNull(mutuo.getStrategyInteresse());
+                GestioneInteresse gest = new GestioneInteresse();
+                gest.setStrategyInteresse(new StrategyInteresseVariabile());
+                assertNotNull(gest);
 
-                mutuo.setValoreRata(mutuo.calcolaInteresse());
+                mutuo.setValoreRata(gest.calcola(importo, 120));
                 bancaISA.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
                 assertNotNull(bancaISA.listaCc.get(iban).listaServiziBancari.get(mutuo.getId()));
 

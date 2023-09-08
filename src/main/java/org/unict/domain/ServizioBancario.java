@@ -21,7 +21,6 @@ public class ServizioBancario
     private String tipologia;
     private float interesse;
     public Map<String,Rata> listaRate;
-    private StrategyInteresse strategyInteresse;
 
     public ServizioBancario(String iban, float importo, LocalDate dataScadenza, int numeroRate, float valoreRata, String tipologia)
     {
@@ -36,12 +35,6 @@ public class ServizioBancario
         this.tipologia = tipologia;
         this.interesse = 0;
         this.listaRate = new HashMap<>();
-        this.strategyInteresse = new StrategyInteresse() {
-            @Override
-            public float calcolaInteresse(float importo, int numRate) {
-                return importo;
-            }
-        };
         caricaRate();
     }
 
@@ -57,31 +50,7 @@ public class ServizioBancario
         this.tipologia = tipologia;
         this.interesse = interesse;
         this.listaRate = new HashMap<>();
-
-        //IN BASE AL PARAMETRO D'APPOGGIO "INTERESSE" RIESCO AD APPLICARE IL PATTERN STRATEGY AL CARICAMENTO DEL SERVIZIO
-        if (interesse == 0.02f)
-        {
-            this.strategyInteresse = new StrategyInteresseBasso();
-        } else if (interesse == 0.05f)
-        {
-            this.strategyInteresse = new StrategyInteresseMedio();
-        } else if (interesse == 0.1f)
-        {
-            this.strategyInteresse = new StrategyInteresseAlto();
-        } else if (interesse == 1F)
-        {
-            this.strategyInteresse = new StrategyInteresseVariabile();
-            setValoreRata(calcolaInteresseVariabile());
-        }else
-        {
-            this.strategyInteresse = new StrategyInteresse() {
-                @Override
-                public float calcolaInteresse(float importo, int numRate) {
-                    return importo;
-                }
-            };
-            throw new Exception("Errore nel rilevare l'interesse");
-        }
+        if (interesse == 1F) setValoreRata(calcolaInteresse());
         caricaRate();
     }
 
@@ -177,20 +146,17 @@ public class ServizioBancario
         this.interesse = interesse;
     }
 
-    public StrategyInteresse getStrategyInteresse() {
-        return strategyInteresse;
-    }
+    public float calcolaInteresse() throws Exception {
+        GestioneInteresse gest = new GestioneInteresse();
+        gest.setStrategyInteresseFloat(interesse);
+        switch (tipologia)
+        {
+            case "Prestito": return gest.calcola(importo, 48);
 
-    public void setStrategyInteresse(StrategyInteresse strategyInteresse) {
-        this.strategyInteresse = strategyInteresse;
-    }
+            case "Mutuo": return gest.calcola(importo, 120);
 
-    public float calcolaInteresse() {
-        return strategyInteresse.calcolaInteresse(importo, numeroRate);
-    }
-
-    public float calcolaInteresseVariabile() {
-        return strategyInteresse.calcolaInteresse(importo, 120);
+            default: return 0;
+        }
     }
 
     public void caricaRate()
