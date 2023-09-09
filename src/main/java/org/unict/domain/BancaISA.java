@@ -265,7 +265,8 @@ public class BancaISA implements Observer{
     public void verificaEsistenzaCc(String iban, String codiceFiscale, String operazione) {
         try
         {
-            if (this.listaCc.get(iban) != null) {
+            if (this.listaCc.get(iban) != null)
+            {
                 verificaOperazione(iban, codiceFiscale, operazione);
             } else
             {
@@ -282,13 +283,16 @@ public class BancaISA implements Observer{
         {
             if(controlloCodiceFiscale(iban, codiceFiscale))
             {
+                ContoCorrente cc = this.listaCc.get(iban);
+
                 switch (operazione)
                 {
                     case "Prelievo":
                                     System.out.println("*Dati Convalidati\n\n"+"Inserisci Importo da Prelevare");
                                     float importo = Float.parseFloat(tastiera.readLine());
-
-                                    prelievo(importo, iban);
+                                    cc.creaPrelievoFiliale(importo);
+                                    stampaCcSuFile();
+                                    stampaOperazioniBancarieSuFile();
                         break;
 
                     case "Deposito":
@@ -298,8 +302,9 @@ public class BancaISA implements Observer{
                                     String nomeM = tastiera.readLine();
                                     System.out.println("Inserisci Cognome Mittente");
                                     String cognomeM = tastiera.readLine();
-
-                                    deposito(importo2, nomeM, cognomeM, iban);
+                                    cc.creaDeposito(importo2, nomeM, cognomeM, iban);
+                                    stampaCcSuFile();
+                                    stampaOperazioniBancarieSuFile();
                         break;
 
                     case "Mutuo":
@@ -307,7 +312,9 @@ public class BancaISA implements Observer{
                                     float importo3 = Float.parseFloat(tastiera.readLine());
                                     System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
                                     float stipendio1 = Float.parseFloat(tastiera.readLine());
-                                    mutuo(importo3, stipendio1, iban);
+                                    cc.creaMutuo(importo3, stipendio1, iban);
+                                    stampaCcSuFile();
+                                    stampaServiziBancariSuFile();
                         break;
 
                     case "Prestito":
@@ -315,7 +322,9 @@ public class BancaISA implements Observer{
                                     float importo4 = Float.parseFloat(tastiera.readLine());
                                     System.out.println("\n"+"Inserisci lo stipendio attuale del cliente");
                                     float stipendio2 = Float.parseFloat(tastiera.readLine());
-                                    prestito(importo4, stipendio2, iban);
+                                    cc.creaPrestito(importo4, stipendio2, iban);
+                                    stampaCcSuFile();
+                                    stampaServiziBancariSuFile();
                         break;
 
                     case "OperazioneBancaria": stampaOperazioniBancarieSuConsole(iban);
@@ -324,7 +333,14 @@ public class BancaISA implements Observer{
                     case "ServizioBancario": stampaServiziBancariSuConsole(iban);
                         break;
 
-                    case "PagaRata": pagaRata(iban);
+                    case "PagaRata":
+                                    stampaServiziBancariSuConsole(iban);
+                                    System.out.println("Inserire l'id del servizio di cui si vuole pagare la rata\n");
+                                    String idServizio = tastiera.readLine();
+                                    cc.pagaRata(idServizio);
+                                    stampaCcSuFile();
+                                    stampaServiziBancariSuFile();
+                                    stampaRateSuFile();
                         break;
 
                     default: break;
@@ -347,119 +363,6 @@ public class BancaISA implements Observer{
             throw new Exception("ERRORE: CODICE FISCALE NON APPARTENENTE ALL'IBAN");
         }
     }
-
-    public void prelievo(float importo, String iban) throws Exception
-    {
-        if (importo < this.listaCc.get(iban).getSaldo())
-        {
-            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() - importo);
-            stampaCcSuFile();
-
-            Prelievo prelievo = new Prelievo("Prelievo", importo, iban);
-            this.listaCc.get(iban).listaPrelievi.put(prelievo.getId(),prelievo);
-            stampaOperazioniBancarieSuFile();
-        }
-        else
-        {
-            System.out.println("\nERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO");
-            throw new Exception("ERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO");
-        }
-    }
-
-    public void deposito(float importo, String iban, String nomeM, String cognomeM) throws Exception
-    {
-        this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo);
-        stampaCcSuFile();
-
-        Deposito deposito = new Deposito("Deposito", importo, iban, nomeM, cognomeM);
-        this.listaCc.get(iban).listaDepositi.put(deposito.getId(),deposito);
-        if ( this.listaCc.get(iban).listaDepositi.get(deposito.getId()) == null)
-        {
-            System.out.println("\nERRORE: DEPOSITO NON CREATO");
-            throw new Exception("ERRORE: DEPOSITO NON CREATO");
-        }
-
-        stampaOperazioniBancarieSuFile();
-    }
-
-    public void mutuo(float importo, float stipendio, String iban) throws Exception
-    {
-        if(importo < stipendio*8)
-        {
-            ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0,"Mutuo");
-
-            int scelta2 = -1;
-            try
-            {
-                System.out.println("""
-            
-                                    TASSO FISSO O VARIABILE
-            
-                                    Inserisci la tua scelta:
-                                    1) Tasso Fisso
-                                    2) Tasso Variabile
-                                    0) Esci
-                                    """);
-
-                scelta2 = Integer.parseInt(tastiera.readLine());
-                if (scelta2 < 0 || scelta2 > 2) {
-                    System.out.println("Scelta non valida");
-                    throw new Exception("Scelta non valida");
-                }
-            } catch(Exception ignored){}
-
-            GestioneInteresse gest = new GestioneInteresse();
-            switch (scelta2) {
-                case 1: gest.setStrategyInteresse(new StrategyInteresseAlto());
-                    mutuo.setInteresse(0.1F);
-                    break;
-                case 2: gest.setStrategyInteresse(new StrategyInteresseVariabile());
-                    mutuo.setInteresse(1F);
-                    break;
-                default:
-                    break;
-            }
-
-            mutuo.setValoreRata(gest.calcola(importo, 120));
-            this.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
-            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo - mutuo.getValoreRata());
-            stampaCcSuFile();
-            stampaServiziBancariSuFile();
-            System.out.println("\nMutuo creato correttamente");
-        }
-        else
-        {
-            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"La banca non può fornire all'utente il mutuo richiesto");
-        }
-    }
-
-    public void prestito(float importo, float stipendio, String iban) throws Exception
-    {
-        if(importo < stipendio*5)
-        {
-            ServizioBancario prestito = new ServizioBancario(iban, importo, LocalDate.now().plusYears(4), 47, 0,"Prestito");
-            GestioneInteresse gest = new GestioneInteresse();
-            if(importo < stipendio*5/2) {
-                gest.setStrategyInteresse(new StrategyInteresseBasso());
-                prestito.setInteresse(0.02F);
-            }else {
-                gest.setStrategyInteresse(new StrategyInteresseMedio());
-                prestito.setInteresse(0.05F);
-            }
-            prestito.setValoreRata(gest.calcola(importo, 48));
-            this.listaCc.get(iban).listaServiziBancari.put(prestito.getId(), prestito);
-            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo() + importo - prestito.getValoreRata());
-            stampaCcSuFile();
-            stampaServiziBancariSuFile();
-            System.out.println("\nPrestito creato correttamente");
-        }
-        else
-        {
-            System.out.println("\n"+"L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
-            throw new Exception("L'importo inserito è troppo alto in proporzione allo stipendio");
-        }
-    }
-
 
     /** --------------------------------------- Menu Dipendente Tecnico --------------------------------------- **/
     public void menuDipendenteT() throws IOException {
@@ -555,12 +458,15 @@ public class BancaISA implements Observer{
                         codiceBancomat = Integer.parseInt(tastiera.readLine());
                         if(codiceBancomat<=listaBancomat.size() && codiceBancomat > 0)
                         {
+                            Bancomat ban = this.listaBancomat.get(codiceBancomat-1);
                             System.out.println("\n Inserisci codice banconota:");
                             codiceBanconota = Integer.parseInt(tastiera.readLine());
                             if(codiceBanconota==5 ||codiceBanconota==10 || codiceBanconota==20 ||
                                 codiceBanconota==50 ||codiceBanconota==100 ||codiceBanconota==200)
                             {
-                                aggiornaPezziBanconota(codiceBancomat, codiceBanconota);
+                                ban.aggiornaPezziBanconota(codiceBanconota);
+                                aggiornaFileBanconote();
+                                aggiornaNotifiche(ban.getCodice(), codiceBanconota);
                                 break;
                             }
                         }
@@ -576,17 +482,6 @@ public class BancaISA implements Observer{
                     break;
             }
         } while (scelta != 0);
-    }
-
-    private void aggiornaPezziBanconota(int codiceBancomat, int codiceBanconota) throws IOException {
-
-        Bancomat ban = this.listaBancomat.get(codiceBancomat-1);
-        int numRicarica = (1000 - (this.listaBanconote.get((codiceBancomat+codiceBanconota)).getNumPezzi() * codiceBanconota))/codiceBanconota;
-        Banconota b = new Banconota( ban.getCodice(), codiceBanconota, numRicarica );
-        ban.listaBanconote.replace(codiceBanconota, b);
-        aggiornaFileBanconote();
-        aggiornaNotifiche(ban.getCodice(), codiceBanconota);
-
     }
 
    private void aggiornaNotifiche(int codiceBancomat, int codiceBaconota) throws IOException {
@@ -607,6 +502,7 @@ public class BancaISA implements Observer{
     /** --------------- Menu Bancomat ----------------------- */
     public void menuBancomat()
     {
+        //int idBancomat = tastiera.readLine();
         int idBancomat = 0;
         System.out.println("Sono Nel Menu Cliente del Bancomat " + (idBancomat+1) + "\n");
         bancomat = this.listaBancomat.get(idBancomat);
@@ -625,7 +521,8 @@ public class BancaISA implements Observer{
 
             if (this.listaCc.containsKey(iban) && Objects.equals(this.listaCc.get(iban).getPin(), pin))
             {
-                System.out.println("Saldo disponibile: €" + this.listaCc.get(iban).getSaldo());
+                ContoCorrente cc = this.listaCc.get(iban);
+                System.out.println("Saldo disponibile: €" + cc.getSaldo());
                 do
                 {
                     try
@@ -636,16 +533,15 @@ public class BancaISA implements Observer{
                             return;
                         }
                         //Verifichiamo se il nostro saldo ci basta per poter effetturare il prelievo
-                        else if(this.listaCc.get(iban).getSaldo() >= prelievo)
+                        else if(cc.getSaldo() >= prelievo)
                         {
                             bancomat.calcolaPrelievo(prelievo);
                             aggiornaFileBanconote();
-                            this.listaCc.get(iban).setSaldo ((int) (this.listaCc.get(iban).getSaldo()-prelievo));
+                            cc.setSaldo ((int) (cc.getSaldo()-prelievo));
                             stampaCcSuFile();
 
                             /* ------------------------------------------------------------- Aggiunta operazioni bancarie ------------------------------------------------------------- */
-                            PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
-                            this.listaCc.get(iban).listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
+                            cc.creaPrelievoBancomat(prelievo, idBancomat);
                             stampaOperazioniBancarieSuFile();
                             return;
                         }
@@ -792,60 +688,6 @@ public class BancaISA implements Observer{
                     "Interesse: " + value.getInteresse() + "\n\n"
                 )
         );
-    }
-
-    private void pagaRata(String iban) throws IOException {
-        stampaServiziBancariSuConsole(iban);
-        System.out.println("Inserire l'id del servizio di cui si vuole pagare la rata\n");
-        String id = tastiera.readLine();
-
-        if (this.listaCc.get(iban).listaServiziBancari.containsKey(id)) {
-            try
-            {
-                ServizioBancario servizio = this.listaCc.get(iban).listaServiziBancari.get(id);
-                if (servizio.isAttivo())
-                {
-                    System.out.println("Servizio trovato...\n");
-                    System.out.println("Inserire il numero di rate che si vogliono pagare\n");
-                    int nRate = Integer.parseInt(tastiera.readLine());
-
-                    if (nRate <= servizio.getNumeroRate())
-                    {
-                        float importo = nRate*servizio.getValoreRata();
-
-                        if(this.listaCc.get(iban).getSaldo() > importo)
-                        {
-                            this.listaCc.get(iban).setSaldo(this.listaCc.get(iban).getSaldo()-importo);
-                            servizio.setNumeroRate(servizio.getNumeroRate()-nRate);
-
-                            if (servizio.getNumeroRate()==0)
-                                servizio.setAttivo(false);
-
-                            for (int i = 0; i < nRate; i++)
-                            {
-                                Rata rataAttuale = new Rata(servizio.getId(), LocalDate.now(), servizio.getValoreRata());
-                                servizio.listaRate.put(rataAttuale.getId(), rataAttuale);
-                            }
-
-                            stampaCcSuFile();
-                            stampaServiziBancariSuFile();
-                            stampaRateSuFile();
-                            System.out.println("\nRate pagate correttamente");
-                        }
-
-                        else
-                            System.out.println("Non hai abbastanza saldo per effettuare questa operazione\n");
-                    }
-                    else
-                        System.out.println("Numero di rate selezionate superiore a quelle rimanenti\n");
-                }
-                else
-                    System.out.println("Il servizio selezionato non è attivo\n");
-
-            } catch (Exception e){e.printStackTrace();}
-        } else {
-            System.out.println("Servizio non trovato...\n");
-        }
     }
 
     private void stampaRateSuFile() throws IOException

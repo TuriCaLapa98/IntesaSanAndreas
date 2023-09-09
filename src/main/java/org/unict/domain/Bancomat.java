@@ -82,6 +82,12 @@ public class Bancomat extends Observable {
         riduciPezzi(pezziBanconote[5], pezziBanconote[4], pezziBanconote[3], pezziBanconote[2], pezziBanconote[1], pezziBanconote[0]);
     }
 
+    public void aggiornaPezziBanconota(int codiceBanconota) throws IOException {
+
+        int numRicarica = (1000 / codiceBanconota);
+        Banconota b = new Banconota( this.codice, codiceBanconota, numRicarica );
+        this.listaBanconote.replace(codiceBanconota, b);
+    }
 
     public void riduciPezzi(int pz5, int pz10, int pz20, int pz50, int pz100, int pz200)
     {

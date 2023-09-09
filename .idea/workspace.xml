@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="31th Commit: Riordinato il codice">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/GestioneInteresse.java" afterDir="false" />
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="32th Commit: Riordinato il codice*">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ServizioBancario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BancaISATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
     </list>
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
     <list id="98cf9fc7-ecac-4334-a3a5-734b009e6797" name="Changes by Venti" comment="Changes by Venti" />
@@ -248,7 +247,8 @@
       <workItem from="1694019979187" duration="316000" />
       <workItem from="1694098757955" duration="3168000" />
       <workItem from="1694105599879" duration="106000" />
-      <workItem from="1694183130333" duration="6969000" />
+      <workItem from="1694183130333" duration="8309000" />
+      <workItem from="1694266820659" duration="9195000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -537,7 +537,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694019773183</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="32th Commit: Riordinato il codice*">
+      <created>1694190489997</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1694190489997</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -582,7 +589,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="6th Commit: Dentro BancaISA aggiunta la riga &quot;listaCc.putAll(c.getListaCc())&quot; in caricaClienti() per la lista dei conti correnti della banca.&#10;Modificato il for dentro Cliente.caricaCc in modo che legga tutti gli item del file (prima si fermava al primo)" />
     <MESSAGE value="8th Commit: Dentro BancaISA aggiunta la Funzione diminuisciSaldo()" />
     <MESSAGE value="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt" />
     <MESSAGE value="11th Commit: Dentro BancaISA aggiunti campi del Dipendente Tecnico e si necessita della funzione updateListaNotifiche con una lista di notifiche dentro bancaISA" />
@@ -607,7 +613,8 @@
     <MESSAGE value="29th Commit: Riordinato il codice" />
     <MESSAGE value="30th Commit: Riordinato il codice" />
     <MESSAGE value="31th Commit: Riordinato il codice" />
-    <option name="LAST_COMMIT_MESSAGE" value="31th Commit: Riordinato il codice" />
+    <MESSAGE value="32th Commit: Riordinato il codice*" />
+    <option name="LAST_COMMIT_MESSAGE" value="32th Commit: Riordinato il codice*" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -179,7 +179,6 @@ public class ContoCorrente
         }
     }
 
-
     public void caricaServiziBancari()
     {
         try {
@@ -209,6 +208,177 @@ public class ContoCorrente
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void creaPrelievoBancomat(int prelievo, int idBancomat)
+    {
+        PrelievoBancomat prelievoBancomat = new PrelievoBancomat("PrelievoBancomat", prelievo, iban,idBancomat+1);
+        this.listaPrelieviBancomat.put(prelievoBancomat.getId(), prelievoBancomat);
+        System.out.println("\nPrelievo effettuato correttamente\n");
+    }
+
+    public void creaPrelievoFiliale(float importo) throws Exception
+    {
+        if (importo < this.getSaldo())
+        {
+            this.setSaldo(this.getSaldo() - importo);
+
+            Prelievo prelievo = new Prelievo("Prelievo", importo, iban);
+            this.listaPrelievi.put(prelievo.getId(),prelievo);
+            System.out.println("\nPrelievo effettuato correttamente\n");
+        }
+        else
+        {
+            System.out.println("\nERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO");
+            throw new Exception("ERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO");
+        }
+    }
+
+    public void creaDeposito(float importo, String nomeM, String cognomeM, String iban) throws Exception
+    {
+        this.setSaldo(this.getSaldo() + importo);
+        Deposito deposito = new Deposito("Deposito", importo, iban, nomeM, cognomeM);
+        this.listaDepositi.put(deposito.getId(),deposito);
+        if ( this.listaDepositi.get(deposito.getId()) == null)
+        {
+            System.out.println("\nERRORE: DEPOSITO NON CREATO");
+            throw new Exception("ERRORE: DEPOSITO NON CREATO");
+        }
+        else System.out.println("\nDeposito effettuato correttamente\n");
+    }
+
+    public void creaMutuo(float importo, float stipendio, String iban) throws Exception
+    {
+        BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in));
+
+        if(importo < stipendio*8)
+        {
+            ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0,"Mutuo");
+
+            int scelta2 = -1;
+            try
+            {
+                System.out.println("""
+            
+                                    TASSO FISSO O VARIABILE
+            
+                                    Inserisci la tua scelta:
+                                    1) Tasso Fisso
+                                    2) Tasso Variabile
+                                    0) Esci
+                                    """);
+
+                scelta2 = Integer.parseInt(tastiera.readLine());
+                if (scelta2 < 0 || scelta2 > 2) {
+                    System.out.println("Scelta non valida");
+                    throw new Exception("Scelta non valida");
+                }
+            } catch(Exception ignored){}
+
+            GestioneInteresse gest = new GestioneInteresse();
+            switch (scelta2) {
+                case 1: gest.setStrategyInteresse(new StrategyInteresseAlto());
+                    mutuo.setInteresse(0.1F);
+                    break;
+                case 2: gest.setStrategyInteresse(new StrategyInteresseVariabile());
+                    mutuo.setInteresse(1F);
+                    break;
+                default:
+                    break;
+            }
+
+            mutuo.setValoreRata(gest.calcola(importo, 120));
+            this.listaServiziBancari.put(mutuo.getId(), mutuo);
+            this.setSaldo(this.getSaldo() + importo - mutuo.getValoreRata());
+            System.out.println("\nMutuo creato correttamente");
+        }
+        else
+        {
+            System.out.println("\n"+"ERRORE: L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"La banca non può fornire all'utente il mutuo richiesto");
+            throw new Exception("ERRORE: L'importo inserito è troppo alto in proporzione allo stipendio");
+        }
+    }
+
+
+    public void creaPrestito(float importo, float stipendio, String iban) throws Exception
+    {
+        if(importo < stipendio*5)
+        {
+            ServizioBancario prestito = new ServizioBancario(iban, importo, LocalDate.now().plusYears(4), 47, 0,"Prestito");
+            GestioneInteresse gest = new GestioneInteresse();
+            if(importo < stipendio*5/2) {
+                gest.setStrategyInteresse(new StrategyInteresseBasso());
+                prestito.setInteresse(0.02F);
+            }else {
+                gest.setStrategyInteresse(new StrategyInteresseMedio());
+                prestito.setInteresse(0.05F);
+            }
+            prestito.setValoreRata(gest.calcola(importo, 48));
+            this.listaServiziBancari.put(prestito.getId(), prestito);
+            this.setSaldo(this.getSaldo() + importo - prestito.getValoreRata());
+            System.out.println("\nPrestito creato correttamente");
+        }
+        else
+        {
+            System.out.println("\n"+"ERRORE: L'importo inserito è troppo alto in proporzione allo stipendio"+"\n"+"E' consigliato effettuare un Mutuo");
+            throw new Exception("ERRORE: L'importo inserito è troppo alto in proporzione allo stipendio");
+        }
+    }
+
+    public void pagaRata(String idServizio) throws Exception
+    {
+        BufferedReader tastiera = new BufferedReader(new InputStreamReader(System.in));
+
+        if (this.listaServiziBancari.containsKey(idServizio))
+        {
+            try
+            {
+                ServizioBancario servizio = this.listaServiziBancari.get(idServizio);
+                if (servizio.isAttivo())
+                {
+                    System.out.println("Servizio trovato...\n");
+                    System.out.println("Inserire il numero di rate che si vogliono pagare\n");
+                    int nRate = Integer.parseInt(tastiera.readLine());
+
+                    if (nRate <= servizio.getNumeroRate())
+                    {
+                        float importo = nRate*servizio.getValoreRata();
+
+                        if(this.getSaldo() > importo)
+                        {
+                            this.setSaldo(this.getSaldo()-importo);
+                            servizio.setNumeroRate(servizio.getNumeroRate()-nRate);
+
+                            if (servizio.getNumeroRate()==0)
+                                servizio.setAttivo(false);
+
+                            for (int i = 0; i < nRate; i++)
+                            {
+                                Rata rataAttuale = new Rata(servizio.getId(), LocalDate.now(), servizio.getValoreRata());
+                                servizio.listaRate.put(rataAttuale.getId(), rataAttuale);
+                            }
+                            System.out.println("\nRate pagate correttamente");
+                        }
+
+                        else {
+                            System.out.println("ERRORE: Non hai abbastanza saldo per effettuare questa operazione\n");
+                            throw new Exception("ERRORE: Non hai abbastanza saldo per effettuare questa operazione");
+                        }
+                    }
+                    else {
+                        System.out.println("ERRORE: Numero di rate selezionate superiore a quelle rimanenti\n");
+                        throw new Exception("ERRORE: Numero di rate selezionate superiore a quelle rimanenti");
+                    }
+                }
+                else {
+                    System.out.println("ERRORE: Il servizio selezionato non è attivo\n");
+                    throw new Exception("ERRORE: Il servizio selezionato non è attivo");
+                }
+            } catch (Exception e){e.printStackTrace();}
+        } else {
+            System.out.println("ERRORE: Servizio non trovato...\n");
+            throw new Exception("ERRORE: Servizio non trovato...");
         }
     }
 }
