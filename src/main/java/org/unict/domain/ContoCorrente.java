@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class ContoCorrente
 {
+    private static ContoCorrente conto;
     private String cf;
     private String iban;
     private float saldo;
@@ -47,6 +48,12 @@ public class ContoCorrente
         this.listaServiziBancari = new HashMap<>();
         caricaOperazioniBancarie();
         caricaServiziBancari();
+    }
+
+    public static ContoCorrente getInstance() throws IOException {
+        if (conto == null)
+            conto = new ContoCorrente("IT88A5315876888350827758213", "Utente1", 20791, "8083154734643135", "2032-10-12", "4532");
+        return conto;
     }
 
     public String getCf() {

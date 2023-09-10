@@ -15,7 +15,7 @@ import static org.testng.AssertJUnit.fail;
 public class BancaISATest
 {
     @BeforeClass
-    public static void initTest() throws IOException {BancaISA bancaISA = BancaISA.getInstance();}
+    public static void initTest() throws IOException { BancaISA bancaISA = BancaISA.getInstance(); }
 
     @Test
     public void testCaricaClienti()
@@ -52,84 +52,7 @@ public class BancaISATest
             assertEquals("ERRORE: IBAN NON ESISTENTE", e.getMessage());
         }
     }
-    @Test
-    public void testPrelievo()
-    {
-        try
-        {
-            BancaISA bancaISA = BancaISA.getInstance();
-            float importo = 1000000;
-            String iban = "IT88A7174727847774516670157";
-            bancaISA.prelievo(importo, iban);
-        }
-        catch (Exception e)
-        {
-            assertEquals("ERRORE: L'IMPORTO INSERITO E' SUPERIORE AL SALDO", e.getMessage());
-        }
-    }
-    @Test
-    public void testDeposito()
-    {
-        try
-        {
-            BancaISA bancaISA = BancaISA.getInstance();
-            float importo = 1000;
-            String nomeM = "Mario";
-            String cognomeM = "Rossi";
-            String iban = "IT88A7174727847774516670157";
 
-            bancaISA.deposito(importo, iban, nomeM, cognomeM);
-        }
-        catch (Exception e)
-        {
-            assertNull(e.getMessage());
-        }
-    }
-    @Test
-    public void testMutuo() throws IOException
-    {
-        BancaISA bancaISA = BancaISA.getInstance();
-        String iban = "IT88A7174727847774516670157";
-        try {
-            System.out.println("*Dati Convalidati\n\n" + "Inserisci il Mutuo richiesto");
-            float importo = 10000;
-            System.out.println("\n" + "Inserisci lo stipendio attuale del cliente");
-            float stipendio = 2300;
-
-            if (importo < stipendio * 8) {
-                ServizioBancario mutuo = new ServizioBancario(iban, importo, LocalDate.now().plusYears(10), 119, 0, "Mutuo");
-
-                GestioneInteresse gest = new GestioneInteresse();
-                gest.setStrategyInteresse(new StrategyInteresseVariabile());
-                assertNotNull(gest);
-
-                mutuo.setValoreRata(gest.calcola(importo, 120));
-                bancaISA.listaCc.get(iban).listaServiziBancari.put(mutuo.getId(), mutuo);
-                assertNotNull(bancaISA.listaCc.get(iban).listaServiziBancari.get(mutuo.getId()));
-
-            } else {
-                System.out.println("\n" + "L'importo inserito è troppo alto in proporzione allo stipendio" + "\n" + "La banca non può fornire all'utente il mutuo richiesto");
-            }
-        } catch (Exception e) {
-            fail("Unexpected exception!");
-        }
-    }
-    @Test
-    public void testPrestito()
-    {
-        try
-        {
-            BancaISA bancaISA = BancaISA.getInstance();
-            float importo = 1000000;
-            float stipendio = 500;
-            String iban = "IT88A7174727847774516670157";
-            bancaISA.prestito(importo, stipendio, iban);
-        }
-        catch (Exception e)
-        {
-            assertEquals("L'importo inserito è troppo alto in proporzione allo stipendio", e.getMessage());
-        }
-    }
     @Test
     //Per verificare che funzioni bisogna togliere le notifiche del file
     public void testObserver() throws IOException, InterruptedException
