@@ -59,6 +59,7 @@ public class Bancomat extends Observable {
                         throw new Exception("Errore caricamento Banconote");
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

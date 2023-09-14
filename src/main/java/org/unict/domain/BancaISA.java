@@ -467,6 +467,7 @@ public class BancaISA implements Observer{
                                 ban.aggiornaPezziBanconota(codiceBanconota);
                                 aggiornaFileBanconote();
                                 aggiornaNotifiche(ban.getCodice(), codiceBanconota);
+                                System.out.println("\nBanconote inserite con successo\n");
                                 break;
                             }
                         }
@@ -773,7 +774,7 @@ public class BancaISA implements Observer{
     }
 
     public void caricaListaBancomat()
-    {
+    { //OBSERVER
         try {
             String file = FilePaths.ELENCO_BANCOMAT_PATH;
             BufferedReader fp = new BufferedReader(new FileReader(file));

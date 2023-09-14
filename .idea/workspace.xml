@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="33th Commit: Riordinato il codice-">
-      <change afterPath="$PROJECT_DIR$/src/test/java/ContoCorrenteTest.java" afterDir="false" />
+    <list default="true" id="700f21ae-d9fb-41b4-9a77-a45e56d014c0" name="Changes by User" comment="34th Commit: Riordinati i test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/ContoCorrente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BancaISATest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BancaISATest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/BancaISA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Bancomat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoBanconote.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoCc.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoClienti.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoClienti.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/elencoRate.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/notificheDipendenteT.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/operazioniBancarie.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/unict/domain/Filetxt/serviziBancari.txt" afterDir="false" />
     </list>
     <list id="4745c416-917e-49c1-99ba-eb73e8928e12" name="Changes" comment="19th Commit: Create 3 liste di OperazioneBancaria, una per ogni classe figlia&#10;&#10;Aggiungere la lettura delle operazioni da file&#10;Aggiungere nel menù filiale un'opzione che veda tutte le operazioni bancarie di quell'iban (per il momento è implementata solo PrelievoBancomat)" />
     <list id="98cf9fc7-ecac-4334-a3a5-734b009e6797" name="Changes by Venti" comment="Changes by Venti" />
@@ -100,7 +106,7 @@
       <recent name="org.unict.domain" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ContoCorrenteTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.unict.domain.Main" />
       <module name="IntesaSanAndreas" />
@@ -155,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.ContoCorrenteTest" />
         <item itemvalue="JUnit.ContoCorrenteTest.testCreaPrestito" />
         <item itemvalue="JUnit.ContoCorrenteTest.testCreaDeposito" />
         <item itemvalue="JUnit.ContoCorrenteTest.testCreaPrelievoFiliale" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -246,7 +252,10 @@
       <workItem from="1694105599879" duration="106000" />
       <workItem from="1694183130333" duration="8309000" />
       <workItem from="1694266820659" duration="9687000" />
-      <workItem from="1694358977953" duration="3177000" />
+      <workItem from="1694358977953" duration="3253000" />
+      <workItem from="1694442609637" duration="4668000" />
+      <workItem from="1694616397497" duration="4311000" />
+      <workItem from="1694703555115" duration="2873000" />
     </task>
     <task id="LOCAL-00001" summary="1st Commit">
       <created>1663781215155</created>
@@ -549,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694279076655</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="34th Commit: Riordinati i test">
+      <created>1694362641161</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1694362641161</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +610,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="10th Commit: Dentro BancaISA aggiustato l'observer e la scrittura da file conseguente in un file notificheDipendenteT.txt" />
     <MESSAGE value="11th Commit: Dentro BancaISA aggiunti campi del Dipendente Tecnico e si necessita della funzione updateListaNotifiche con una lista di notifiche dentro bancaISA" />
     <MESSAGE value="12th Commit: Dentro BancaISA rimpiazzato il sistema di stampa di notifiche con aggiunta una lista notifiche di banca isa in modo da poter essere manipolata e ristampata ogni volta.&#10;&#10;Vedere se sovrascrive tutto il file oppure solo le prime n righe" />
     <MESSAGE value="13th Commit: Dentro BancaISA aggiornato il metodo di stampa delle notifiche in modo che non se ne creino di duplicati (dentro l'observer), All'interno di aggiornaPezziBanconota aggiunto il parametro in riga 300 (codicebancomat+1).&#10;&#10;Aggiustare in riga 300 Banca isa per l'effettivo aggiornamento delle banconote sia nelle liste interne di banca isa, sia nei file per poi rimuovere le notifiche&#10;&#10;P. (aggiornaPezziBanconota, aggiornaNotifiche)" />
@@ -619,7 +634,8 @@
     <MESSAGE value="31th Commit: Riordinato il codice" />
     <MESSAGE value="32th Commit: Riordinato il codice*" />
     <MESSAGE value="33th Commit: Riordinato il codice-" />
-    <option name="LAST_COMMIT_MESSAGE" value="33th Commit: Riordinato il codice-" />
+    <MESSAGE value="34th Commit: Riordinati i test" />
+    <option name="LAST_COMMIT_MESSAGE" value="34th Commit: Riordinati i test" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
